@@ -1,0 +1,1740 @@
+[
+  {
+    "model": "core.transaction",
+    "pk": 12001,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "28400.00",
+      "date": "2025-01-01",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12001",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 12002,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158000.00",
+      "date": "2025-01-01",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12002",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 12003,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "33400.00",
+      "date": "2025-01-02",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12003",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 12004,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "142500.00",
+      "date": "2025-01-02",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12004",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 12005,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "41200.00",
+      "date": "2025-01-03",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12005",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12006,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "22100.00",
+      "date": "2025-01-04",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12006",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12007,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "186000.00",
+      "date": "2025-01-04",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12007",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12008,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "30200.00",
+      "date": "2025-01-05",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12008",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12009,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "149000.00",
+      "date": "2025-01-05",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12009",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12010,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "29100.00",
+      "date": "2025-01-06",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12010",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12011,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "154700.00",
+      "date": "2025-01-06",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12011",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12012,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "35500.00",
+      "date": "2025-01-07",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12012",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12013,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "146300.00",
+      "date": "2025-01-07",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12013",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12014,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "41800.00",
+      "date": "2025-01-08",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12014",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12015,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "23300.00",
+      "date": "2025-01-09",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12015",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12016,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160200.00",
+      "date": "2025-01-09",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12016",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12017,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "30800.00",
+      "date": "2025-01-10",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12017",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12018,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "148900.00",
+      "date": "2025-01-10",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12018",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12019,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "29500.00",
+      "date": "2025-01-11",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12019",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12020,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "153800.00",
+      "date": "2025-01-11",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12020",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12021,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "36000.00",
+      "date": "2025-01-12",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12021",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12022,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "147200.00",
+      "date": "2025-01-12",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12022",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12023,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "42200.00",
+      "date": "2025-01-13",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12023",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12024,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "23900.00",
+      "date": "2025-01-14",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12024",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12025,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161300.00",
+      "date": "2025-01-14",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12025",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12026,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "31200.00",
+      "date": "2025-01-15",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12026",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12027,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "150600.00",
+      "date": "2025-01-15",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12027",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12028,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "29900.00",
+      "date": "2025-01-16",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12028",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12029,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "156800.00",
+      "date": "2025-01-16",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12029",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12030,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "36700.00",
+      "date": "2025-01-17",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12030",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12031,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "144900.00",
+      "date": "2025-01-17",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12031",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12032,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "42700.00",
+      "date": "2025-01-18",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12032",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12033,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "24400.00",
+      "date": "2025-01-19",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12033",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 12034,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "31500.00",
+      "date": "2025-01-20",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12034",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 12035,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "152600.00",
+      "date": "2025-01-20",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12035",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12036,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "30200.00",
+      "date": "2025-01-21",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12036",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12037,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "148300.00",
+      "date": "2025-01-21",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12037",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12038,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "37100.00",
+      "date": "2025-01-22",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12038",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12039,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "156900.00",
+      "date": "2025-01-22",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12039",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12040,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "43000.00",
+      "date": "2025-01-23",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12040",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12041,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "24700.00",
+      "date": "2025-01-24",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12041",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12042,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "159800.00",
+      "date": "2025-01-24",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12042",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12043,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "31800.00",
+      "date": "2025-01-25",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12043",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12044,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "150400.00",
+      "date": "2025-01-25",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12044",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12045,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "30500.00",
+      "date": "2025-01-26",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12045",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12046,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "157600.00",
+      "date": "2025-01-26",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12046",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12047,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "37500.00",
+      "date": "2025-01-27",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12047",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12048,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "143900.00",
+      "date": "2025-01-27",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12048",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12049,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "43600.00",
+      "date": "2025-01-28",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12049",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12050,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "25300.00",
+      "date": "2025-01-29",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12050",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12051,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161800.00",
+      "date": "2025-01-29",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12051",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12052,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "31900.00",
+      "date": "2025-01-30",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12052",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12053,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "149700.00",
+      "date": "2025-01-30",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12053",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12054,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "30800.00",
+      "date": "2025-01-31",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12054",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12055,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158600.00",
+      "date": "2025-01-31",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12055",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12056,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "38000.00",
+      "date": "2025-02-01",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12056",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12057,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "145600.00",
+      "date": "2025-02-01",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12057",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12058,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "44100.00",
+      "date": "2025-02-02",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12058",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12059,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "25800.00",
+      "date": "2025-02-03",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12059",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12060,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162900.00",
+      "date": "2025-02-03",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12060",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12061,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "32300.00",
+      "date": "2025-02-04",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12061",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12062,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "151800.00",
+      "date": "2025-02-04",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12062",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12063,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "31000.00",
+      "date": "2025-02-05",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12063",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12064,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158700.00",
+      "date": "2025-02-05",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12064",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12065,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "38200.00",
+      "date": "2025-02-06",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12065",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12066,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "146900.00",
+      "date": "2025-02-06",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12066",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 12067,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "44500.00",
+      "date": "2025-02-07",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12067",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12068,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "26100.00",
+      "date": "2025-02-08",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12068",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12069,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164200.00",
+      "date": "2025-02-08",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12069",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12070,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "33000.00",
+      "date": "2025-02-09",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12070",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12071,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "153700.00",
+      "date": "2025-02-09",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12071",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12072,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "31400.00",
+      "date": "2025-02-10",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12072",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12073,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160300.00",
+      "date": "2025-02-10",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12073",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12074,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "38700.00",
+      "date": "2025-02-11",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12074",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12075,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "147800.00",
+      "date": "2025-02-11",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12075",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12076,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "45200.00",
+      "date": "2025-02-12",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12076",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12077,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "26600.00",
+      "date": "2025-02-13",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12077",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12078,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165900.00",
+      "date": "2025-02-13",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12078",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12079,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "33600.00",
+      "date": "2025-02-14",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12079",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12080,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "155100.00",
+      "date": "2025-02-14",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12080",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12081,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "31700.00",
+      "date": "2025-02-15",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12081",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12082,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161200.00",
+      "date": "2025-02-15",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12082",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12083,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "39000.00",
+      "date": "2025-02-16",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12083",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12084,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "148900.00",
+      "date": "2025-02-16",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12084",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12085,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "45900.00",
+      "date": "2025-02-17",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12085",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12086,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "27000.00",
+      "date": "2025-02-18",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12086",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12087,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "167300.00",
+      "date": "2025-02-18",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12087",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12088,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "34100.00",
+      "date": "2025-02-19",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12088",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12089,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "154600.00",
+      "date": "2025-02-19",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12089",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12090,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "32000.00",
+      "date": "2025-02-20",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12090",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12091,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162400.00",
+      "date": "2025-02-20",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12091",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12092,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Depense",
+      "montant": "39500.00",
+      "date": "2025-02-21",
+      "categorie": "Renforcement comités pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12092",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12093,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "149300.00",
+      "date": "2025-02-21",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12093",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12094,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "46400.00",
+      "date": "2025-02-22",
+      "categorie": "Appui mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12094",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12095,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "27400.00",
+      "date": "2025-02-23",
+      "categorie": "Transport poisson",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12095",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12096,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "168600.00",
+      "date": "2025-02-23",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12096",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12097,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Depense",
+      "montant": "34500.00",
+      "date": "2025-02-24",
+      "categorie": "Gestion durable ressources",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RNCLPA-12097",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12098,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "157100.00",
+      "date": "2025-02-24",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RNCLPA-12098",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 12099,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "32200.00",
+      "date": "2025-02-25",
+      "categorie": "Nettoyage plages",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RNCLPA-12099",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 12100,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163900.00",
+      "date": "2025-02-25",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RNCLPA-12100",
+      "fichier_recu": null,
+      "created_by": 107
+    }
+  }
+]

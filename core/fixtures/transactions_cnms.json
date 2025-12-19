@@ -1,0 +1,988 @@
+[
+  {
+    "model": "core.transaction",
+    "pk": 13201,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 446,
+      "type": "Depense",
+      "montant": "33200.00",
+      "date": "2025-01-03",
+      "categorie": "Amélioration conditions travail",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13201",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13202,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162800.00",
+      "date": "2025-01-03",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13202",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13203,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 447,
+      "type": "Depense",
+      "montant": "35100.00",
+      "date": "2025-01-04",
+      "categorie": "Développement local maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13203",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13204,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158900.00",
+      "date": "2025-01-04",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13204",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13205,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 448,
+      "type": "Depense",
+      "montant": "38900.00",
+      "date": "2025-01-05",
+      "categorie": "Formation qualité et sécurité",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13205",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13206,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161600.00",
+      "date": "2025-01-05",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13206",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13207,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 449,
+      "type": "Depense",
+      "montant": "31800.00",
+      "date": "2025-01-06",
+      "categorie": "Gestion déchets débarquement",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CNMS-13207",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13208,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160900.00",
+      "date": "2025-01-06",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13208",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13209,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 450,
+      "type": "Depense",
+      "montant": "35800.00",
+      "date": "2025-01-07",
+      "categorie": "Chaîne de froid",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13209",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13210,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164700.00",
+      "date": "2025-01-07",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13210",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13211,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 446,
+      "type": "Depense",
+      "montant": "33100.00",
+      "date": "2025-01-08",
+      "categorie": "Amélioration conditions travail",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13211",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13212,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163000.00",
+      "date": "2025-01-08",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13212",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13213,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 447,
+      "type": "Depense",
+      "montant": "35000.00",
+      "date": "2025-01-09",
+      "categorie": "Développement local maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13213",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13214,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161500.00",
+      "date": "2025-01-09",
+      "categorie": "Vente produits",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13214",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13215,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 448,
+      "type": "Depense",
+      "montant": "39100.00",
+      "date": "2025-01-10",
+      "categorie": "Formation qualité et sécurité",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13215",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13216,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "166100.00",
+      "date": "2025-01-10",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13216",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13217,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 449,
+      "type": "Depense",
+      "montant": "32200.00",
+      "date": "2025-01-11",
+      "categorie": "Gestion déchets débarquement",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CNMS-13217",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13218,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164300.00",
+      "date": "2025-01-11",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13218",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13219,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 450,
+      "type": "Depense",
+      "montant": "35500.00",
+      "date": "2025-01-12",
+      "categorie": "Chaîne de froid",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13219",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13220,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165500.00",
+      "date": "2025-01-12",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13220",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13221,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 446,
+      "type": "Depense",
+      "montant": "33400.00",
+      "date": "2025-01-13",
+      "categorie": "Amélioration conditions travail",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13221",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13222,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162200.00",
+      "date": "2025-01-13",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13222",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13223,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 447,
+      "type": "Depense",
+      "montant": "35200.00",
+      "date": "2025-01-14",
+      "categorie": "Développement local maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13223",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13224,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163700.00",
+      "date": "2025-01-14",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13224",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13225,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 448,
+      "type": "Depense",
+      "montant": "38500.00",
+      "date": "2025-01-15",
+      "categorie": "Formation qualité et sécurité",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13225",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13226,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165900.00",
+      "date": "2025-01-15",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13226",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13227,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 449,
+      "type": "Depense",
+      "montant": "31900.00",
+      "date": "2025-01-16",
+      "categorie": "Gestion déchets débarquement",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CNMS-13227",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13228,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163300.00",
+      "date": "2025-01-16",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13228",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13229,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 450,
+      "type": "Depense",
+      "montant": "35700.00",
+      "date": "2025-01-17",
+      "categorie": "Chaîne de froid",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13229",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13230,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "166800.00",
+      "date": "2025-01-17",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13230",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13231,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 446,
+      "type": "Depense",
+      "montant": "33000.00",
+      "date": "2025-01-18",
+      "categorie": "Amélioration conditions travail",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13231",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13232,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160700.00",
+      "date": "2025-01-18",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13232",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13233,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 447,
+      "type": "Depense",
+      "montant": "35500.00",
+      "date": "2025-01-19",
+      "categorie": "Développement local maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13233",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13234,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165900.00",
+      "date": "2025-01-19",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13234",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13235,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 448,
+      "type": "Depense",
+      "montant": "38200.00",
+      "date": "2025-01-20",
+      "categorie": "Formation qualité et sécurité",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13235",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13236,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164400.00",
+      "date": "2025-01-20",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13236",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13237,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 449,
+      "type": "Depense",
+      "montant": "31600.00",
+      "date": "2025-01-21",
+      "categorie": "Gestion déchets débarquement",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CNMS-13237",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13238,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163500.00",
+      "date": "2025-01-21",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13238",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13239,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 450,
+      "type": "Depense",
+      "montant": "35900.00",
+      "date": "2025-01-22",
+      "categorie": "Chaîne de froid",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13239",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13240,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165200.00",
+      "date": "2025-01-22",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13240",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13241,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 446,
+      "type": "Depense",
+      "montant": "33300.00",
+      "date": "2025-01-23",
+      "categorie": "Amélioration conditions travail",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13241",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13242,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164800.00",
+      "date": "2025-01-23",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13242",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13243,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 447,
+      "type": "Depense",
+      "montant": "35100.00",
+      "date": "2025-01-24",
+      "categorie": "Développement local maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13243",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13244,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165700.00",
+      "date": "2025-01-24",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13244",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13245,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 448,
+      "type": "Depense",
+      "montant": "38300.00",
+      "date": "2025-01-25",
+      "categorie": "Formation qualité et sécurité",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13245",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13246,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161900.00",
+      "date": "2025-01-25",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13246",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13247,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 449,
+      "type": "Depense",
+      "montant": "31800.00",
+      "date": "2025-01-26",
+      "categorie": "Gestion déchets débarquement",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CNMS-13247",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13248,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163400.00",
+      "date": "2025-01-26",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13248",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13249,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 450,
+      "type": "Depense",
+      "montant": "36100.00",
+      "date": "2025-01-27",
+      "categorie": "Chaîne de froid",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13249",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13250,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164900.00",
+      "date": "2025-01-27",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13250",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13251,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 446,
+      "type": "Depense",
+      "montant": "33500.00",
+      "date": "2025-01-28",
+      "categorie": "Amélioration conditions travail",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13251",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13252,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162300.00",
+      "date": "2025-01-28",
+      "categorie": "Vente produits",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13252",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13253,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 447,
+      "type": "Depense",
+      "montant": "35300.00",
+      "date": "2025-01-29",
+      "categorie": "Développement local maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13253",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13254,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163800.00",
+      "date": "2025-01-29",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13254",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13255,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 448,
+      "type": "Depense",
+      "montant": "38000.00",
+      "date": "2025-01-30",
+      "categorie": "Formation qualité et sécurité",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13255",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13256,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165600.00",
+      "date": "2025-01-30",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13256",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13257,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 449,
+      "type": "Depense",
+      "montant": "31700.00",
+      "date": "2025-01-31",
+      "categorie": "Gestion déchets débarquement",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CNMS-13257",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13258,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163900.00",
+      "date": "2025-01-31",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNMS-13258",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13259,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 450,
+      "type": "Depense",
+      "montant": "36300.00",
+      "date": "2025-02-01",
+      "categorie": "Chaîne de froid",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNMS-13259",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13260,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165800.00",
+      "date": "2025-02-01",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNMS-13260",
+      "fichier_recu": null,
+      "created_by": 110
+    }
+  }
+]

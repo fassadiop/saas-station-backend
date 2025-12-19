@@ -1,0 +1,1734 @@
+[
+  {
+    "model": "core.transaction",
+    "pk": 11001,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "48500.00",
+      "date": "2025-01-03",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11001",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11002,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162000.00",
+      "date": "2025-01-04",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNPS-11002",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11003,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "26800.00",
+      "date": "2025-01-05",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11003",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11004,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Depense",
+      "montant": "7200.00",
+      "date": "2025-01-06",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CNPS-11004",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11005,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "37100.00",
+      "date": "2025-01-07",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11005",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11006,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "168500.00",
+      "date": "2025-01-08",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11006",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11007,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "29800.00",
+      "date": "2025-01-09",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11007",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11008,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "43500.00",
+      "date": "2025-01-10",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11008",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11009,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158000.00",
+      "date": "2025-01-11",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNPS-11009",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11010,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "49000.00",
+      "date": "2025-01-12",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11010",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11011,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "26500.00",
+      "date": "2025-01-13",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11011",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11012,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Depense",
+      "montant": "7600.00",
+      "date": "2025-01-14",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CNPS-11012",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11013,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "37200.00",
+      "date": "2025-01-15",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11013",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11014,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "171000.00",
+      "date": "2025-01-16",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11014",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11015,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "30300.00",
+      "date": "2025-01-17",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11015",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11016,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "43800.00",
+      "date": "2025-01-18",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11016",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11017,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164500.00",
+      "date": "2025-01-19",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNPS-11017",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11018,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "49200.00",
+      "date": "2025-01-20",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11018",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11019,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "26900.00",
+      "date": "2025-01-21",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11019",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11020,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "36900.00",
+      "date": "2025-01-22",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11020",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11021,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "168000.00",
+      "date": "2025-01-23",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11021",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11022,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "30100.00",
+      "date": "2025-01-24",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11022",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11023,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "44000.00",
+      "date": "2025-01-25",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11023",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11024,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160500.00",
+      "date": "2025-01-26",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNPS-11024",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11025,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "49700.00",
+      "date": "2025-01-27",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11025",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11026,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "27000.00",
+      "date": "2025-01-28",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11026",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11027,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "37500.00",
+      "date": "2025-01-29",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11027",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11028,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "170000.00",
+      "date": "2025-01-30",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11028",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11029,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "30500.00",
+      "date": "2025-01-31",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11029",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11030,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "44200.00",
+      "date": "2025-02-01",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11030",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11031,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162500.00",
+      "date": "2025-02-02",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11031",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11032,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "49900.00",
+      "date": "2025-02-03",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11032",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11033,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "27100.00",
+      "date": "2025-02-04",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11033",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 11034,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "37300.00",
+      "date": "2025-02-05",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11034",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11035,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "170800.00",
+      "date": "2025-02-06",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11035",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11036,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "30400.00",
+      "date": "2025-02-07",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11036",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11037,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "43900.00",
+      "date": "2025-02-08",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11037",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11038,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164500.00",
+      "date": "2025-02-09",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNPS-11038",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11039,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "50100.00",
+      "date": "2025-02-10",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11039",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11040,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "27200.00",
+      "date": "2025-02-11",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11040",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11041,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "37600.00",
+      "date": "2025-02-12",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11041",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11042,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163200.00",
+      "date": "2025-02-13",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11042",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11043,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "30700.00",
+      "date": "2025-02-14",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11043",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11044,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "44100.00",
+      "date": "2025-02-15",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11044",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11045,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165500.00",
+      "date": "2025-02-16",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNPS-11045",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11046,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "50500.00",
+      "date": "2025-02-17",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11046",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11047,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "27300.00",
+      "date": "2025-02-18",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11047",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11048,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "37900.00",
+      "date": "2025-02-19",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11048",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11049,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "169500.00",
+      "date": "2025-02-20",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11049",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11050,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "30900.00",
+      "date": "2025-02-21",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11050",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11051,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "44500.00",
+      "date": "2025-02-22",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11051",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11052,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163900.00",
+      "date": "2025-02-23",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11052",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11053,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "50800.00",
+      "date": "2025-02-24",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11053",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11054,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "27400.00",
+      "date": "2025-02-25",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11054",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11055,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "38200.00",
+      "date": "2025-02-26",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11055",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11056,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "171500.00",
+      "date": "2025-02-27",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11056",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11057,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "31100.00",
+      "date": "2025-02-28",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11057",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11058,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "44600.00",
+      "date": "2025-03-01",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11058",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11059,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164800.00",
+      "date": "2025-03-02",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11059",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11060,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "51000.00",
+      "date": "2025-03-03",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11060",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11061,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "27600.00",
+      "date": "2025-03-04",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11061",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11062,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "38400.00",
+      "date": "2025-03-05",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11062",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11063,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "170200.00",
+      "date": "2025-03-06",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11063",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11064,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "31200.00",
+      "date": "2025-03-07",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11064",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11065,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "44800.00",
+      "date": "2025-03-08",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11065",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11066,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165200.00",
+      "date": "2025-03-09",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11066",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 11067,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "51400.00",
+      "date": "2025-03-10",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11067",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 11068,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "27800.00",
+      "date": "2025-03-11",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11068",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 11069,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "38600.00",
+      "date": "2025-03-12",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11069",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 11070,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "170900.00",
+      "date": "2025-03-13",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11070",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 11071,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "31400.00",
+      "date": "2025-03-14",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11071",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 11072,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "45000.00",
+      "date": "2025-03-15",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11072",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 11073,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "166400.00",
+      "date": "2025-03-16",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNPS-11073",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 11074,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "51600.00",
+      "date": "2025-03-17",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11074",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 11075,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "27900.00",
+      "date": "2025-03-18",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11075",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11076,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "38900.00",
+      "date": "2025-03-19",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11076",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11077,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "172300.00",
+      "date": "2025-03-20",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11077",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11078,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "31600.00",
+      "date": "2025-03-21",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11078",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11079,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "45200.00",
+      "date": "2025-03-22",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11079",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11080,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "167400.00",
+      "date": "2025-03-23",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11080",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11081,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "51900.00",
+      "date": "2025-03-24",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11081",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11082,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "28200.00",
+      "date": "2025-03-25",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11082",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11083,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "39200.00",
+      "date": "2025-03-26",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11083",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11084,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "171000.00",
+      "date": "2025-03-27",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11084",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11085,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "31800.00",
+      "date": "2025-03-28",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11085",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11086,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "45500.00",
+      "date": "2025-03-29",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11086",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11087,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "168200.00",
+      "date": "2025-03-30",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CNPS-11087",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11088,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "52100.00",
+      "date": "2025-03-31",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11088",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11089,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "28300.00",
+      "date": "2025-04-01",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11089",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11090,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "39500.00",
+      "date": "2025-04-02",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11090",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11091,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "173400.00",
+      "date": "2025-04-03",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11091",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11092,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "32000.00",
+      "date": "2025-04-04",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11092",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11093,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "45800.00",
+      "date": "2025-04-05",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11093",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11094,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "169900.00",
+      "date": "2025-04-06",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11094",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11095,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "52300.00",
+      "date": "2025-04-07",
+      "categorie": "Couverture sociale pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11095",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11096,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 412,
+      "type": "Depense",
+      "montant": "28400.00",
+      "date": "2025-04-08",
+      "categorie": "Campagne sécurité en mer",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11096",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11097,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "39600.00",
+      "date": "2025-04-09",
+      "categorie": "Renforcement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11097",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11098,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": null,
+      "type": "Recette",
+      "montant": "174900.00",
+      "date": "2025-04-10",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CNPS-11098",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 11099,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "32100.00",
+      "date": "2025-04-11",
+      "categorie": "Travail décent pêche",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11099",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 11100,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "projet": 415,
+      "type": "Depense",
+      "montant": "45900.00",
+      "date": "2025-04-12",
+      "categorie": "GPS & gilets",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CNPS-11100",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  }
+]

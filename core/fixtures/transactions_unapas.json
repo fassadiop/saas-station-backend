@@ -1,0 +1,1745 @@
+[
+  {
+    "model": "core.transaction",
+    "pk": 10401,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "49500.00",
+      "date": "2025-01-04",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0401",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10402,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158000.00",
+      "date": "2025-01-05",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0402",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10403,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "27500.00",
+      "date": "2025-01-06",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0403",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10404,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Depense",
+      "montant": "7500.00",
+      "date": "2025-01-07",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0404",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10405,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "35500.00",
+      "date": "2025-01-08",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0405",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10406,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "174000.00",
+      "date": "2025-01-09",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0406",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10407,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "39500.00",
+      "date": "2025-01-10",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0407",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10408,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "46000.00",
+      "date": "2025-01-11",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0408",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10409,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162500.00",
+      "date": "2025-01-12",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0409",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10410,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "50000.00",
+      "date": "2025-01-13",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0410",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10411,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "29000.00",
+      "date": "2025-01-14",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0411",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10412,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Depense",
+      "montant": "7800.00",
+      "date": "2025-01-15",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0412",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10413,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "36000.00",
+      "date": "2025-01-16",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0413",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10414,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "170500.00",
+      "date": "2025-01-17",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0414",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10415,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "40500.00",
+      "date": "2025-01-18",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0415",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10416,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "47200.00",
+      "date": "2025-01-19",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0416",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10417,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162000.00",
+      "date": "2025-01-20",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0417",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10418,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "49800.00",
+      "date": "2025-01-21",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0418",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10419,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "28900.00",
+      "date": "2025-01-22",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0419",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10420,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "35000.00",
+      "date": "2025-01-23",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0420",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10421,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "171000.00",
+      "date": "2025-01-24",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0421",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10422,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "40700.00",
+      "date": "2025-01-25",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0422",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10423,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "46200.00",
+      "date": "2025-01-26",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0423",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10424,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160000.00",
+      "date": "2025-01-27",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0424",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10425,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "50200.00",
+      "date": "2025-01-28",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0425",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10426,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "27000.00",
+      "date": "2025-01-29",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0426",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10427,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "34500.00",
+      "date": "2025-01-30",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0427",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10428,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "169000.00",
+      "date": "2025-01-31",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0428",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10429,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "41000.00",
+      "date": "2025-02-01",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0429",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10430,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "47000.00",
+      "date": "2025-02-02",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0430",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10431,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163000.00",
+      "date": "2025-02-03",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0431",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10432,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "50500.00",
+      "date": "2025-02-04",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0432",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10433,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "28200.00",
+      "date": "2025-02-05",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0433",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 10434,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "34800.00",
+      "date": "2025-02-06",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0434",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10435,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "171000.00",
+      "date": "2025-02-07",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0435",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10436,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "41500.00",
+      "date": "2025-02-08",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0436",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10437,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "46800.00",
+      "date": "2025-02-09",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0437",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10438,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165000.00",
+      "date": "2025-02-10",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0438",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10439,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "50200.00",
+      "date": "2025-02-11",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0439",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10440,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "28600.00",
+      "date": "2025-02-12",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0440",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10441,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "34200.00",
+      "date": "2025-02-13",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0441",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10442,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "173000.00",
+      "date": "2025-02-14",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0442",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10443,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "41300.00",
+      "date": "2025-02-15",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0443",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10444,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "46000.00",
+      "date": "2025-02-16",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0444",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10445,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160500.00",
+      "date": "2025-02-17",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0445",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10446,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "51000.00",
+      "date": "2025-02-18",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0446",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10447,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "27800.00",
+      "date": "2025-02-19",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0447",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10448,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "33800.00",
+      "date": "2025-02-20",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0448",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10449,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "172000.00",
+      "date": "2025-02-21",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0449",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10450,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "42000.00",
+      "date": "2025-02-22",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0450",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10451,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "46500.00",
+      "date": "2025-02-23",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0451",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10452,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163500.00",
+      "date": "2025-02-24",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0452",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10453,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "50700.00",
+      "date": "2025-02-25",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0453",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10454,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "29000.00",
+      "date": "2025-02-26",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0454",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10455,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "33600.00",
+      "date": "2025-02-27",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0455",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10456,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "168000.00",
+      "date": "2025-02-28",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0456",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10457,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "41800.00",
+      "date": "2025-03-01",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0457",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10458,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "46900.00",
+      "date": "2025-03-02",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0458",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10459,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162000.00",
+      "date": "2025-03-03",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0459",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10460,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "50900.00",
+      "date": "2025-03-04",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0460",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10461,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "29200.00",
+      "date": "2025-03-05",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0461",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10462,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "34000.00",
+      "date": "2025-03-06",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0462",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10463,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "170000.00",
+      "date": "2025-03-07",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0463",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10464,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "42200.00",
+      "date": "2025-03-08",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0464",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10465,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "46800.00",
+      "date": "2025-03-09",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0465",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10466,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164000.00",
+      "date": "2025-03-10",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0466",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 10467,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "51200.00",
+      "date": "2025-03-11",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0467",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10468,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "28300.00",
+      "date": "2025-03-12",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0468",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10469,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "33900.00",
+      "date": "2025-03-13",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0469",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10470,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "172500.00",
+      "date": "2025-03-14",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0470",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10471,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "42500.00",
+      "date": "2025-03-15",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0471",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10472,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "47100.00",
+      "date": "2025-03-16",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0472",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10473,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161500.00",
+      "date": "2025-03-17",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0473",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10474,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "51400.00",
+      "date": "2025-03-18",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0474",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10475,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "28800.00",
+      "date": "2025-03-19",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0475",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10476,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "34400.00",
+      "date": "2025-03-20",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0476",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10477,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "169500.00",
+      "date": "2025-03-21",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0477",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10478,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "43000.00",
+      "date": "2025-03-22",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0478",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10479,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "47400.00",
+      "date": "2025-03-23",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0479",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10480,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164500.00",
+      "date": "2025-03-24",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0480",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10481,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "51800.00",
+      "date": "2025-03-25",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0481",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10482,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "29300.00",
+      "date": "2025-03-26",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0482",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10483,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "34100.00",
+      "date": "2025-03-27",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0483",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10484,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "171500.00",
+      "date": "2025-03-28",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0484",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10485,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "43200.00",
+      "date": "2025-03-29",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0485",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10486,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "47500.00",
+      "date": "2025-03-30",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0486",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10487,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162500.00",
+      "date": "2025-03-31",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0487",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10488,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "52000.00",
+      "date": "2025-04-01",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0488",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10489,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "29500.00",
+      "date": "2025-04-02",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0489",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10490,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "34500.00",
+      "date": "2025-04-03",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0490",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10491,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "170500.00",
+      "date": "2025-04-04",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0491",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10492,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "43800.00",
+      "date": "2025-04-05",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0492",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10493,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "47600.00",
+      "date": "2025-04-06",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0493",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10494,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163800.00",
+      "date": "2025-04-07",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNA-0494",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10495,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Depense",
+      "montant": "52300.00",
+      "date": "2025-04-08",
+      "categorie": "Renouvellement pirogues",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0495",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10496,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "29700.00",
+      "date": "2025-04-09",
+      "categorie": "Formation pêcheurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0496",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10497,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "34700.00",
+      "date": "2025-04-10",
+      "categorie": "Équipements LED",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0497",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10498,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": null,
+      "type": "Recette",
+      "montant": "172200.00",
+      "date": "2025-04-11",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNA-0498",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10499,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Depense",
+      "montant": "43900.00",
+      "date": "2025-04-12",
+      "categorie": "Appui pêcheurs",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNA-0499",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10500,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "48000.00",
+      "date": "2025-04-13",
+      "categorie": "Filets & matériels",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNA-0500",
+      "fichier_recu": null,
+      "created_by": 106
+    }
+  }
+]

@@ -1,0 +1,511 @@
+[
+  {
+    "model": "core.projet",
+    "pk": 401,
+    "fields": {
+      "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201",
+      "nom": "Programme d’Équipement en Glacières",
+      "budget": "15000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 402,
+    "fields": {
+      "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201",
+      "nom": "Formation en Gestion Financière des GIE",
+      "budget": "3500000.00",
+      "statut": "Termine"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 403,
+    "fields": {
+      "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201",
+      "nom": "Projet de Modernisation des Points de Débarquement",
+      "budget": "22000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 404,
+    "fields": {
+      "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201",
+      "nom": "Renforcement des Capacités des Femmes Transformatrices",
+      "budget": "5000000.00",
+      "statut": "Suspendu"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 405,
+    "fields": {
+      "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201",
+      "nom": "Appui en Matériel de Conservation",
+      "budget": "8000000.00",
+      "statut": "En_cours"
+    }
+  },
+
+  {
+    "model": "core.projet",
+    "pk": 406,
+    "fields": {
+      "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102",
+      "nom": "Projet Construction Chambre Froide Communautaire",
+      "budget": "18000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 407,
+    "fields": {
+      "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102",
+      "nom": "Appui aux Activités de Transformation du Poisson",
+      "budget": "7000000.00",
+      "statut": "Termine"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 408,
+    "fields": {
+      "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102",
+      "nom": "Projet d’Amélioration des Conditions de Débarquement",
+      "budget": "23000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 409,
+    "fields": {
+      "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102",
+      "nom": "Acquisition de Matériel de Sécurité en Mer",
+      "budget": "6000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 410,
+    "fields": {
+      "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102",
+      "nom": "Programme d’Hygiène et Qualité pour Femmes Mareyeuses",
+      "budget": "4500000.00",
+      "statut": "Suspendu"
+    }
+  },
+
+  {
+    "model": "core.projet",
+    "pk": 411,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "nom": "Projet de Couverture Sociale des Pêcheurs",
+      "budget": "12000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 412,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "nom": "Campagne de Sécurité et Sauvetage en Mer",
+      "budget": "3000000.00",
+      "statut": "Termine"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 413,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "nom": "Projet Renforcement Matériel des Pirogues",
+      "budget": "15000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 414,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "nom": "Promotion du Travail Décent en Pêche Artisanale",
+      "budget": "5000000.00",
+      "statut": "Suspendu"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 415,
+    "fields": {
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "nom": "Acquisition de GPS et Gilets de Sauvetage",
+      "budget": "4000000.00",
+      "statut": "En_cours"
+    }
+  },
+
+  {
+    "model": "core.projet",
+    "pk": 416,
+    "fields": {
+      "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204",
+      "nom": "Projet d’Appui aux GIE de la Petite Côte",
+      "budget": "14000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 417,
+    "fields": {
+      "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204",
+      "nom": "Renforcement des Capacités des Trésoriers",
+      "budget": "2500000.00",
+      "statut": "Termine"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 418,
+    "fields": {
+      "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204",
+      "nom": "Projet d’Appui à la Digitalisation",
+      "budget": "9000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 419,
+    "fields": {
+      "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204",
+      "nom": "Appui Matériel aux Débarcadères",
+      "budget": "11000000.00",
+      "statut": "Suspendu"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 420,
+    "fields": {
+      "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204",
+      "nom": "Fonds de Soutien aux Activités Féminines",
+      "budget": "6000000.00",
+      "statut": "En_cours"
+    }
+  },
+
+  {
+    "model": "core.projet",
+    "pk": 421,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "nom": "Projet de Microfinance pour Transformatrices",
+      "budget": "8000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 422,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "nom": "Programme d’Hygiène et Qualité",
+      "budget": "4000000.00",
+      "statut": "Termine"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 423,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "nom": "Appui aux Activités de Transformation Artisanale",
+      "budget": "9500000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 424,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "nom": "Projet d’Amélioration de la Chaîne de Valeur",
+      "budget": "20000000.00",
+      "statut": "Suspendu"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 425,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "nom": "Appui Matériel aux Femmes",
+      "budget": "5000000.00",
+      "statut": "En_cours"
+    }
+  },
+
+  {
+    "model": "core.projet",
+    "pk": 426,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "nom": "Projet de Renouvellement de Pirogues",
+      "budget": "24000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 427,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "nom": "Formation Technique des Jeunes Pêcheurs",
+      "budget": "4500000.00",
+      "statut": "Termine"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 428,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "nom": "Acquisition de Lampes LED pour la Pêche Nocturne",
+      "budget": "3500000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 429,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "nom": "Appui aux Pêcheurs en Difficulté",
+      "budget": "7000000.00",
+      "statut": "Suspendu"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 430,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "nom": "Projet d’Amélioration des Filets",
+      "budget": "6000000.00",
+      "statut": "En_cours"
+    }
+  },
+
+  {
+    "model": "core.projet",
+    "pk": 431,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "nom": "Projet Communautaire de Nettoyage des Plages",
+      "budget": "2200000.00",
+      "statut": "Termine"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 432,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "nom": "Renforcement des Comités de Pêche",
+      "budget": "5000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 433,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "nom": "Projet d’Appui aux Mareyeurs",
+      "budget": "9000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 434,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "nom": "Appui au Transport du Poisson",
+      "budget": "3500000.00",
+      "statut": "Suspendu"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 435,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "nom": "Projet de Gestion Durable des Ressources",
+      "budget": "16000000.00",
+      "statut": "En_cours"
+    }
+  },
+
+  {
+    "model": "core.projet",
+    "pk": 436,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "nom": "Projet de Formation des Jeunes Mareyeurs",
+      "budget": "4000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 437,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "nom": "Acquisition de Matériel de Conservation",
+      "budget": "7500000.00",
+      "statut": "Termine"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 438,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "nom": "Projet de Valorisation des Déchets de Poisson",
+      "budget": "11000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 439,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "nom": "Programme de Sécurité Sanitaire",
+      "budget": "5000000.00",
+      "statut": "Suspendu"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 440,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "nom": "Projet Appui Logistique",
+      "budget": "3000000.00",
+      "statut": "En_cours"
+    }
+  },
+
+  {
+    "model": "core.projet",
+    "pk": 441,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "nom": "Projet d’Appui aux Femmes Débarqueuses",
+      "budget": "6000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 442,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "nom": "Sécurité Maritime des Jeunes Pêcheurs",
+      "budget": "2500000.00",
+      "statut": "Termine"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 443,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "nom": "Valorisation du Poisson Déclassé",
+      "budget": "9000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 444,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "nom": "Renforcement du Matériel de Fumage",
+      "budget": "5000000.00",
+      "statut": "Suspendu"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 445,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "nom": "Appui Micro-entreprenariat Féminin",
+      "budget": "4500000.00",
+      "statut": "En_cours"
+    }
+  },
+
+  {
+    "model": "core.projet",
+    "pk": 446,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "nom": "Projet d'Amélioration des Conditions de Travail",
+      "budget": "7000000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 447,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "nom": "Programme de Développement local maritime",
+      "budget": "3000000.00",
+      "statut": "Termine"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 448,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "nom": "Projet de Formation en Qualité et Sécurité",
+      "budget": "5500000.00",
+      "statut": "En_cours"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 449,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "nom": "Projet de Gestion des Déchets en Zone de Débarquement",
+      "budget": "10000000.00",
+      "statut": "Suspendu"
+    }
+  },
+  {
+    "model": "core.projet",
+    "pk": 450,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "nom": "Amélioration de la Chaîne de Froid",
+      "budget": "16000000.00",
+      "statut": "En_cours"
+    }
+  }
+]

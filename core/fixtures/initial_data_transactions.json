@@ -1,0 +1,811 @@
+[
+  {
+    "model": "core.transaction",
+    "pk": 501,
+    "fields": {
+      "tenant": "69f44674-192d-4d04-b6fd-8c9d79bf2eaa",
+      "projet": 401,
+      "type": "Recette",
+      "montant": "150000.00",
+      "date": "2025-01-10",
+      "categorie": "Cotisation membre",
+      "mode_paiement": "Espèces",
+      "reference": "REF-2025-501",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 502,
+    "fields": {
+      "tenant": "69f44674-192d-4d04-b6fd-8c9d79bf2eaa",
+      "projet": 402,
+      "type": "Depense",
+      "montant": "85000.00",
+      "date": "2025-01-14",
+      "categorie": "Achat matériel",
+      "mode_paiement": "Wave",
+      "reference": "REF-2025-502",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 503,
+    "fields": {
+      "tenant": "69f44674-192d-4d04-b6fd-8c9d79bf2eaa",
+      "projet": 403,
+      "type": "Depense",
+      "montant": "120000.00",
+      "date": "2025-01-20",
+      "categorie": "Carburant",
+      "mode_paiement": "Orange Money",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 504,
+    "fields": {
+      "tenant": "69f44674-192d-4d04-b6fd-8c9d79bf2eaa",
+      "projet": 404,
+      "type": "Recette",
+      "montant": "90000.00",
+      "date": "2025-01-22",
+      "categorie": "Vente de glace",
+      "mode_paiement": "",
+      "reference": "REF-2025-504",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 505,
+    "fields": {
+      "tenant": "69f44674-192d-4d04-b6fd-8c9d79bf2eaa",
+      "projet": 405,
+      "type": "Depense",
+      "montant": "60000.00",
+      "date": "2025-01-25",
+      "categorie": "Appui aux membres",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 506,
+    "fields": {
+      "tenant": "c3052cf0-8234-42f6-92a4-b67d2f75dea2",
+      "projet": 406,
+      "type": "Recette",
+      "montant": "200000.00",
+      "date": "2025-01-08",
+      "categorie": "Subvention",
+      "mode_paiement": "",
+      "reference": "REF-2025-506",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 507,
+    "fields": {
+      "tenant": "c3052cf0-8234-42f6-92a4-b67d2f75dea2",
+      "projet": 407,
+      "type": "Depense",
+      "montant": "50000.00",
+      "date": "2025-01-11",
+      "categorie": "Communication",
+      "mode_paiement": "Wave",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 508,
+    "fields": {
+      "tenant": "c3052cf0-8234-42f6-92a4-b67d2f75dea2",
+      "projet": 408,
+      "type": "Depense",
+      "montant": "130000.00",
+      "date": "2025-01-14",
+      "categorie": "Carburant",
+      "mode_paiement": "",
+      "reference": "REF-2025-508",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 509,
+    "fields": {
+      "tenant": "c3052cf0-8234-42f6-92a4-b67d2f75dea2",
+      "projet": 409,
+      "type": "Recette",
+      "montant": "115000.00",
+      "date": "2025-01-17",
+      "categorie": "Participation projet",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 510,
+    "fields": {
+      "tenant": "c3052cf0-8234-42f6-92a4-b67d2f75dea2",
+      "projet": 410,
+      "type": "Depense",
+      "montant": "90000.00",
+      "date": "2025-01-23",
+      "categorie": "Dépenses administratives",
+      "mode_paiement": "Orange Money",
+      "reference": "REF-2025-510",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 511,
+    "fields": {
+      "tenant": "54ba41fd-432e-426f-a0b5-abec54f03b50",
+      "projet": 411,
+      "type": "Depense",
+      "montant": "75000.00",
+      "date": "2025-01-09",
+      "categorie": "Appui aux membres",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 512,
+    "fields": {
+      "tenant": "54ba41fd-432e-426f-a0b5-abec54f03b50",
+      "projet": 412,
+      "type": "Recette",
+      "montant": "180000.00",
+      "date": "2025-01-13",
+      "categorie": "Subvention",
+      "mode_paiement": "",
+      "reference": "REF-2025-512",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 513,
+    "fields": {
+      "tenant": "54ba41fd-432e-426f-a0b5-abec54f03b50",
+      "projet": 413,
+      "type": "Depense",
+      "montant": "140000.00",
+      "date": "2025-01-15",
+      "categorie": "Achat matériel",
+      "mode_paiement": "Wave",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 514,
+    "fields": {
+      "tenant": "54ba41fd-432e-426f-a0b5-abec54f03b50",
+      "projet": 414,
+      "type": "Depense",
+      "montant": "60000.00",
+      "date": "2025-01-18",
+      "categorie": "Carburant",
+      "mode_paiement": "",
+      "reference": "REF-2025-514",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 515,
+    "fields": {
+      "tenant": "54ba41fd-432e-426f-a0b5-abec54f03b50",
+      "projet": 415,
+      "type": "Recette",
+      "montant": "95000.00",
+      "date": "2025-01-21",
+      "categorie": "Cotisation membre",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 516,
+    "fields": {
+      "tenant": "2e4763f1-5db8-421d-8065-8fa74b9e1ecb",
+      "projet": 416,
+      "type": "Recette",
+      "montant": "210000.00",
+      "date": "2025-01-10",
+      "categorie": "Participation projet",
+      "mode_paiement": "",
+      "reference": "REF-2025-516",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 517,
+    "fields": {
+      "tenant": "2e4763f1-5db8-421d-8065-8fa74b9e1ecb",
+      "projet": 417,
+      "type": "Depense",
+      "montant": "50000.00",
+      "date": "2025-01-12",
+      "categorie": "Communication",
+      "mode_paiement": "Orange Money",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 518,
+    "fields": {
+      "tenant": "2e4763f1-5db8-421d-8065-8fa74b9e1ecb",
+      "projet": 418,
+      "type": "Depense",
+      "montant": "180000.00",
+      "date": "2025-01-15",
+      "categorie": "Achat matériel",
+      "mode_paiement": "",
+      "reference": "REF-2025-518",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 519,
+    "fields": {
+      "tenant": "2e4763f1-5db8-421d-8065-8fa74b9e1ecb",
+      "projet": 419,
+      "type": "Depense",
+      "montant": "65000.00",
+      "date": "2025-01-18",
+      "categorie": "Carburant",
+      "mode_paiement": "",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 520,
+    "fields": {
+      "tenant": "2e4763f1-5db8-421d-8065-8fa74b9e1ecb",
+      "projet": 420,
+      "type": "Recette",
+      "montant": "130000.00",
+      "date": "2025-01-22",
+      "categorie": "Subvention",
+      "mode_paiement": "Espèces",
+      "reference": "REF-2025-520",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 521,
+    "fields": {
+      "tenant": "30e3bcd5-4fb1-41e1-a58b-4b64c0ecba08",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "70000.00",
+      "date": "2025-01-09",
+      "categorie": "Appui aux membres",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 522,
+    "fields": {
+      "tenant": "30e3bcd5-4fb1-41e1-a58b-4b64c0ecba08",
+      "projet": 422,
+      "type": "Recette",
+      "montant": "120000.00",
+      "date": "2025-01-13",
+      "categorie": "Cotisation membre",
+      "mode_paiement": "",
+      "reference": "REF-2025-522",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 523,
+    "fields": {
+      "tenant": "30e3bcd5-4fb1-41e1-a58b-4b64c0ecba08",
+      "projet": 423,
+      "type": "Depense",
+      "montant": "135000.00",
+      "date": "2025-01-15",
+      "categorie": "Dépenses administratives",
+      "mode_paiement": "Orange Money",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 524,
+    "fields": {
+      "tenant": "30e3bcd5-4fb1-41e1-a58b-4b64c0ecba08",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "90000.00",
+      "date": "2025-01-18",
+      "categorie": "Carburant",
+      "mode_paiement": "",
+      "reference": "REF-2025-524",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 525,
+    "fields": {
+      "tenant": "30e3bcd5-4fb1-41e1-a58b-4b64c0ecba08",
+      "projet": 425,
+      "type": "Recette",
+      "montant": "160000.00",
+      "date": "2025-01-21",
+      "categorie": "Participation projet",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 526,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 426,
+      "type": "Recette",
+      "montant": "180000.00",
+      "date": "2025-01-10",
+      "categorie": "Subvention",
+      "mode_paiement": "",
+      "reference": "REF-2025-526",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 527,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 427,
+      "type": "Depense",
+      "montant": "65000.00",
+      "date": "2025-01-12",
+      "categorie": "Achat matériel",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 528,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 428,
+      "type": "Depense",
+      "montant": "90000.00",
+      "date": "2025-01-15",
+      "categorie": "Carburant",
+      "mode_paiement": "",
+      "reference": "REF-2025-528",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 529,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 429,
+      "type": "Recette",
+      "montant": "140000.00",
+      "date": "2025-01-18",
+      "categorie": "Cotisation membre",
+      "mode_paiement": "Wave",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 530,
+    "fields": {
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "projet": 430,
+      "type": "Depense",
+      "montant": "85000.00",
+      "date": "2025-01-22",
+      "categorie": "Appui aux membres",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 531,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 431,
+      "type": "Depense",
+      "montant": "50000.00",
+      "date": "2025-01-08",
+      "categorie": "Dépenses administratives",
+      "mode_paiement": "",
+      "reference": "REF-2025-531",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 532,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 432,
+      "type": "Recette",
+      "montant": "170000.00",
+      "date": "2025-01-11",
+      "categorie": "Vente de glace",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 533,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 433,
+      "type": "Depense",
+      "montant": "95000.00",
+      "date": "2025-01-14",
+      "categorie": "Achat matériel",
+      "mode_paiement": "Orange Money",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 534,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 434,
+      "type": "Depense",
+      "montant": "80000.00",
+      "date": "2025-01-17",
+      "categorie": "Carburant",
+      "mode_paiement": "",
+      "reference": "REF-2025-534",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 535,
+    "fields": {
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "projet": 435,
+      "type": "Recette",
+      "montant": "210000.00",
+      "date": "2025-01-21",
+      "categorie": "Participation projet",
+      "mode_paiement": "Wave",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 536,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "55000.00",
+      "date": "2025-01-09",
+      "categorie": "Communication",
+      "mode_paiement": "",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 537,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Recette",
+      "montant": "160000.00",
+      "date": "2025-01-12",
+      "categorie": "Cotisation membre",
+      "mode_paiement": "Espèces",
+      "reference": "REF-2025-537",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 538,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "110000.00",
+      "date": "2025-01-14",
+      "categorie": "Achat matériel",
+      "mode_paiement": "Wave",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 539,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "90000.00",
+      "date": "2025-01-18",
+      "categorie": "Carburant",
+      "mode_paiement": "",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 540,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Recette",
+      "montant": "200000.00",
+      "date": "2025-01-21",
+      "categorie": "Vente de glace",
+      "mode_paiement": "Espèces",
+      "reference": "REF-2025-540",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 541,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "70000.00",
+      "date": "2025-01-09",
+      "categorie": "Achat matériel",
+      "mode_paiement": "",
+      "reference": "REF-2025-541",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 542,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Recette",
+      "montant": "130000.00",
+      "date": "2025-01-12",
+      "categorie": "Subvention",
+      "mode_paiement": "",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 543,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "90000.00",
+      "date": "2025-01-14",
+      "categorie": "Carburant",
+      "mode_paiement": "",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 544,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "60000.00",
+      "date": "2025-01-17",
+      "categorie": "Dépenses administratives",
+      "mode_paiement": "",
+      "reference": "REF-2025-544",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 545,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Recette",
+      "montant": "145000.00",
+      "date": "2025-01-21",
+      "categorie": "Participation projet",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 546,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 446,
+      "type": "Depense",
+      "montant": "55000.00",
+      "date": "2025-01-09",
+      "categorie": "Communication",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 547,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 447,
+      "type": "Recette",
+      "montant": "160000.00",
+      "date": "2025-01-12",
+      "categorie": "Vente de glace",
+      "mode_paiement": "",
+      "reference": "REF-2025-547",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 548,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 448,
+      "type": "Depense",
+      "montant": "115000.00",
+      "date": "2025-01-14",
+      "categorie": "Achat matériel",
+      "mode_paiement": "Wave",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 549,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 449,
+      "type": "Depense",
+      "montant": "90000.00",
+      "date": "2025-01-17",
+      "categorie": "Carburant",
+      "mode_paiement": "",
+      "reference": "REF-2025-549",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 550,
+    "fields": {
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "projet": 450,
+      "type": "Recette",
+      "montant": "190000.00",
+      "date": "2025-01-21",
+      "categorie": "Cotisation membre",
+      "mode_paiement": "Espèces",
+      "reference": "",
+      "fichier_recu": null,
+      "created_by": 1
+    }
+  }
+]

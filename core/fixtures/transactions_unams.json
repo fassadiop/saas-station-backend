@@ -1,0 +1,1663 @@
+[
+  {
+    "model": "core.transaction",
+    "pk": 13101,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "32800.00",
+      "date": "2025-01-03",
+      "categorie": "Appui femmes débarqueuses",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13101",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13102,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162400.00",
+      "date": "2025-01-03",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13102",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13103,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Depense",
+      "montant": "35100.00",
+      "date": "2025-01-04",
+      "categorie": "Sécurité maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13103",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13104,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "153800.00",
+      "date": "2025-01-04",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13104",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13105,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "38900.00",
+      "date": "2025-01-05",
+      "categorie": "Valorisation poisson déclassé",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13105",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13106,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160200.00",
+      "date": "2025-01-05",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13106",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13107,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "31800.00",
+      "date": "2025-01-06",
+      "categorie": "Matériel fumage",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13107",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13108,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "157600.00",
+      "date": "2025-01-06",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13108",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13109,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Depense",
+      "montant": "34200.00",
+      "date": "2025-01-07",
+      "categorie": "Micro-entreprenariat féminin",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13109",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13110,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163900.00",
+      "date": "2025-01-07",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13110",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13111,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "32300.00",
+      "date": "2025-01-08",
+      "categorie": "Appui femmes débarqueuses",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13111",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13112,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164800.00",
+      "date": "2025-01-08",
+      "categorie": "Vente produits",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13112",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13113,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Depense",
+      "montant": "34700.00",
+      "date": "2025-01-09",
+      "categorie": "Sécurité maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13113",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13114,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162700.00",
+      "date": "2025-01-09",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13114",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13115,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "38500.00",
+      "date": "2025-01-10",
+      "categorie": "Valorisation poisson déclassé",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13115",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13116,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163300.00",
+      "date": "2025-01-10",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13116",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13117,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "31600.00",
+      "date": "2025-01-11",
+      "categorie": "Matériel fumage",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13117",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13118,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "159800.00",
+      "date": "2025-01-11",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13118",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13119,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Depense",
+      "montant": "33600.00",
+      "date": "2025-01-12",
+      "categorie": "Micro-entreprenariat féminin",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13119",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13120,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162600.00",
+      "date": "2025-01-12",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13120",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13121,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "32700.00",
+      "date": "2025-01-13",
+      "categorie": "Appui femmes débarqueuses",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13121",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13122,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158300.00",
+      "date": "2025-01-13",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13122",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13123,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Depense",
+      "montant": "34900.00",
+      "date": "2025-01-14",
+      "categorie": "Sécurité maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13123",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13124,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162900.00",
+      "date": "2025-01-14",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13124",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13125,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "38400.00",
+      "date": "2025-01-15",
+      "categorie": "Valorisation poisson déclassé",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13125",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13126,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "159600.00",
+      "date": "2025-01-15",
+      "categorie": "Vente produits",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13126",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13127,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "31900.00",
+      "date": "2025-01-16",
+      "categorie": "Matériel fumage",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13127",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13128,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160800.00",
+      "date": "2025-01-16",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13128",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13129,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Depense",
+      "montant": "33500.00",
+      "date": "2025-01-17",
+      "categorie": "Micro-entreprenariat féminin",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13129",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13130,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163500.00",
+      "date": "2025-01-17",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13130",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13131,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "32600.00",
+      "date": "2025-01-18",
+      "categorie": "Appui femmes débarqueuses",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13131",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13132,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161700.00",
+      "date": "2025-01-18",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13132",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13133,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Depense",
+      "montant": "35200.00",
+      "date": "2025-01-19",
+      "categorie": "Sécurité maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13133",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13134,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162900.00",
+      "date": "2025-01-19",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13134",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13135,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "38700.00",
+      "date": "2025-01-20",
+      "categorie": "Valorisation poisson déclassé",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13135",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13136,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "159400.00",
+      "date": "2025-01-20",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13136",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13137,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "32200.00",
+      "date": "2025-01-21",
+      "categorie": "Matériel fumage",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13137",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13138,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163800.00",
+      "date": "2025-01-21",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13138",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13139,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Depense",
+      "montant": "33000.00",
+      "date": "2025-01-22",
+      "categorie": "Micro-entreprenariat féminin",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13139",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13140,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164200.00",
+      "date": "2025-01-22",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13140",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13141,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "32900.00",
+      "date": "2025-01-23",
+      "categorie": "Appui femmes débarqueuses",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13141",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13142,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165300.00",
+      "date": "2025-01-23",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13142",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13143,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Depense",
+      "montant": "35300.00",
+      "date": "2025-01-24",
+      "categorie": "Sécurité maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13143",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13144,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163700.00",
+      "date": "2025-01-24",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13144",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13145,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "38600.00",
+      "date": "2025-01-25",
+      "categorie": "Valorisation poisson déclassé",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13145",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13146,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162600.00",
+      "date": "2025-01-25",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13146",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13147,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "32100.00",
+      "date": "2025-01-26",
+      "categorie": "Matériel fumage",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13147",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13148,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "159800.00",
+      "date": "2025-01-26",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13148",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13149,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Depense",
+      "montant": "33300.00",
+      "date": "2025-01-27",
+      "categorie": "Micro-entreprenariat féminin",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13149",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13150,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164900.00",
+      "date": "2025-01-27",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13150",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13151,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "32500.00",
+      "date": "2025-01-28",
+      "categorie": "Appui femmes débarqueuses",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13151",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13152,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165600.00",
+      "date": "2025-01-28",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13152",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13153,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Depense",
+      "montant": "35000.00",
+      "date": "2025-01-29",
+      "categorie": "Sécurité maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13153",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13154,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161900.00",
+      "date": "2025-01-29",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13154",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13155,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "38900.00",
+      "date": "2025-01-30",
+      "categorie": "Valorisation poisson déclassé",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13155",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13156,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162800.00",
+      "date": "2025-01-30",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13156",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13157,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "31800.00",
+      "date": "2025-01-31",
+      "categorie": "Matériel fumage",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13157",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13158,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163300.00",
+      "date": "2025-01-31",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13158",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13159,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Depense",
+      "montant": "33900.00",
+      "date": "2025-02-01",
+      "categorie": "Micro-entreprenariat féminin",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13159",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13160,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162200.00",
+      "date": "2025-02-01",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13160",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13161,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "32400.00",
+      "date": "2025-02-02",
+      "categorie": "Appui femmes débarqueuses",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13161",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13162,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161800.00",
+      "date": "2025-02-02",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13162",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13163,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Depense",
+      "montant": "34800.00",
+      "date": "2025-02-03",
+      "categorie": "Sécurité maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13163",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13164,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163400.00",
+      "date": "2025-02-03",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13164",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13165,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "38300.00",
+      "date": "2025-02-04",
+      "categorie": "Valorisation poisson déclassé",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13165",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13166,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160700.00",
+      "date": "2025-02-04",
+      "categorie": "Vente produits",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13166",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13167,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "31700.00",
+      "date": "2025-02-05",
+      "categorie": "Matériel fumage",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13167",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13168,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162900.00",
+      "date": "2025-02-05",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13168",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13169,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Depense",
+      "montant": "33400.00",
+      "date": "2025-02-06",
+      "categorie": "Micro-entreprenariat féminin",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13169",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13170,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165700.00",
+      "date": "2025-02-06",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13170",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13171,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "32800.00",
+      "date": "2025-02-07",
+      "categorie": "Appui femmes débarqueuses",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13171",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13172,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160800.00",
+      "date": "2025-02-07",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13172",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13173,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Depense",
+      "montant": "34900.00",
+      "date": "2025-02-08",
+      "categorie": "Sécurité maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13173",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13174,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162300.00",
+      "date": "2025-02-08",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13174",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13175,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "38500.00",
+      "date": "2025-02-09",
+      "categorie": "Valorisation poisson déclassé",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13175",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13176,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160900.00",
+      "date": "2025-02-09",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13176",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13177,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "32200.00",
+      "date": "2025-02-10",
+      "categorie": "Matériel fumage",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13177",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13178,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164400.00",
+      "date": "2025-02-10",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13178",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13179,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Depense",
+      "montant": "33800.00",
+      "date": "2025-02-11",
+      "categorie": "Micro-entreprenariat féminin",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13179",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13180,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "166200.00",
+      "date": "2025-02-11",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13180",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13181,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "32600.00",
+      "date": "2025-02-12",
+      "categorie": "Appui femmes débarqueuses",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13181",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13182,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161900.00",
+      "date": "2025-02-12",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13182",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13183,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Depense",
+      "montant": "34500.00",
+      "date": "2025-02-13",
+      "categorie": "Sécurité maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13183",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13184,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164200.00",
+      "date": "2025-02-13",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13184",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13185,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "38800.00",
+      "date": "2025-02-14",
+      "categorie": "Valorisation poisson déclassé",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13185",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13186,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163600.00",
+      "date": "2025-02-14",
+      "categorie": "Vente poisson",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13186",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13187,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "32000.00",
+      "date": "2025-02-15",
+      "categorie": "Matériel fumage",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13187",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13188,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165800.00",
+      "date": "2025-02-15",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13188",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13189,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Depense",
+      "montant": "34000.00",
+      "date": "2025-02-16",
+      "categorie": "Micro-entreprenariat féminin",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13189",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13190,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "166300.00",
+      "date": "2025-02-16",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13190",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13191,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 441,
+      "type": "Depense",
+      "montant": "32700.00",
+      "date": "2025-02-17",
+      "categorie": "Appui femmes débarqueuses",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13191",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13192,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162700.00",
+      "date": "2025-02-17",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13192",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13193,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 442,
+      "type": "Depense",
+      "montant": "34600.00",
+      "date": "2025-02-18",
+      "categorie": "Sécurité maritime",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13193",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13194,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165400.00",
+      "date": "2025-02-18",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13194",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13195,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 443,
+      "type": "Depense",
+      "montant": "39200.00",
+      "date": "2025-02-19",
+      "categorie": "Valorisation poisson déclassé",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13195",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13196,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "164800.00",
+      "date": "2025-02-19",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13196",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13197,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 444,
+      "type": "Depense",
+      "montant": "32300.00",
+      "date": "2025-02-20",
+      "categorie": "Matériel fumage",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-UNAMS-13197",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13198,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "166900.00",
+      "date": "2025-02-20",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-UNAMS-13198",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13199,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": 445,
+      "type": "Depense",
+      "montant": "33700.00",
+      "date": "2025-02-21",
+      "categorie": "Micro-entreprenariat féminin",
+      "mode_paiement": "Virement",
+      "reference": "DPS-UNAMS-13199",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13200,
+    "fields": {
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165800.00",
+      "date": "2025-02-21",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-UNAMS-13200",
+      "fichier_recu": null,
+      "created_by": 109
+    }
+  }
+]

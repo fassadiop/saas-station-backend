@@ -1,0 +1,61 @@
+[
+  { "model": "core.cotisation", "pk": 501, "fields": { "membre": 301, "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201", "montant": "5000.00", "date_paiement": "2025-01-10", "periode": "2025-01", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 502, "fields": { "membre": 302, "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201", "montant": "7000.00", "date_paiement": "2025-02-08", "periode": "2025-02", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 503, "fields": { "membre": 303, "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201", "montant": "3000.00", "date_paiement": "2025-03-17", "periode": "2025-03", "statut": "En_attente" }},
+  { "model": "core.cotisation", "pk": 504, "fields": { "membre": 304, "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201", "montant": "6500.00", "date_paiement": "2025-04-11", "periode": "2025-04", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 505, "fields": { "membre": 305, "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201", "montant": "4000.00", "date_paiement": "2025-05-12", "periode": "2025-05", "statut": "Payé" }},
+
+  { "model": "core.cotisation", "pk": 506, "fields": { "membre": 306, "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102", "montant": "5500.00", "date_paiement": "2025-01-09", "periode": "2025-01", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 507, "fields": { "membre": 307, "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102", "montant": "7200.00", "date_paiement": "2025-02-14", "periode": "2025-02", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 508, "fields": { "membre": 308, "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102", "montant": "3200.00", "date_paiement": "2025-03-19", "periode": "2025-03", "statut": "En_attente" }},
+  { "model": "core.cotisation", "pk": 509, "fields": { "membre": 309, "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102", "montant": "6800.00", "date_paiement": "2025-04-22", "periode": "2025-04", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 510, "fields": { "membre": 310, "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102", "montant": "4500.00", "date_paiement": "2025-05-06", "periode": "2025-05", "statut": "Payé" }},
+
+  { "model": "core.cotisation", "pk": 511, "fields": { "membre": 311, "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203", "montant": "6000.00", "date_paiement": "2025-01-13", "periode": "2025-01", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 512, "fields": { "membre": 312, "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203", "montant": "7500.00", "date_paiement": "2025-02-10", "periode": "2025-02", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 513, "fields": { "membre": 313, "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203", "montant": "3500.00", "date_paiement": "2025-03-08", "periode": "2025-03", "statut": "En_attente" }},
+  { "model": "core.cotisation", "pk": 514, "fields": { "membre": 314, "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203", "montant": "6800.00", "date_paiement": "2025-04-17", "periode": "2025-04", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 515, "fields": { "membre": 315, "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203", "montant": "4900.00", "date_paiement": "2025-05-03", "periode": "2025-05", "statut": "Payé" }},
+
+  { "model": "core.cotisation", "pk": 516, "fields": { "membre": 316, "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204", "montant": "5300.00", "date_paiement": "2025-01-11", "periode": "2025-01", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 517, "fields": { "membre": 317, "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204", "montant": "7000.00", "date_paiement": "2025-02-19", "periode": "2025-02", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 518, "fields": { "membre": 318, "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204", "montant": "3100.00", "date_paiement": "2025-03-22", "periode": "2025-03", "statut": "En_attente" }},
+  { "model": "core.cotisation", "pk": 519, "fields": { "membre": 319, "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204", "montant": "6900.00", "date_paiement": "2025-04-14", "periode": "2025-04", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 520, "fields": { "membre": 320, "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204", "montant": "5100.00", "date_paiement": "2025-05-18", "periode": "2025-05", "statut": "Payé" }},
+
+  { "model": "core.cotisation", "pk": 521, "fields": { "membre": 321, "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205", "montant": "5400.00", "date_paiement": "2025-01-05", "periode": "2025-01", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 522, "fields": { "membre": 322, "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205", "montant": "7200.00", "date_paiement": "2025-02-20", "periode": "2025-02", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 523, "fields": { "membre": 323, "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205", "montant": "3600.00", "date_paiement": "2025-03-09", "periode": "2025-03", "statut": "En_attente" }},
+  { "model": "core.cotisation", "pk": 524, "fields": { "membre": 324, "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205", "montant": "6900.00", "date_paiement": "2025-04-25", "periode": "2025-04", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 525, "fields": { "membre": 325, "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205", "montant": "5200.00", "date_paiement": "2025-05-13", "periode": "2025-05", "statut": "Payé" }},
+
+  { "model": "core.cotisation", "pk": 526, "fields": { "membre": 326, "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206", "montant": "5800.00", "date_paiement": "2025-01-03", "periode": "2025-01", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 527, "fields": { "membre": 327, "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206", "montant": "7600.00", "date_paiement": "2025-02-11", "periode": "2025-02", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 528, "fields": { "membre": 328, "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206", "montant": "3300.00", "date_paiement": "2025-03-24", "periode": "2025-03", "statut": "En_attente" }},
+  { "model": "core.cotisation", "pk": 529, "fields": { "membre": 329, "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206", "montant": "7000.00", "date_paiement": "2025-04-07", "periode": "2025-04", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 530, "fields": { "membre": 330, "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206", "montant": "5400.00", "date_paiement": "2025-05-19", "periode": "2025-05", "statut": "Payé" }},
+
+  { "model": "core.cotisation", "pk": 531, "fields": { "membre": 331, "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207", "montant": "5000.00", "date_paiement": "2025-01-14", "periode": "2025-01", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 532, "fields": { "membre": 332, "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207", "montant": "7300.00", "date_paiement": "2025-02-04", "periode": "2025-02", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 533, "fields": { "membre": 333, "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207", "montant": "3500.00", "date_paiement": "2025-03-15", "periode": "2025-03", "statut": "En_attente" }},
+  { "model": "core.cotisation", "pk": 534, "fields": { "membre": 334, "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207", "montant": "6600.00", "date_paiement": "2025-04-12", "periode": "2025-04", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 535, "fields": { "membre": 335, "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207", "montant": "5200.00", "date_paiement": "2025-05-02", "periode": "2025-05", "statut": "Payé" }},
+
+  { "model": "core.cotisation", "pk": 536, "fields": { "membre": 336, "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308", "montant": "5900.00", "date_paiement": "2025-01-16", "periode": "2025-01", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 537, "fields": { "membre": 337, "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308", "montant": "7100.00", "date_paiement": "2025-02-21", "periode": "2025-02", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 538, "fields": { "membre": 338, "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308", "montant": "3400.00", "date_paiement": "2025-03-03", "periode": "2025-03", "statut": "En_attente" }},
+  { "model": "core.cotisation", "pk": 539, "fields": { "membre": 339, "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308", "montant": "6400.00", "date_paiement": "2025-04-19", "periode": "2025-04", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 540, "fields": { "membre": 340, "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308", "montant": "5200.00", "date_paiement": "2025-05-01", "periode": "2025-05", "statut": "Payé" }},
+
+  { "model": "core.cotisation", "pk": 541, "fields": { "membre": 341, "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409", "montant": "6000.00", "date_paiement": "2025-01-07", "periode": "2025-01", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 542, "fields": { "membre": 342, "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409", "montant": "7300.00", "date_paiement": "2025-02-12", "periode": "2025-02", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 543, "fields": { "membre": 343, "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409", "montant": "3400.00", "date_paiement": "2025-03-26", "periode": "2025-03", "statut": "En_attente" }},
+  { "model": "core.cotisation", "pk": 544, "fields": { "membre": 344, "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409", "montant": "6700.00", "date_paiement": "2025-04-06", "periode": "2025-04", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 545, "fields": { "membre": 345, "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409", "montant": "5200.00", "date_paiement": "2025-05-11", "periode": "2025-05", "statut": "Payé" }},
+
+  { "model": "core.cotisation", "pk": 546, "fields": { "membre": 346, "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410", "montant": "5700.00", "date_paiement": "2025-01-15", "periode": "2025-01", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 547, "fields": { "membre": 347, "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410", "montant": "7000.00", "date_paiement": "2025-02-16", "periode": "2025-02", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 548, "fields": { "membre": 348, "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410", "montant": "3500.00", "date_paiement": "2025-03-07", "periode": "2025-03", "statut": "En_attente" }},
+  { "model": "core.cotisation", "pk": 549, "fields": { "membre": 349, "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410", "montant": "6500.00", "date_paiement": "2025-04-21", "periode": "2025-04", "statut": "Payé" }},
+  { "model": "core.cotisation", "pk": 550, "fields": { "membre": 350, "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410", "montant": "5200.00", "date_paiement": "2025-05-17", "periode": "2025-05", "statut": "Payé" }}
+]

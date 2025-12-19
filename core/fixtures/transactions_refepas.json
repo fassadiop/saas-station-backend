@@ -1,0 +1,1756 @@
+[
+  {
+    "model": "core.transaction",
+    "pk": 10201,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "52000.00",
+      "date": "2025-01-05",
+      "categorie": "Fonds de microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0201",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10202,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "68000.00",
+      "date": "2025-01-06",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0202",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10203,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "31000.00",
+      "date": "2025-01-07",
+      "categorie": "Sensibilisation hygiène",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0203",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10204,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "7200.00",
+      "date": "2025-01-08",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0204",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10205,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "128000.00",
+      "date": "2025-01-09",
+      "categorie": "Subventions",
+      "mode_paiement": "Virement",
+      "reference": "RCT-RFP-0205",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10206,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "6800.00",
+      "date": "2025-01-10",
+      "categorie": "Communication",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0206",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10207,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "44500.00",
+      "date": "2025-01-11",
+      "categorie": "Appui production",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0207",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10208,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158000.00",
+      "date": "2025-01-12",
+      "categorie": "Vente produits transformés",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0208",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10209,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "52000.00",
+      "date": "2025-01-13",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0209",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10210,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "11200.00",
+      "date": "2025-01-14",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0210",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10211,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Recette",
+      "montant": "182000.00",
+      "date": "2025-01-15",
+      "categorie": "Remboursements microcrédit",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0211",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10212,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "165000.00",
+      "date": "2025-01-16",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0212",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10213,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "29800.00",
+      "date": "2025-01-17",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0213",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10214,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "6900.00",
+      "date": "2025-01-18",
+      "categorie": "Communication",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0214",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10215,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "146000.00",
+      "date": "2025-01-19",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0215",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10216,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "38000.00",
+      "date": "2025-01-20",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0216",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10217,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158000.00",
+      "date": "2025-01-21",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0217",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10218,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "46000.00",
+      "date": "2025-01-22",
+      "categorie": "Fonds de microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0218",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10219,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Dependse",
+      "montant": "8700.00",
+      "date": "2025-01-23",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0219",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10220,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "156000.00",
+      "date": "2025-01-24",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0220",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10221,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "42000.00",
+      "date": "2025-01-25",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0221",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10222,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "142000.00",
+      "date": "2025-01-26",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0222",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10223,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "28000.00",
+      "date": "2025-01-27",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0223",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10224,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "174000.00",
+      "date": "2025-01-28",
+      "categorie": "Vente produits transformés",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0224",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10225,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "51000.00",
+      "date": "2025-01-29",
+      "categorie": "Fonds microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0225",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10226,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "7200.00",
+      "date": "2025-01-30",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0226",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10227,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "165000.00",
+      "date": "2025-01-31",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0227",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10228,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "42000.00",
+      "date": "2025-02-01",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0228",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10229,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158000.00",
+      "date": "2025-02-02",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0229",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10230,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "51000.00",
+      "date": "2025-02-03",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0230",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10231,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "7500.00",
+      "date": "2025-02-04",
+      "categorie": "Communication",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0231",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10232,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "28000.00",
+      "date": "2025-02-05",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0232",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10233,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Recette",
+      "montant": "168000.00",
+      "date": "2025-02-06",
+      "categorie": "Remboursements microcrédit",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0233",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 10234,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "154000.00",
+      "date": "2025-02-07",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0234",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10235,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Depense",
+      "montant": "43000.00",
+      "date": "2025-02-08",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0235",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10236,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "8500.00",
+      "date": "2025-02-09",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0236",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10237,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "38000.00",
+      "date": "2025-02-10",
+      "categorie": "Appui production",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0237",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10238,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "172000.00",
+      "date": "2025-02-11",
+      "categorie": "Vente produits transformés",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0238",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10239,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "30000.00",
+      "date": "2025-02-12",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0239",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10240,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "52000.00",
+      "date": "2025-02-13",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0240",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10241,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "168000.00",
+      "date": "2025-02-14",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0241",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10242,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "47000.00",
+      "date": "2025-02-15",
+      "categorie": "Fonds microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0242",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10243,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Depense",
+      "montant": "29000.00",
+      "date": "2025-02-16",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0243",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10244,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "7800.00",
+      "date": "2025-02-17",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0244",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10245,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "42000.00",
+      "date": "2025-02-18",
+      "categorie": "Appui production",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0245",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10246,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "162000.00",
+      "date": "2025-02-19",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0246",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10247,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "30000.00",
+      "date": "2025-02-20",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0247",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10248,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "52000.00",
+      "date": "2025-02-21",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0248",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10249,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "174000.00",
+      "date": "2025-02-22",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0249",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10250,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "46000.00",
+      "date": "2025-02-23",
+      "categorie": "Fonds microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0250",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10251,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "42000.00",
+      "date": "2025-02-24",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0251",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10252,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "8400.00",
+      "date": "2025-02-25",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0252",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10253,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "166000.00",
+      "date": "2025-02-26",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0253",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10254,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "29500.00",
+      "date": "2025-02-27",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0254",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10255,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "52000.00",
+      "date": "2025-02-28",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0255",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10256,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "170000.00",
+      "date": "2025-03-01",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0256",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10257,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "48000.00",
+      "date": "2025-03-02",
+      "categorie": "Fonds microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0257",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10258,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "42000.00",
+      "date": "2025-03-03",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0258",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10259,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "7500.00",
+      "date": "2025-03-04",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0259",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10260,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "168000.00",
+      "date": "2025-03-05",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0260",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10261,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "29000.00",
+      "date": "2025-03-06",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0261",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10262,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "51000.00",
+      "date": "2025-03-07",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0262",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10263,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "172000.00",
+      "date": "2025-03-08",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0263",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10264,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "48000.00",
+      "date": "2025-03-09",
+      "categorie": "Fonds microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0264",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10265,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "42000.00",
+      "date": "2025-03-10",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0265",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10266,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "8300.00",
+      "date": "2025-03-11",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0266",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 10267,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "169000.00",
+      "date": "2025-03-12",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0267",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10268,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "30000.00",
+      "date": "2025-03-13",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0268",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10269,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "51000.00",
+      "date": "2025-03-14",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0269",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10270,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "175000.00",
+      "date": "2025-03-15",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0270",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10271,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "48000.00",
+      "date": "2025-03-16",
+      "categorie": "Fonds microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0271",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10272,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "43000.00",
+      "date": "2025-03-17",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0272",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10273,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "8200.00",
+      "date": "2025-03-18",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0273",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10274,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "169000.00",
+      "date": "2025-03-19",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0274",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10275,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "29500.00",
+      "date": "2025-03-20",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0275",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10276,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "52000.00",
+      "date": "2025-03-21",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0276",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10277,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "173000.00",
+      "date": "2025-03-22",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0277",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10278,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "49000.00",
+      "date": "2025-03-23",
+      "categorie": "Fonds microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0278",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10279,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Depense",
+      "montant": "29000.00",
+      "date": "2025-03-24",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0279",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10280,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "8100.00",
+      "date": "2025-03-25",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0280",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10281,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "171000.00",
+      "date": "2025-03-26",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0281",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10282,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "30000.00",
+      "date": "2025-03-27",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0282",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10283,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "53000.00",
+      "date": "2025-03-28",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0283",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10284,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "175000.00",
+      "date": "2025-03-29",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0284",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10285,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "49000.00",
+      "date": "2025-03-30",
+      "categorie": "Fonds microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0285",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10286,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "43000.00",
+      "date": "2025-03-31",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0286",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10287,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "8300.00",
+      "date": "2025-04-01",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0287",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10288,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "171000.00",
+      "date": "2025-04-02",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0288",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10289,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "30000.00",
+      "date": "2025-04-03",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0289",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10290,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "52000.00",
+      "date": "2025-04-04",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0290",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10291,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "176000.00",
+      "date": "2025-04-05",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0291",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10292,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "49000.00",
+      "date": "2025-04-06",
+      "categorie": "Fonds microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0292",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10293,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "44000.00",
+      "date": "2025-04-07",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0293",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10294,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Depense",
+      "montant": "8200.00",
+      "date": "2025-04-08",
+      "categorie": "Carburant",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0294",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 10295,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 423,
+      "type": "Recette",
+      "montant": "172000.00",
+      "date": "2025-04-09",
+      "categorie": "Vente production",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-RFP-0295",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10296,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 422,
+      "type": "Depense",
+      "montant": "30500.00",
+      "date": "2025-04-10",
+      "categorie": "Hygiène & formation",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0296",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10297,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 425,
+      "type": "Depense",
+      "montant": "52000.00",
+      "date": "2025-04-11",
+      "categorie": "Matériel transformation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0297",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10298,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": null,
+      "type": "Recette",
+      "montant": "178000.00",
+      "date": "2025-04-12",
+      "categorie": "Cotisations",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-RFP-0298",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10299,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 421,
+      "type": "Depense",
+      "montant": "50000.00",
+      "date": "2025-04-13",
+      "categorie": "Fonds microcrédit",
+      "mode_paiement": "Virement",
+      "reference": "DPS-RFP-0299",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 10300,
+    "fields": {
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "projet": 424,
+      "type": "Depense",
+      "montant": "44000.00",
+      "date": "2025-04-14",
+      "categorie": "Transport",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-RFP-0300",
+      "fichier_recu": null,
+      "created_by": 105
+    }
+  }
+]

@@ -1,0 +1,1676 @@
+[
+  {
+    "model": "core.transaction",
+    "pk": 13001,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "28500.00",
+      "date": "2025-01-02",
+      "categorie": "Formation jeunes mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13001",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13002,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "144300.00",
+      "date": "2025-01-02",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13002",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13003,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Depense",
+      "montant": "31200.00",
+      "date": "2025-01-03",
+      "categorie": "Matériel conservation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13003",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13004,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "150800.00",
+      "date": "2025-01-03",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13004",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13005,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "35400.00",
+      "date": "2025-01-04",
+      "categorie": "Valorisation déchets poisson",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13005",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13006,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "142900.00",
+      "date": "2025-01-04",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13006",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13007,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "27600.00",
+      "date": "2025-01-05",
+      "categorie": "Sécurité sanitaire",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CAPS-13007",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13008,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "157600.00",
+      "date": "2025-01-05",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13008",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13009,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Depense",
+      "montant": "29800.00",
+      "date": "2025-01-06",
+      "categorie": "Appui logistique",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13009",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13010,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "149700.00",
+      "date": "2025-01-06",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13010",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13011,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "29000.00",
+      "date": "2025-01-07",
+      "categorie": "Formation jeunes mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13011",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13012,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "152800.00",
+      "date": "2025-01-07",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13012",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13013,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Depense",
+      "montant": "31800.00",
+      "date": "2025-01-08",
+      "categorie": "Matériel conservation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13013",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13014,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "155400.00",
+      "date": "2025-01-08",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13014",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13015,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "36000.00",
+      "date": "2025-01-09",
+      "categorie": "Valorisation déchets poisson",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13015",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13016,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "146900.00",
+      "date": "2025-01-09",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13016",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13017,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "28000.00",
+      "date": "2025-01-10",
+      "categorie": "Sécurité sanitaire",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CAPS-13017",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13018,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158100.00",
+      "date": "2025-01-10",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13018",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13019,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Depense",
+      "montant": "30400.00",
+      "date": "2025-01-11",
+      "categorie": "Appui logistique",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13019",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13020,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "150200.00",
+      "date": "2025-01-11",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13020",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13021,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "29600.00",
+      "date": "2025-01-12",
+      "categorie": "Formation jeunes mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13021",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13022,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "153600.00",
+      "date": "2025-01-12",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13022",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13023,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Depense",
+      "montant": "32400.00",
+      "date": "2025-01-13",
+      "categorie": "Matériel conservation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13023",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13024,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "156900.00",
+      "date": "2025-01-13",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13024",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13025,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "36600.00",
+      "date": "2025-01-14",
+      "categorie": "Valorisation déchets poisson",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13025",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13026,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "148200.00",
+      "date": "2025-01-14",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13026",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13027,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "28400.00",
+      "date": "2025-01-15",
+      "categorie": "Sécurité sanitaire",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CAPS-13027",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13028,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "159700.00",
+      "date": "2025-01-15",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13028",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13029,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Depense",
+      "montant": "30800.00",
+      "date": "2025-01-16",
+      "categorie": "Appui logistique",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13029",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13030,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "152300.00",
+      "date": "2025-01-16",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13030",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13031,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "30000.00",
+      "date": "2025-01-17",
+      "categorie": "Formation jeunes mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13031",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13032,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "154900.00",
+      "date": "2025-01-17",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13032",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13033,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Depense",
+      "montant": "32900.00",
+      "date": "2025-01-18",
+      "categorie": "Matériel conservation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13033",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13034,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "37200.00",
+      "date": "2025-01-19",
+      "categorie": "Valorisation déchets poisson",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13034",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13035,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "148200.00",
+      "date": "2025-01-19",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13035",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13036,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "28900.00",
+      "date": "2025-01-20",
+      "categorie": "Sécurité sanitaire",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CAPS-13036",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13037,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "152900.00",
+      "date": "2025-01-20",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13037",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13038,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Depense",
+      "montant": "31000.00",
+      "date": "2025-01-21",
+      "categorie": "Appui logistique",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13038",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13039,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "149800.00",
+      "date": "2025-01-21",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13039",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13040,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "30200.00",
+      "date": "2025-01-22",
+      "categorie": "Formation jeunes mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13040",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13041,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "153300.00",
+      "date": "2025-01-22",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13041",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13042,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Depense",
+      "montant": "33000.00",
+      "date": "2025-01-23",
+      "categorie": "Matériel conservation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13042",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13043,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "156400.00",
+      "date": "2025-01-23",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13043",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13044,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "37500.00",
+      "date": "2025-01-24",
+      "categorie": "Valorisation déchets poisson",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13044",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13045,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "148900.00",
+      "date": "2025-01-24",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13045",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13046,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "29200.00",
+      "date": "2025-01-25",
+      "categorie": "Sécurité sanitaire",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CAPS-13046",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13047,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158200.00",
+      "date": "2025-01-25",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13047",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13048,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Depense",
+      "montant": "31500.00",
+      "date": "2025-01-26",
+      "categorie": "Appui logistique",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13048",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13049,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "153900.00",
+      "date": "2025-01-26",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13049",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13050,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "30500.00",
+      "date": "2025-01-27",
+      "categorie": "Formation jeunes mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13050",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13051,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "152100.00",
+      "date": "2025-01-27",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13051",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13052,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Depense",
+      "montant": "33900.00",
+      "date": "2025-01-28",
+      "categorie": "Matériel conservation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13052",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13053,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "157300.00",
+      "date": "2025-01-28",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13053",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13054,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "38100.00",
+      "date": "2025-01-29",
+      "categorie": "Valorisation déchets poisson",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13054",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13055,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "150600.00",
+      "date": "2025-01-29",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13055",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13056,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "29500.00",
+      "date": "2025-01-30",
+      "categorie": "Sécurité sanitaire",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CAPS-13056",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13057,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "159300.00",
+      "date": "2025-01-30",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13057",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13058,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Depense",
+      "montant": "31900.00",
+      "date": "2025-01-31",
+      "categorie": "Appui logistique",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13058",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13059,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "151900.00",
+      "date": "2025-01-31",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13059",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13060,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "30700.00",
+      "date": "2025-02-01",
+      "categorie": "Formation jeunes mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13060",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13061,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "156800.00",
+      "date": "2025-02-01",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13061",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13062,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Depense",
+      "montant": "34500.00",
+      "date": "2025-02-02",
+      "categorie": "Matériel conservation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13062",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13063,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "159900.00",
+      "date": "2025-02-02",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13063",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13064,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "38700.00",
+      "date": "2025-02-03",
+      "categorie": "Valorisation déchets poisson",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13064",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13065,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "154600.00",
+      "date": "2025-02-03",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13065",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13066,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "30000.00",
+      "date": "2025-02-04",
+      "categorie": "Sécurité sanitaire",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CAPS-13066",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13067,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Depense",
+      "montant": "32200.00",
+      "date": "2025-02-05",
+      "categorie": "Appui logistique",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13067",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13068,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "156700.00",
+      "date": "2025-02-05",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13068",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13069,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "30900.00",
+      "date": "2025-02-06",
+      "categorie": "Formation jeunes mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13069",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13070,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158800.00",
+      "date": "2025-02-06",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13070",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13071,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Depense",
+      "montant": "35200.00",
+      "date": "2025-02-07",
+      "categorie": "Matériel conservation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13071",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13072,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "149200.00",
+      "date": "2025-02-07",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13072",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13073,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "39200.00",
+      "date": "2025-02-08",
+      "categorie": "Valorisation déchets poisson",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13073",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13074,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "155900.00",
+      "date": "2025-02-08",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13074",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13075,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "30600.00",
+      "date": "2025-02-09",
+      "categorie": "Sécurité sanitaire",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CAPS-13075",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13076,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "161700.00",
+      "date": "2025-02-09",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13076",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13077,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Depense",
+      "montant": "32200.00",
+      "date": "2025-02-10",
+      "categorie": "Appui logistique",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13077",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13078,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "154800.00",
+      "date": "2025-02-10",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13078",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13079,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "31400.00",
+      "date": "2025-02-11",
+      "categorie": "Formation jeunes mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13079",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13080,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158300.00",
+      "date": "2025-02-11",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13080",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13081,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Depense",
+      "montant": "35800.00",
+      "date": "2025-02-12",
+      "categorie": "Matériel conservation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13081",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13082,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160900.00",
+      "date": "2025-02-12",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13082",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13083,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "39500.00",
+      "date": "2025-02-13",
+      "categorie": "Valorisation déchets poisson",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13083",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13084,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "156500.00",
+      "date": "2025-02-13",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13084",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13085,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "31200.00",
+      "date": "2025-02-14",
+      "categorie": "Sécurité sanitaire",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CAPS-13085",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13086,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158700.00",
+      "date": "2025-02-14",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13086",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13087,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Depense",
+      "montant": "32800.00",
+      "date": "2025-02-15",
+      "categorie": "Appui logistique",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13087",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13088,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "157200.00",
+      "date": "2025-02-15",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13088",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13089,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 436,
+      "type": "Depense",
+      "montant": "32000.00",
+      "date": "2025-02-16",
+      "categorie": "Formation jeunes mareyeurs",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13089",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13090,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "159900.00",
+      "date": "2025-02-16",
+      "categorie": "Vente glace",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13090",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13091,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 437,
+      "type": "Depense",
+      "montant": "36400.00",
+      "date": "2025-02-17",
+      "categorie": "Matériel conservation",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13091",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13092,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "158300.00",
+      "date": "2025-02-17",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13092",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13093,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 438,
+      "type": "Depense",
+      "montant": "39900.00",
+      "date": "2025-02-18",
+      "categorie": "Valorisation déchets poisson",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13093",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13094,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160500.00",
+      "date": "2025-02-18",
+      "categorie": "Vente produits",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13094",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13095,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 439,
+      "type": "Depense",
+      "montant": "31800.00",
+      "date": "2025-02-19",
+      "categorie": "Sécurité sanitaire",
+      "mode_paiement": "Espèces",
+      "reference": "DPS-CAPS-13095",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13096,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "159300.00",
+      "date": "2025-02-19",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13096",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13097,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": 440,
+      "type": "Depense",
+      "montant": "33100.00",
+      "date": "2025-02-20",
+      "categorie": "Appui logistique",
+      "mode_paiement": "Virement",
+      "reference": "DPS-CAPS-13097",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+  {
+    "model": "core.transaction",
+    "pk": 13098,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "160800.00",
+      "date": "2025-02-20",
+      "categorie": "Vente produits",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13098",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+
+  {
+    "model": "core.transaction",
+    "pk": 13099,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "157700.00",
+      "date": "2025-02-21",
+      "categorie": "Cotisations",
+      "mode_paiement": "Espèces",
+      "reference": "RCT-CAPS-13099",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  },
+
+  {
+    "model": "core.transaction",
+    "pk": 13100,
+    "fields": {
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "projet": null,
+      "type": "Recette",
+      "montant": "163900.00",
+      "date": "2025-02-22",
+      "categorie": "Vente glace",
+      "mode_paiement": "Mobile Money",
+      "reference": "RCT-CAPS-13100",
+      "fichier_recu": null,
+      "created_by": 108
+    }
+  }
+]

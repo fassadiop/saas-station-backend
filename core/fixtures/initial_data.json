@@ -1,0 +1,123 @@
+[
+  {
+    "model": "tenants.tenant",
+    "pk": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201",
+    "fields": {
+      "nom": "CONIPAS",
+      "type_structure": "Organisation",
+      "date_creation": "2024-01-10",
+      "devise": "XOF",
+      "actif": true,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "tenants.tenant",
+    "pk": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102",
+    "fields": {
+      "nom": "FENAGIE",
+      "type_structure": "Organisation",
+      "date_creation": "2024-01-11",
+      "devise": "XOF",
+      "actif": true,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "tenants.tenant",
+    "pk": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+    "fields": {
+      "nom": "CNPS",
+      "type_structure": "Organisation",
+      "date_creation": "2024-01-12",
+      "devise": "XOF",
+      "actif": true,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "tenants.tenant",
+    "pk": "d72bb1ce-1d77-43bb-9f92-d430992c4204",
+    "fields": {
+      "nom": "UNAGIEMS",
+      "type_structure": "Organisation",
+      "date_creation": "2024-01-13",
+      "devise": "XOF",
+      "actif": true,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "tenants.tenant",
+    "pk": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+    "fields": {
+      "nom": "REFEPAS",
+      "type_structure": "Organisation",
+      "date_creation": "2024-01-14",
+      "devise": "XOF",
+      "actif": true,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "tenants.tenant",
+    "pk": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+    "fields": {
+      "nom": "UNAPAS",
+      "type_structure": "Organisation",
+      "date_creation": "2024-01-15",
+      "devise": "XOF",
+      "actif": true,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "tenants.tenant",
+    "pk": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+    "fields": {
+      "nom": "RNCLPA",
+      "type_structure": "Organisation",
+      "date_creation": "2024-01-16",
+      "devise": "XOF",
+      "actif": true,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "tenants.tenant",
+    "pk": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+    "fields": {
+      "nom": "CAPS",
+      "type_structure": "Organisation",
+      "date_creation": "2024-01-17",
+      "devise": "XOF",
+      "actif": true,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "tenants.tenant",
+    "pk": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+    "fields": {
+      "nom": "UNAMS",
+      "type_structure": "Organisation",
+      "date_creation": "2024-01-18",
+      "devise": "XOF",
+      "actif": true,
+      "created_by": 1
+    }
+  },
+  {
+    "model": "tenants.tenant",
+    "pk": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+    "fields": {
+      "nom": "CNMS",
+      "type_structure": "Organisation",
+      "date_creation": "2024-01-19",
+      "devise": "XOF",
+      "actif": true,
+      "created_by": 1
+    }
+  }
+]
+

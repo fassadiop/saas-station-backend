@@ -1,0 +1,142 @@
+[
+  {
+    "model": "accounts.utilisateur",
+    "pk": 101,
+    "fields": {
+      "username": "malick.fall",
+      "first_name": "Malick",
+      "last_name": "FALL",
+      "email": "malick.fall@conipas.sn",
+      "role": "AdminTenant",
+      "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201",
+      "is_active": true,
+      "password": "pbkdf2_sha256$600000$FjI9qgV1t0u5YwN3BGxH1D$xgheLGOR+6/T0s83hU+qB+Vj/BZrXbZ8Pr81ov6+xYg="
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 102,
+    "fields": {
+      "username": "taha.samba",
+      "first_name": "Taha",
+      "last_name": "SAMBA",
+      "email": "taha.samba@fenagie.sn",
+      "role": "AdminTenant",
+      "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102",
+      "is_active": true,
+      "password": "pbkdf2_sha256$600000$FjI9qgV1t0u5YwN3BGxH1D$xgheLGOR+6/T0s83hU+qB+Vj/BZrXbZ8Pr81ov6+xYg="
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 103,
+    "fields": {
+      "username": "badou.ndoye",
+      "first_name": "Badou",
+      "last_name": "NDOYE",
+      "email": "badou.ndoye@cnps.sn",
+      "role": "AdminTenant",
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "is_active": true,
+      "password": "pbkdf2_sha256$600000$FjI9qgV1t0u5YwN3BGxH1D$xgheLGOR+6/T0s83hU+qB+Vj/BZrXbZ8Pr81ov6+xYg="
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 104,
+    "fields": {
+      "username": "mamadou.fall",
+      "first_name": "Mamadou",
+      "last_name": "FALL",
+      "email": "mamadadou.fall@unagiems.sn",
+      "role": "AdminTenant",
+      "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204",
+      "is_active": true,
+      "password": "pbkdf2_sha256$600000$FjI9qgV1t0u5YwN3BGxH1D$xgheLGOR+6/T0s83hU+qB+Vj/BZrXbZ8Pr81ov6+xYg="
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 105,
+    "fields": {
+      "username": "diaba.diop",
+      "first_name": "Diaba",
+      "last_name": "DIOP",
+      "email": "diaba.diop@refepas.sn",
+      "role": "AdminTenant",
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "is_active": true,
+      "password": "pbkdf2_sha256$600000$FjI9qgV1t0u5YwN3BGxH1D$xgheLGOR+6/T0s83hU+qB+Vj/BZrXbZ8Pr81ov6+xYg="
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 106,
+    "fields": {
+      "username": "maka.dieye",
+      "first_name": "Maka",
+      "last_name": "DIEYE",
+      "email": "maka.dieye@unapas.sn",
+      "role": "AdminTenant",
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "is_active": true,
+      "password": "pbkdf2_sha256$600000$FjI9qgV1t0u5YwN3BGxH1D$xgheLGOR+6/T0s83hU+qB+Vj/BZrXbZ8Pr81ov6+xYg="
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 107,
+    "fields": {
+      "username": "ibrahima.mar",
+      "first_name": "Ibrahima",
+      "last_name": "MAR",
+      "email": "ibrahima.mar@rnclpa.sn",
+      "role": "AdminTenant",
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "is_active": true,
+      "password": "pbkdf2_sha256$600000$FjI9qgV1t0u5YwN3BGxH1D$xgheLGOR+6/T0s83hU+qB+Vj/BZrXbZ8Pr81ov6+xYg="
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 108,
+    "fields": {
+      "username": "diabel.mbeguere",
+      "first_name": "Diabel",
+      "last_name": "MBEGUERÉ",
+      "email": "diabel.mbeguere@caps.sn",
+      "role": "AdminTenant",
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "is_active": true,
+      "password": "pbkdf2_sha256$600000$FjI9qgV1t0u5YwN3BGxH1D$xgheLGOR+6/T0s83hU+qB+Vj/BZrXbZ8Pr81ov6+xYg="
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 109,
+    "fields": {
+      "username": "ibrahima.diaw",
+      "first_name": "Ibrahima",
+      "last_name": "DIAW",
+      "email": "ibrahima.diaw@unams.sn",
+      "role": "AdminTenant",
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "is_active": true,
+      "password": "pbkdf2_sha256$600000$FjI9qgV1t0u5YwN3BGxH1D$xgheLGOR+6/T0s83hU+qB+Vj/BZrXbZ8Pr81ov6+xYg="
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 110,
+    "fields": {
+      "username": "djiby.ndiaye",
+      "first_name": "Djiby",
+      "last_name": "NDIAYE",
+      "email": "djiby.ndiaye@cnms.sn",
+      "role": "AdminTenant",
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "is_active": true,
+      "password": "pbkdf2_sha256$600000$FjI9qgV1t0u5YwN3BGxH1D$xgheLGOR+6/T0s83hU+qB+Vj/BZrXbZ8Pr81ov6+xYg="
+    }
+  }
+]

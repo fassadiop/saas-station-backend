@@ -1,0 +1,431 @@
+[
+  {
+    "model": "accounts.utilisateur",
+    "pk": 601,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "tresorier_conipas",
+      "first_name": "Abdou",
+      "last_name": "Ba",
+      "email": "tresorier@conipas.sn",
+      "role": "Tresorier",
+      "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 602,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur1_conipas",
+      "first_name": "Cheikh",
+      "last_name": "Ndiaye",
+      "email": "collecteur1@conipas.sn",
+      "role": "Collecteur",
+      "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 603,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur2_conipas",
+      "first_name": "Alioune",
+      "last_name": "Diop",
+      "email": "collecteur2@conipas.sn",
+      "role": "Collecteur",
+      "tenant": "a1cbe1b9-25c3-4f0f-b3b1-e0a5d7d00201",
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "accounts.utilisateur",
+    "pk": 604,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "tresorier_fenagie",
+      "first_name": "Omar",
+      "last_name": "Camara",
+      "email": "tresorier@fenagie.sn",
+      "role": "Tresorier",
+      "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 605,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur1_fenagie",
+      "first_name": "Mame",
+      "last_name": "Sarr",
+      "email": "collecteur1@fenagie.sn",
+      "role": "Collecteur",
+      "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 606,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur2_fenagie",
+      "first_name": "Fatou",
+      "last_name": "Ka",
+      "email": "collecteur2@fenagie.sn",
+      "role": "Collecteur",
+      "tenant": "b9e6d2ca-9e72-4f1b-8c12-d54f6a933102",
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "accounts.utilisateur",
+    "pk": 607,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "tresorier_cnps",
+      "first_name": "Pape",
+      "last_name": "Dieng",
+      "email": "tresorier@cnps.sn",
+      "role": "Tresorier",
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 608,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur1_cnps",
+      "first_name": "Astou",
+      "last_name": "Diallo",
+      "email": "collecteur1@cnps.sn",
+      "role": "Collecteur",
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 609,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur2_cnps",
+      "first_name": "Souleymane",
+      "last_name": "Faye",
+      "email": "collecteur2@cnps.sn",
+      "role": "Collecteur",
+      "tenant": "c45f81ab-3f9f-4c19-9155-7b01bc331203",
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "accounts.utilisateur",
+    "pk": 610,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "tresorier_unagiems",
+      "first_name": "Ousmane",
+      "last_name": "Camara",
+      "email": "tresorier@unagiems.sn",
+      "role": "Tresorier",
+      "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 611,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur1_unagiems",
+      "first_name": "Mamadou",
+      "last_name": "Thiam",
+      "email": "collecteur1@unagiems.sn",
+      "role": "Collecteur",
+      "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 612,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur2_unagiems",
+      "first_name": "Fatou",
+      "last_name": "Seye",
+      "email": "collecteur2@unagiems.sn",
+      "role": "Collecteur",
+      "tenant": "d72bb1ce-1d77-43bb-9f92-d430992c4204",
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "accounts.utilisateur",
+    "pk": 613,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "tresorier_refepas",
+      "first_name": "Adama",
+      "last_name": "Samb",
+      "email": "tresorier@refepas.sn",
+      "role": "Tresorier",
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 614,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur1_refepas",
+      "first_name": "Aissatou",
+      "last_name": "Fall",
+      "email": "collecteur1@refepas.sn",
+      "role": "Collecteur",
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 615,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur2_refepas",
+      "first_name": "Souleymane",
+      "last_name": "Diouf",
+      "email": "collecteur2@refepas.sn",
+      "role": "Collecteur",
+      "tenant": "e3f6aa77-e92f-4dd4-9132-5b30d9bc5205",
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "accounts.utilisateur",
+    "pk": 616,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "tresorier_unapas",
+      "first_name": "Ibrahima",
+      "last_name": "Gaye",
+      "email": "tresorier@unapas.sn",
+      "role": "Tresorier",
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 617,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur1_unapas",
+      "first_name": "Khady",
+      "last_name": "Sarr",
+      "email": "collecteur1@unapas.sn",
+      "role": "Collecteur",
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 618,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur2_unapas",
+      "first_name": "Moustapha",
+      "last_name": "Ndao",
+      "email": "collecteur2@unapas.sn",
+      "role": "Collecteur",
+      "tenant": "f1b22fc1-73f8-4d78-ac22-81cd22176206",
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "accounts.utilisateur",
+    "pk": 619,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "tresorier_rnclpa",
+      "first_name": "Oumar",
+      "last_name": "Sow",
+      "email": "tresorier@rnclpa.sn",
+      "role": "Tresorier",
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 620,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur1_rnclpa",
+      "first_name": "Mariama",
+      "last_name": "Ndoye",
+      "email": "collecteur1@rnclpa.sn",
+      "role": "Collecteur",
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 621,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur2_rnclpa",
+      "first_name": "Serigne",
+      "last_name": "Fall",
+      "email": "collecteur2@rnclpa.sn",
+      "role": "Collecteur",
+      "tenant": "a7c98ac2-2f44-4bb8-b7c7-1ad5e41e1207",
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "accounts.utilisateur",
+    "pk": 622,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "tresorier_caps",
+      "first_name": "Mamour",
+      "last_name": "Diouf",
+      "email": "tresorier@caps.sn",
+      "role": "Tresorier",
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 623,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur1_caps",
+      "first_name": "Rokhaya",
+      "last_name": "Camara",
+      "email": "collecteur1@caps.sn",
+      "role": "Collecteur",
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 624,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur2_caps",
+      "first_name": "Bamba",
+      "last_name": "Gaye",
+      "email": "collecteur2@caps.sn",
+      "role": "Collecteur",
+      "tenant": "bb02dac9-9c44-4e18-8fe9-7256223d2308",
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "accounts.utilisateur",
+    "pk": 625,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "tresorier_unams",
+      "first_name": "Fallou",
+      "last_name": "Diop",
+      "email": "tresorier@unams.sn",
+      "role": "Tresorier",
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 626,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur1_unams",
+      "first_name": "Soda",
+      "last_name": "Ndiaye",
+      "email": "collecteur1@unams.sn",
+      "role": "Collecteur",
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 627,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur2_unams",
+      "first_name": "Bassirou",
+      "last_name": "Ndao",
+      "email": "collecteur2@unams.sn",
+      "role": "Collecteur",
+      "tenant": "cc72fe34-7b1b-4c1a-8f56-0adbb91a3409",
+      "is_active": true
+    }
+  },
+
+  {
+    "model": "accounts.utilisateur",
+    "pk": 628,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "tresorier_cnms",
+      "first_name": "Mouhamed",
+      "last_name": "Sarr",
+      "email": "tresorier@cnms.sn",
+      "role": "Tresorier",
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 629,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur1_cnms",
+      "first_name": "Coumba",
+      "last_name": "Gueye",
+      "email": "collecteur1@cnms.sn",
+      "role": "Collecteur",
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "is_active": true
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 630,
+    "fields": {
+      "password": "pbkdf2_sha256$720000$Cq2brqqO1O1KWMH7$Jf1Kw/H1H2+i++N70fEvJZ7+0Lqz2XF8FbHfuisZMyM=",
+      "username": "collecteur2_cnms",
+      "first_name": "Lamine",
+      "last_name": "Thiam",
+      "email": "collecteur2@cnms.sn",
+      "role": "Collecteur",
+      "tenant": "dd81ba11-1c66-4f87-a19e-6c22081d4410",
+      "is_active": true
+    }
+  }
+]
