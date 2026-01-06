@@ -4,6 +4,7 @@ __pycache__/
 *.pyo
 
 # Environnement virtuel
+.venv/
 venv/
 .env/
 *.env
@@ -15,6 +16,11 @@ db.sqlite3
 *.log
 static/
 media/
+db.sqlite3
+.env
+.env.*
+media/
+staticfiles/
 
 # IDE
 .vscode/
@@ -24,3 +30,9 @@ media/
 # OS
 .DS_Store
 Thumbs.db
+
+
+# OS / IDE
+.vscode/
+.idea/
+.DS_Store

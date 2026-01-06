@@ -47,8 +47,8 @@ INSTALLED_APPS = [
     # Local apps
     'core',
     'dashboard',
-    'stations',
     'finances_station',
+    'stations.apps.StationsConfig',
 ]
 
 MIDDLEWARE = [
@@ -159,8 +159,8 @@ SIMPLE_JWT = {
 
 # Password hashing
 PASSWORD_HASHERS = [
-    'django.contrib.auth.hashers.Argon2PasswordHasher',
-    'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    "django.contrib.auth.hashers.Argon2PasswordHasher",
+    "django.contrib.auth.hashers.PBKDF2PasswordHasher",
 ]
 
 # drf-spectacular (Swagger/OpenAPI)

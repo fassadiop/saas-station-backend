@@ -1,0 +1,32 @@
+[
+  {
+    "model": "stations.station",
+    "pk": 201,
+    "fields": {
+      "tenant": 1,
+      "nom": "Station Plateau",
+      "region": "Dakar",
+      "departement": "Dakar",
+      "adresse": "Plateau",
+      "telephone": "770000001",
+      "responsable": "Gerant Plateau",
+      "active": true,
+      "created_at": "2025-01-01T10:00:00Z"
+    }
+  },
+  {
+    "model": "stations.station",
+    "pk": 202,
+    "fields": {
+      "tenant": 1,
+      "nom": "Station Médina",
+      "region": "Dakar",
+      "departement": "Dakar",
+      "adresse": "Médina",
+      "telephone": "770000002",
+      "responsable": "Gerant Medina",
+      "active": true,
+      "created_at": "2025-01-01T10:05:00Z"
+    }
+  }
+]

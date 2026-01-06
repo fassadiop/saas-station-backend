@@ -1,3 +1,4 @@
+# core/serializers.py
 from rest_framework import serializers
 from django.contrib.auth import authenticate, get_user_model
 
@@ -5,6 +6,7 @@ from accounts.models import Utilisateur
 from stations.models import Station
 from .models import Transaction, Membre, Projet, Cotisation, Tenant, FileUpload
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from accounts.constants import UserRole
 
 from core.models import Tenant
 
@@ -29,6 +31,7 @@ class MeSerializer(serializers.ModelSerializer):
             "is_superuser",
             "is_staff",
             "role", 
+            "module",
             "tenant",
         )
 
@@ -85,6 +88,7 @@ class UtilisateurSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "role",
+            "module",
             "tenant",
             "tenant_id",
             "station",
@@ -110,7 +114,7 @@ class UtilisateurSerializer(serializers.ModelSerializer):
         # -------------------------------
         # SUPER ADMIN
         # -------------------------------
-        if role == "SuperAdmin":
+        if role == UserRole.SUPERADMIN:
             if not creator or not creator.is_superuser:
                 raise serializers.ValidationError(
                     "Seul le SuperAdmin peut créer ou modifier un SuperAdmin."
@@ -119,23 +123,45 @@ class UtilisateurSerializer(serializers.ModelSerializer):
             attrs["station"] = None
 
         # -------------------------------
-        # ADMIN TENANT
+        # ADMIN TENANT FINANCE
         # -------------------------------
-        if role == "AdminTenant":
+        if role == UserRole.ADMIN_TENANT_FINANCE:
             if not creator or not creator.is_superuser:
                 raise serializers.ValidationError(
-                    "Seul le SuperAdmin peut créer un AdminTenant."
+                    "Seul le SuperAdmin peut créer un AdminTenantFinance."
                 )
             if not tenant:
                 raise serializers.ValidationError(
-                    {"tenant": "Tenant obligatoire pour créer un AdminTenant."}
+                    {"tenant": "Tenant obligatoire pour ce rôle."}
+                )
+            attrs["station"] = None
+
+        # -------------------------------
+        # ADMIN TENANT STATION
+        # -------------------------------
+        if role == UserRole.ADMIN_TENANT_STATION:
+            if not creator or not creator.is_superuser:
+                raise serializers.ValidationError(
+                    "Seul le SuperAdmin peut créer un AdminTenantStation."
+                )
+            if not tenant:
+                raise serializers.ValidationError(
+                    {"tenant": "Tenant obligatoire pour ce rôle."}
                 )
             attrs["station"] = None
 
         # ------------------------------------------------
         # UTILISATEURS STATION
         # ------------------------------------------------
-        station_roles = ("ChefStation", "Superviseur", "Collecteur")
+        station_roles = (
+            UserRole.GERANT,
+            UserRole.SUPERVISEUR,
+            UserRole.COLLECTEUR,
+            UserRole.CAISSIER,
+            UserRole.POMPISTE,
+            UserRole.PERSONNEL_ENTRETIEN,
+            UserRole.SECURITE,
+        )
 
         if role in station_roles:
             if not tenant:
@@ -148,7 +174,7 @@ class UtilisateurSerializer(serializers.ModelSerializer):
                 )
 
             # 🔐 Un AdminTenant crée uniquement dans son tenant
-            if creator and creator.role == "AdminTenant":
+            if creator and creator.role == UserRole.ADMIN_TENANT_STATION:
                 attrs["tenant"] = creator.tenant
 
         # ------------------------------------
@@ -158,7 +184,7 @@ class UtilisateurSerializer(serializers.ModelSerializer):
 
         if role in finance_roles:
             attrs["station"] = None
-            if creator and creator.role == "AdminTenant":
+            if creator and creator.role == UserRole.ADMIN_TENANT_FINANCE:
                 attrs["tenant"] = creator.tenant
 
         return attrs

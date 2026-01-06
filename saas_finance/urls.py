@@ -35,6 +35,8 @@ router.register(r'staff', StaffViewSet, basename="staff")
 
 
 urlpatterns = [
+    path("api/v1/dashboard/", include("dashboard.urls")),
+    
     path("api/v1/station/", include("stations.urls")),
     path("api/v1/finances/", include("finances_station.urls")),
 

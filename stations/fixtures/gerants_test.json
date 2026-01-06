@@ -1,0 +1,32 @@
+[
+  {
+    "model": "accounts.utilisateur",
+    "pk": 101,
+    "fields": {
+      "username": "gerant_plateau",
+      "email": "plateau@station.sn",
+      "first_name": "Gerant",
+      "last_name": "Plateau",
+      "role": "GERANT",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$600000$kR9YJ2m8Zx$2yZq4C7ZpK3m4RZyU8oXy6xv6FZ3oZb0Ck8Q2Lk3mS4="
+    }
+  },
+  {
+    "model": "accounts.utilisateur",
+    "pk": 102,
+    "fields": {
+      "username": "gerant_medina",
+      "email": "medina@station.sn",
+      "first_name": "Gerant",
+      "last_name": "Medina",
+      "role": "GERANT",
+      "is_active": true,
+      "is_staff": false,
+      "is_superuser": false,
+      "password": "pbkdf2_sha256$600000$kR9YJ2m8Zx$2yZq4C7ZpK3m4RZyU8oXy6xv6FZ3oZb0Ck8Q2Lk3mS4="
+    }
+  }
+]

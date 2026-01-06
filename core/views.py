@@ -16,8 +16,7 @@ from django.db.models import Sum, Q, Value
 from accounts.permissions import CanManageUsers
 
 from .permissions import (
-    IsSuperAdminOnly,
-    IsTenantAdminOnly,
+    IsAdminTenantFinanceOnly,
     IsSameTenantOrSuper,
 )
 
@@ -32,6 +31,7 @@ from . import models
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django.db.models.functions import TruncMonth, Concat, Coalesce
 from core.pagination import StandardResultsSetPagination
+from accounts.constants import UserRole
 
 User = get_user_model()
 
@@ -54,7 +54,10 @@ class TenantViewSet(viewsets.ModelViewSet):
         if user.is_superuser:
             return Tenant.objects.all()
 
-        if getattr(user, "role", None) == "AdminTenant":
+        if user.role in {
+            UserRole.ADMIN_TENANT_FINANCE,
+            UserRole.ADMIN_TENANT_STATION,
+        }:
             return Tenant.objects.filter(id=user.tenant_id)
 
         return Tenant.objects.none()
@@ -76,7 +79,7 @@ class MembreViewSet(viewsets.ModelViewSet):
     serializer_class = MembreSerializer
     permission_classes = [
         IsAuthenticated,
-        IsTenantAdminOnly,
+        IsAdminTenantFinanceOnly,
         IsSameTenantOrSuper,
     ]
 
@@ -121,6 +124,7 @@ class ProjetViewSet(viewsets.ModelViewSet):
     permission_classes = [
         IsAuthenticated,
         IsSameTenantOrSuper,
+        IsAdminTenantFinanceOnly,
     ]
 
     pagination_class = StandardResultsSetPagination
@@ -165,6 +169,7 @@ class CotisationViewSet(viewsets.ModelViewSet):
     permission_classes = [
         IsAuthenticated,
         IsSameTenantOrSuper,
+        IsAdminTenantFinanceOnly,
     ]
 
     # 🔒 PAS DE SearchFilter
@@ -343,85 +348,106 @@ class UtilisateurViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UtilisateurSerializer
     permission_classes = [IsAuthenticated, CanManageUsers]
-
     pagination_class = StandardResultsSetPagination
-    
+
     filter_backends = [filters.SearchFilter]
     search_fields = ["email", "first_name", "last_name", "username"]
 
     def get_queryset(self):
         user = self.request.user
 
-        # 🔒 SuperAdmin → voit UNIQUEMENT les AdminTenant
         if user.is_superuser:
             return User.objects.filter(
-                role="AdminTenant"
+                role__in=[
+                    UserRole.ADMIN_TENANT_FINANCE,
+                    UserRole.ADMIN_TENANT_STATION,
+                ]
             ).select_related("tenant").order_by("-id")
 
-        # 🔒 AdminTenant → voit les utilisateurs de SON tenant
-        if user.role == "AdminTenant":
+        if user.role == UserRole.ADMIN_TENANT_FINANCE:
             return User.objects.filter(
-                tenant=user.tenant
+                tenant=user.tenant,
+                role__in=[
+                    UserRole.TRESORIER,
+                    UserRole.LECTEUR,
+                ]
+            ).select_related("tenant").order_by("-id")
+
+        if user.role == UserRole.ADMIN_TENANT_STATION:
+            return User.objects.filter(
+                tenant=user.tenant,
+                role__in=[
+                    UserRole.GERANT,
+                    UserRole.COLLECTEUR,
+                ]
             ).select_related("tenant", "station").order_by("-id")
+
+        return User.objects.none()
 
     def perform_create(self, serializer):
         creator = self.request.user
         role_to_create = serializer.validated_data.get("role")
 
-        # --- SUPERADMIN ---
         if creator.is_superuser:
-            # SuperAdmin peut tout créer
-            # mais AdminTenant → tenant obligatoire
-            if role_to_create == "AdminTenant" and not serializer.validated_data.get("tenant"):
-                raise ValidationError({"tenant": "Tenant obligatoire pour AdminTenant."})
-
             serializer.save()
             return
 
-        # --- ADMIN TENANT ---
-        if creator.role == "AdminTenant":
-            if role_to_create not in ("Collecteur", "Tresorier", "ChefStation"):
+        if creator.role == UserRole.ADMIN_TENANT_FINANCE:
+            if role_to_create not in {
+                UserRole.TRESORIER,
+                UserRole.COLLECTEUR,
+            }:
                 raise PermissionDenied(
-                    "Un AdminTenant ne peut créer que des Collecteurs, Trésoriers ou Chefs de station."
+                    "Un Admin Finance ne peut créer que des Trésoriers ou Lecteurs."
                 )
-
-            # Tenant FORCÉ (sécurité SaaS)
             serializer.save(tenant=creator.tenant)
             return
 
-        # --- AUTRES ---
-        raise PermissionDenied("Vous n’avez pas le droit de créer des utilisateurs.")
+        if creator.role == UserRole.ADMIN_TENANT_STATION:
+            if role_to_create not in {
+                UserRole.GERANT,
+                UserRole.SUPERVISEUR,
+                UserRole.POMPISTE,
+                UserRole.CAISSIER,
+                UserRole.PERSONNEL_ENTRETIEN,
+                UserRole.SECURITE,
+            }:
+                raise PermissionDenied(
+                    "Un Admin Station ne peut créer que des Gérants, Superviseur, Pompiste, etc."
+                )
+            serializer.save(tenant=creator.tenant)
+            return
 
-    @action(detail=True, methods=['post'], url_path='change-password')
-    def change_password(self, request, pk=None):
-        user = self.get_object()
-        new_password = request.data.get("password")
-
-        if not new_password:
-            return Response({"detail": "Nouveau mot de passe requis"}, status=status.HTTP_400_BAD_REQUEST)
-
-        user.set_password(new_password)
-        user.save()
-
-        return Response({"detail": "Mot de passe mis à jour avec succès"})
+        raise PermissionDenied("Action non autorisée.")
     
     @action(detail=True, methods=["post"], url_path="toggle-active")
     def toggle_active(self, request, pk=None):
-        user = self.get_object()
+        target = self.get_object()
         actor = request.user
 
-        # Sécurité
-        if actor.role != "AdminTenant" and not actor.is_superuser:
+        if actor.is_superuser:
+            pass
+
+        elif (
+            actor.role == UserRole.ADMIN_TENANT_FINANCE
+            and target.role in {UserRole.TRESORIER, UserRole.COLLECTEUR}
+        ):
+            pass
+
+        elif (
+            actor.role == UserRole.ADMIN_TENANT_STATION
+            and target.role in {UserRole.GERANT, UserRole.SUPERVISEUR, UserRole.POMPISTE, UserRole.CAISSIER, UserRole.PERSONNEL_ENTRETIEN, UserRole.SECURITE}
+        ):
+            pass
+
+        else:
             raise PermissionDenied("Action interdite.")
 
-        if user.role not in ("Collecteur", "Tresorier"):
-            raise PermissionDenied("Utilisateur non gérable.")
-
-        user.is_active = not user.is_active
-        user.save(update_fields=["is_active"])
+        target.is_active = not target.is_active
+        target.save(update_fields=["is_active"])
 
         return Response(
-            {"id": user.id, "is_active": user.is_active},
+            {"id": target.id, "is_active": target.is_active},
             status=status.HTTP_200_OK,
         )
     
@@ -433,48 +459,66 @@ def me(request):
 
 class StaffViewSet(TenantViewSet, viewsets.ModelViewSet):
     """
-    Gestion du personnel métier :
-    - Collecteur
-    - Trésorier
-    - Lecteur
-
-    Accessible UNIQUEMENT à l'AdminTenant.
+    Personnel STATION uniquement
     """
     serializer_class = UtilisateurSerializer
     permission_classes = [IsAuthenticated]
-    http_method_names = ["get", "patch"]  # 🔒 pas de delete, pas de post ici
+    http_method_names = ["get", "patch"]
 
     def get_queryset(self):
         user = self.request.user
 
-        # Sécurité stricte
-        if not user.tenant or user.role != "AdminTenant":
+        if not user.tenant or user.role != UserRole.ADMIN_TENANT_STATION:
             return User.objects.none()
 
         return User.objects.filter(
             tenant=user.tenant,
-            role__in=["Tresorier", "Collecteur", "Lecteur"]
+            role__in=[
+                UserRole.GERANT,
+                UserRole.SUPERVISEUR,
+                UserRole.POMPISTE,
+                UserRole.CAISSIER,
+                UserRole.PERSONNEL_ENTRETIEN,
+                UserRole.SECURITE,
+            ]
         ).order_by("role", "username")
 
     def perform_create(self, serializer):
-        user = self.request.user
+        creator = self.request.user
+        role_to_create = serializer.validated_data.get("role")
 
-        # 🔒 Sécurité absolue
-        if user.role != "AdminTenant" or not user.tenant:
-            raise PermissionDenied("Action non autorisée.")
+        if creator.is_superuser:
+            serializer.save()
+            return
 
-        role = serializer.validated_data.get("role")
+        if creator.role == UserRole.ADMIN_TENANT_FINANCE:
+            if role_to_create not in {
+                UserRole.TRESORIER,
+                UserRole.COLLECTEUR,
+            }:
+                raise PermissionDenied(
+                    "Un Admin Finance ne peut créer que des Trésoriers ou Lecteurs."
+                )
+            serializer.save(tenant=creator.tenant)
+            return
 
-        # 🔒 Rôles autorisés UNIQUEMENT
-        if role not in ["Tresorier", "Collecteur", "Lecteur"]:
-            raise PermissionDenied(
-                "Vous ne pouvez créer que des Collecteurs, Trésoriers ou Lecteurs."
-            )
+        if creator.role == UserRole.ADMIN_TENANT_STATION:
+            if role_to_create not in {
+                UserRole.GERANT,
+                UserRole.SUPERVISEUR,
+                UserRole.POMPISTE,
+                UserRole.CAISSIER,
+                UserRole.PERSONNEL_ENTRETIEN,
+                UserRole.SECURITE,
+            }:
+                raise PermissionDenied(
+                    "Un Admin Station ne peut créer que des Gérants, Superviseur, Pompiste, etc."
+                )
+            serializer.save(tenant=creator.tenant)
+            return
 
-        # 🔒 Tenant forcé (anti-faille SaaS)
-        serializer.save(
-            tenant=user.tenant,
-        )
+        raise PermissionDenied("Action non autorisée.")
+
     def partial_update(self, request, *args, **kwargs):
         """
         Autorise UNIQUEMENT l’activation / désactivation
@@ -496,7 +540,67 @@ class StaffViewSet(TenantViewSet, viewsets.ModelViewSet):
         instance.save(update_fields=["is_active"])
 
         return Response(self.get_serializer(instance).data)
-    
+
+
+@action(detail=True, methods=["post"], url_path="toggle-active")
+def toggle_active(self, request, pk=None):
+    target = self.get_object()
+    actor = request.user
+
+    if actor.is_superuser:
+        pass
+
+    elif (
+        actor.role == UserRole.ADMIN_TENANT_FINANCE
+        and target.role in {UserRole.TRESORIER, UserRole.COLLECTEUR}
+    ):
+        pass
+
+    elif (
+        actor.role == UserRole.ADMIN_TENANT_STATION
+        and target.role in {UserRole.GERANT, UserRole.SUPERVISEUR, UserRole.POMPISTE, UserRole.CAISSIER, UserRole.PERSONNEL_ENTRETIEN, UserRole.SECURITE}
+    ):
+        pass
+
+    else:
+        raise PermissionDenied("Action interdite.")
+
+    target.is_active = not target.is_active
+    target.save(update_fields=["is_active"])
+
+    return Response(
+        {"id": target.id, "is_active": target.is_active},
+        status=status.HTTP_200_OK,
+    )
+
+class StaffViewSet(TenantViewSet, viewsets.ModelViewSet):
+    """
+    Personnel station uniquement :
+    - Gérant
+    - Collecteur
+    """
+    serializer_class = UtilisateurSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get", "patch"]
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if not user.tenant or user.role != UserRole.ADMIN_TENANT_STATION:
+            return User.objects.none()
+
+        return User.objects.filter(
+            tenant=user.tenant,
+            role__in=[
+                UserRole.GERANT,
+                UserRole.SUPERVISEUR,
+                UserRole.POMPISTE,
+                UserRole.CAISSIER,
+                UserRole.PERSONNEL_ENTRETIEN,
+                UserRole.SECURITE
+            ]
+        ).order_by("role", "username")
+
 
 class TransactionViewSet(viewsets.ModelViewSet):
     serializer_class = TransactionSerializer

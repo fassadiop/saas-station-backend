@@ -10,35 +10,6 @@ from django.conf import settings
 from tenants.models import Tenant
 
 
-# class Tenant(models.Model):
-#     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-#     nom = models.CharField(max_length=150, unique=True)
-#     type_structure = models.CharField(max_length=50)
-#     date_creation = models.DateField(auto_now_add=True)
-#     devise = models.CharField(max_length=10, default='XOF')
-#     actif = models.BooleanField(default=True)
-    
-#     created_by = models.ForeignKey(
-#         'accounts.Utilisateur',
-#         on_delete=models.SET_NULL,
-#         null=True,
-#         related_name="tenants_crees"
-#     )
-
-#     def __str__(self):
-#         return self.nom
-
-# class Utilisateur(AbstractUser):
-#     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE, related_name="utilisateurs", null=True)
-#     ROLE_CHOICES = (
-#         ('SuperAdmin','SuperAdmin'),
-#         ('AdminTenant','AdminTenant'),
-#         ('Tresorier','Tresorier'),
-#         ('Collecteur','Collecteur'),
-#         ('Lecteur','Lecteur'),
-#     )
-#     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='Lecteur')
-
 class Membre(models.Model):
     tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE, related_name="membres")
     nom_membre = models.CharField(max_length=100)

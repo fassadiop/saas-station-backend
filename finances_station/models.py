@@ -1,9 +1,20 @@
+# saas-backend/finances_station/models.py
 from django.db import models
 from tenants.models import Tenant
 from stations.models import Station
 
 
 class TransactionStation(models.Model):
+    FINANCE_STATUS = (
+        ("PROVISOIRE", "Provisoire"),
+        ("CONFIRMEE", "Confirmée"),
+    )
+
+    finance_status = models.CharField(
+        max_length=15,
+        choices=FINANCE_STATUS,
+        default="PROVISOIRE"
+    )
     TYPE_CHOICES = (
         ("RECETTE", "Recette"),
         ("DEPENSE", "Dépense"),

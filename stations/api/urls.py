@@ -1,6 +1,5 @@
-from django.urls import path
-from .dashboard import StationDashboardAPIView
+from django.urls import include, path
 
 urlpatterns = [
-    path("", StationDashboardAPIView.as_view(), name="station-dashboard"),
+    path("stations/", include("stations.urls")),
 ]

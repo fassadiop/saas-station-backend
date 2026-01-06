@@ -1,7 +1,7 @@
 from tenants.models import Tenant
 from tenants.serializers import TenantSerializer
 from tenants.permissions import TenantPermission
-
+from accounts.constants import UserRole
 
 from rest_framework import viewsets, permissions
 from rest_framework.exceptions import PermissionDenied
@@ -21,7 +21,10 @@ class TenantViewSet(viewsets.ModelViewSet):
             return Tenant.objects.all()
 
         # ✅ ADMIN TENANT : son propre tenant
-        if user.role == "AdminTenant" and user.tenant_id:
+        if user.role == UserRole.ADMIN_TENANT_FINANCE and user.tenant_id:
+            return Tenant.objects.filter(id=user.tenant_id)
+        
+        if user.role == UserRole.ADMIN_TENANT_STATION and user.tenant_id:
             return Tenant.objects.filter(id=user.tenant_id)
 
         # ❌ AUTRES : aucun accès

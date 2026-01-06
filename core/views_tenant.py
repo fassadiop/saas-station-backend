@@ -1,7 +1,9 @@
+# core/views_tenant.py
 from rest_framework import viewsets, permissions
 from rest_framework.exceptions import PermissionDenied
 from .models import Tenant
 from .serializers import TenantSerializer
+from accounts.constants import UserRole
 
 class TenantViewSet(viewsets.ModelViewSet):
     queryset = Tenant.objects.all()
@@ -17,7 +19,10 @@ class TenantViewSet(viewsets.ModelViewSet):
         if user.is_superuser:
             return Tenant.objects.all()
 
-        if getattr(user, "role", None) == "AdminTenant":
+        if user.role in {
+            UserRole.ADMIN_TENANT_FINANCE,
+            UserRole.ADMIN_TENANT_STATION,
+        }:
             return Tenant.objects.filter(id=user.tenant_id)
 
         return Tenant.objects.none()
