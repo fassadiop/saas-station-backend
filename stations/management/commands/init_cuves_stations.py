@@ -1,3 +1,5 @@
+# stations/management/commands/init_cuves_stations.py
+
 from django.core.management.base import BaseCommand
 from stations.models import Station
 from stations.models_depotage.cuve import Cuve

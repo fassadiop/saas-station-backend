@@ -13,7 +13,6 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from django.db.models import Sum, Q, Value
 
-from accounts.permissions import CanManageUsers
 
 from .permissions import (
     IsAdminTenantFinanceOnly,
@@ -347,7 +346,7 @@ class LoginView(APIView):
 class UtilisateurViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UtilisateurSerializer
-    permission_classes = [IsAuthenticated, CanManageUsers]
+    permission_classes = [IsAuthenticated]
     pagination_class = StandardResultsSetPagination
 
     filter_backends = [filters.SearchFilter]

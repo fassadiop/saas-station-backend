@@ -1,3 +1,5 @@
+# stations.models_depotage/mouvement_stock.py
+
 from django.db import models
 
 class MouvementStock(models.Model):

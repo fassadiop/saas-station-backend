@@ -4,7 +4,7 @@ from django.db import models
 from django.conf import settings
 
 from stations.constants import DepotageStatus
-from stations.models import Station
+
 
 class Depotage(models.Model):
     """
@@ -14,23 +14,25 @@ class Depotage(models.Model):
     - Impacte le stock cuve
     """
 
-    PRODUIT_CHOICES = (
-        ("ESSENCE", "Essence"),
-        ("GASOIL", "Gasoil"),
-    )
-
     # =========================
     # CONTEXTE
     # =========================
-    station = models.ForeignKey(
-        Station,
+    tenant = models.ForeignKey(
+        "tenants.Tenant",
         on_delete=models.CASCADE,
         related_name="depotages"
     )
 
-    produit = models.CharField(
-        max_length=10,
-        choices=PRODUIT_CHOICES
+    station = models.ForeignKey(
+        "stations.Station",
+        on_delete=models.CASCADE,
+        related_name="depotages"
+    )
+
+    cuve = models.ForeignKey(
+        "stations.Cuve",
+        on_delete=models.PROTECT,
+        related_name="depotages"
     )
 
     fournisseur = models.CharField(
@@ -149,6 +151,10 @@ class Depotage(models.Model):
         verbose_name_plural = "Dépotages"
 
     def __str__(self):
-        return f"Dépotage {self.produit} – {self.station.nom} – {self.date_depotage.date()}"
+        return (
+            f"Dépotage {self.cuve.produit.code} "
+            f"– {self.station.nom} "
+            f"– {self.date_depotage.date()}"
+        )
 
 

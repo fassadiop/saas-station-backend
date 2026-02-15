@@ -1,84 +1,90 @@
+# stations/services/stock.py
+
 from django.db import transaction
-from stations.models_depotage.cuve import Cuve
+from stations.models_depotage.cuve import Cuve, CuveStatus
 from rest_framework.exceptions import ValidationError
 from stations.models_depotage.mouvement_stock import MouvementStock
 
 @transaction.atomic
 def appliquer_stock_relais(relais):
+
     if relais.stock_applique:
         return
 
-    station = relais.station
+    for ligne in relais.produits.select_for_update():
 
-    # ESSENCE
-    if relais.volume_essence_vendu > 0:
-        cuve_essence = Cuve.objects.select_for_update().get(
-            station=station,
-            produit="ESSENCE"
-        )
-        cuve_essence.stock_actuel -= relais.volume_essence_vendu
-        cuve_essence.save(update_fields=["stock_actuel"])
+        volume = ligne.volume_vendu
 
-    # GASOIL
-    if relais.volume_gasoil_vendu > 0:
-        cuve_gasoil = Cuve.objects.select_for_update().get(
-            station=station,
-            produit="GASOIL"
+        if volume <= 0:
+            continue
+
+        cuve = Cuve.objects.select_for_update().get(
+            station=relais.station,
+            produit=ligne.produit,
+            statut=CuveStatus.ACTIVE,
         )
-        cuve_gasoil.stock_actuel -= relais.volume_gasoil_vendu
-        cuve_gasoil.save(update_fields=["stock_actuel"])
+
+        if cuve.stock_actuel < volume:
+            raise ValidationError(
+                f"Stock insuffisant pour {ligne.produit.code}"
+            )
+
+        cuve.stock_actuel -= volume
+        cuve.save(update_fields=["stock_actuel", "updated_at"])
+
+        MouvementStock.objects.create(
+            tenant=relais.tenant,
+            station=relais.station,
+            cuve=cuve,
+            type_mouvement=MouvementStock.MOUVEMENT_SORTIE,
+            quantite=volume,
+            source_type="RELAIS",
+            source_id=relais.id,
+            date_mouvement=relais.fin_relais,
+        )
 
     relais.stock_applique = True
     relais.save(update_fields=["stock_applique"])
 
+
+
 @transaction.atomic
 def appliquer_stock_depotage(depotage, user):
-    """
-    Applique l'impact stock d'un dépotage CONFIRME.
-    Idempotent via depotage.stock_applique.
-    """
 
     if depotage.stock_applique:
-        raise ValidationError("Le stock a déjà été appliqué pour ce dépotage.")
+        raise ValidationError("Le stock a déjà été appliqué.")
 
     if depotage.statut != "CONFIRME":
-        raise ValidationError("Le dépotage doit être confirmé avant transfert.")
+        raise ValidationError("Le dépotage doit être confirmé.")
 
-    # Verrouillage cuve
-    try:
-        cuve = Cuve.objects.select_for_update().get(
-            station=depotage.station,
-            produit=depotage.produit,
-            actif=True,
-        )
-    except Cuve.DoesNotExist:
-        raise ValidationError(
-            "Aucune cuve active trouvée pour ce produit."
-        )
+    cuve = Cuve.objects.select_for_update().get(id=depotage.cuve_id)
 
-    # Volume réel accepté
+    if cuve.statut not in [
+        CuveStatus.STANDBY,
+        CuveStatus.ACTIVE,
+    ]:
+        raise ValidationError("La cuve n'est pas disponible pour dépotage.")
+
     volume = depotage.quantite_acceptee
 
     if volume <= 0:
         raise ValidationError("Quantité acceptée invalide.")
 
-    # Mouvement de stock (SOURCE DE VÉRITÉ)
+    # Mouvement stock (source de vérité)
     MouvementStock.objects.create(
-        tenant=depotage.station.tenant,
+        tenant=depotage.tenant,
         station=depotage.station,
         cuve=cuve,
         type_mouvement=MouvementStock.MOUVEMENT_ENTREE,
-        quantite=depotage.quantite_acceptee,
+        quantite=volume,
         source_type="DEPOTAGE",
         source_id=depotage.id,
         date_mouvement=depotage.date_depotage,
     )
 
-    # Mise à jour stock cuve
-    cuve.stock_actuel = cuve.stock_actuel + volume
+    cuve.stock_actuel += volume
     cuve.save(update_fields=["stock_actuel", "updated_at"])
 
-    # Marquage idempotence
     depotage.stock_applique = True
     depotage.statut = "TRANSFERE"
     depotage.save(update_fields=["stock_applique", "statut", "updated_at"])

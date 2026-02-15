@@ -86,3 +86,10 @@ class DepotageStatus(models.TextChoices):
     BROUILLON = "BROUILLON", "Brouillon"
     SOUMIS = "SOUMIS", "Soumis"
     CONFIRME = "CONFIRME", "Confirmé"
+
+
+class RelaisStatus(models.TextChoices):
+    BROUILLON = "BROUILLON", "Brouillon"
+    SOUMIS = "SOUMIS", "Soumis"
+    VALIDE = "VALIDE", "Validé"
+    TRANSFERE = "TRANSFERE", "Transféré"
