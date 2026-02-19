@@ -1,4 +1,5 @@
 # accounts/permissions.py
+
 from rest_framework.permissions import BasePermission
 from accounts.constants import UserRole
 
@@ -74,3 +75,11 @@ class CanCreateStationPersonnel(BasePermission):
 
         # ❌ Tous les autres rôles
         return False
+    
+
+class IsSuperAdmin(BasePermission):
+    def has_permission(self, request, view):
+        return (
+            request.user.is_authenticated and
+            request.user.role == UserRole.SUPERADMIN
+        )

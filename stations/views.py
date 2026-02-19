@@ -1,11 +1,12 @@
 # saas-backend/stations/views.py
 
-from decimal import Decimal
-from django.db.models import Count
+from django.db.models import DecimalField as ModelDecimalField
+from rest_framework import status
+from django.core.exceptions import ValidationError as DjangoValidationError
+from django.db.models import Count, Sum, Q
 from django.db import transaction
 from django.utils import timezone
 from django.utils.timezone import now
-from django.db.models import Sum
 from django.db.models.functions import TruncDate
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -16,29 +17,35 @@ from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework.exceptions import PermissionDenied, ValidationError
+from rest_framework.generics import ListAPIView
 
 from accounts.constants import UserRole
 from accounts.models import Utilisateur
+from django.db.models.functions import Coalesce
 
 from core.pagination import StandardResultsSetPagination
+from dashboard.permissions import IsAdminTenantStation
 from finances_station.models import TransactionStation
+from stations.models_depotage.cuve import Cuve, CuveStatus
+from stations.models_produit import PrixCarburant, ProduitCarburant
+from stations.services.stock import get_capacite_totale_produit, get_seuil_critique_reel, get_stock_global_produit
 
 from .models import (
     IndexPompe,
+    Pompe,
     Station,
-    VenteCarburant,
-    Local,
-    ContratLocation,
     RelaisEquipe,
     FaitStatus,
 )
 from .serializers import (
+    CuveSerializer,
     IndexPompeReadSerializer,
     IndexPompeWriteSerializer,
+    PompeActiveSerializer,
+    PompeSerializer,
+    PrixCarburantSerializer,
+    ProduitCarburantSerializer,
     StationSerializer,
-    VenteCarburantSerializer,
-    LocalSerializer,
-    ContratLocationSerializer,
     RelaisEquipeSerializer,
 )
 from .permissions import CanAccessStations, IsStationAdminOrActor
@@ -86,23 +93,36 @@ class StationViewSet(ModelViewSet):
     def perform_create(self, serializer):
         user = self.request.user
 
+        # 🔒 Seul AdminTenantStation peut créer une station
         if user.role != UserRole.ADMIN_TENANT_STATION:
             raise PermissionDenied(
                 "Seul un AdminTenantStation peut créer une station."
             )
 
         gerant_data = serializer.validated_data.pop("gerant", None)
+
         if not gerant_data:
             raise ValidationError(
                 {"gerant": "Un GERANT est obligatoire."}
             )
 
         with transaction.atomic():
+
+            # 1️⃣ Création station
             station = serializer.save(tenant=user.tenant)
 
-            user.stations_administrees.add(station)
+            # 2️⃣ Vérifier qu'aucun GERANT actif n'existe déjà
+            if Utilisateur.objects.filter(
+                station=station,
+                role=UserRole.GERANT,
+                is_active=True
+            ).exists():
+                raise ValidationError(
+                    {"gerant": "Un chef de station actif existe déjà."}
+                )
 
-            Utilisateur.objects.create_user(
+            # 3️⃣ Création du GERANT
+            gerant = Utilisateur.objects.create_user(
                 username=gerant_data["username"],
                 password=gerant_data["password"],
                 email=gerant_data.get("email", ""),
@@ -114,6 +134,163 @@ class StationViewSet(ModelViewSet):
                 is_active=True,
             )
 
+            # 4️⃣ Lier la station à l'AdminTenantStation
+            user.stations_administrees.add(station)
+
+        return station
+
+# ============================================================
+# CUVES
+# ============================================================
+class CuveViewSet(ModelViewSet):
+    serializer_class = CuveSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+
+        # 🔹 AdminTenantStation → toutes les stations administrées
+        if user.role == UserRole.ADMIN_TENANT_STATION:
+            return Cuve.objects.filter(
+                tenant=user.tenant,
+                station__in=user.stations_administrees.all()
+            )
+
+        # 🔹 GERANT / SUPERVISEUR → station unique
+        if user.role in (
+            UserRole.GERANT,
+            UserRole.SUPERVISEUR,
+        ):
+            return Cuve.objects.filter(
+                tenant=user.tenant,
+                station=user.station
+            )
+
+        return Cuve.objects.none()
+
+    def perform_create(self, serializer):
+        user = self.request.user
+        station = serializer.validated_data.get("station")
+
+        if user.role != UserRole.ADMIN_TENANT_STATION:
+            raise PermissionDenied("Accès réservé à l’AdminTenantStation.")
+
+        if station.tenant_id != user.tenant_id:
+            raise PermissionDenied("Station hors tenant.")
+
+        if not user.stations_administrees.filter(id=station.id).exists():
+            raise PermissionDenied("Station non autorisée.")
+
+        serializer.save()
+
+    def update(self, request, *args, **kwargs):
+        if request.user.role != UserRole.ADMIN_TENANT_STATION:
+            raise PermissionDenied("Modification réservée à l’AdminTenantStation.")
+        return super().update(request, *args, **kwargs)
+
+
+    def destroy(self, request, *args, **kwargs):
+        if request.user.role != UserRole.ADMIN_TENANT_STATION:
+            raise PermissionDenied("Suppression réservée à l’AdminTenantStation.")
+        return super().destroy(request, *args, **kwargs)
+
+    @action(detail=True, methods=["post"])
+    def changer_statut(self, request, pk=None):
+        cuve = self.get_object()
+        nouveau_statut = request.data.get("statut")
+
+        if not nouveau_statut:
+            return Response(
+                {"detail": "Statut requis."},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        try:
+            cuve.changer_statut(nouveau_statut)
+        except DjangoValidationError as e:
+            return Response(
+                {"detail": e.message},
+                status=status.HTTP_400_BAD_REQUEST,
+            )
+
+        return Response(
+            {"detail": "Statut mis à jour."}
+        )
+    
+# ==========================================================
+# PRODUIT CARBURANT
+# ==========================================================
+class ProduitCarburantViewSet(ModelViewSet):
+    serializer_class = ProduitCarburantSerializer
+    permission_classes = [IsAuthenticated]
+    http_method_names = ["get", "post", "patch", "delete"]
+
+    def get_queryset(self):
+        user = self.request.user
+
+        return (
+            ProduitCarburant.objects
+            .filter(tenant=user.tenant)
+            .annotate(
+                stock_global=Coalesce(
+                    Sum(
+                        "cuves__stock_actuel",
+                        filter=Q(
+                            cuves__statut__in=[
+                                CuveStatus.ACTIVE,
+                                CuveStatus.STANDBY,
+                            ]
+                        ),
+                        output_field=ModelDecimalField(
+                            max_digits=12,
+                            decimal_places=2,
+                        ),
+                    ),
+                    0,
+                    output_field=ModelDecimalField(
+                        max_digits=12,
+                        decimal_places=2,
+                    ),
+                )
+            )
+        )
+
+    def perform_create(self, serializer):
+        user = self.request.user
+
+        if user.role != UserRole.ADMIN_TENANT_STATION:
+            raise PermissionDenied(
+                "Accès réservé à l’AdminTenantStation."
+            )
+
+        serializer.save()
+
+    def perform_destroy(self, instance):
+        if instance.cuve_set.exists():
+            raise PermissionDenied(
+                "Impossible de supprimer un produit utilisé par une cuve."
+            )
+
+        instance.delete()
+
+    @action(detail=True, methods=["post"])
+    def desactiver(self, request, pk=None):
+        produit = self.get_object()
+
+        try:
+            produit.desactiver()
+        except DjangoValidationError as e:
+            return Response(
+                {"detail": e.message},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        return Response({"detail": "Produit désactivé."})
+
+
+# ============================================================
+# TENANTS
+# ============================================================
 class TenantViewSetMixin:
     serializer_class = StationSerializer
     permission_classes = [IsAuthenticated, CanAccessStations]
@@ -133,7 +310,7 @@ class TenantViewSetMixin:
 
 class PompeViewSet(ModelViewSet):
     serializer_class = PompeSerializer
-    permission_classes = [IsAdminTenantStationForPompe]
+    permission_classes = [IsAdminTenantStation]
 
     def get_queryset(self):
         user = self.request.user
@@ -184,374 +361,7 @@ class PompeActiveListView(APIView):
         return Response(serializer.data)
 
 
-class RelaisIndexV2ViewSet(viewsets.ModelViewSet):
-    """
-    Gestion des relais d’index (V2).
-    Source de vérité unique pour les index par pompe.
-    """
-
-    serializer_class = RelaisIndexV2Serializer
-    permission_classes = [
-        IsAuthenticated,
-        IsStationAdminOrActor,
-        CanCreateRelaisIndexV2,
-    ]
-
-    # ----------------------
-    # QUERYSET SÉCURISÉ
-    # ----------------------
-    def get_queryset(self):
-        user = self.request.user
-
-        qs = (
-            RelaisIndexV2.objects
-            .select_related("station")
-            .prefetch_related(
-                "lignes",
-                "lignes__index_pompe",
-                "lignes__index_pompe__pompe",
-            )
-        )
-
-        if not user.is_superuser:
-            qs = qs.filter(station=user.station)
-
-        return qs.order_by("-debut_relais")
-
-    # ----------------------
-    # CREATE (ATOMIC)
-    # ----------------------
-    def create(self, request, *args, **kwargs):
-        if request.user.role not in (
-            UserRole.POMPISTE,
-            UserRole.SUPERVISEUR,
-        ):
-            raise_business_error(
-                code=ErrorCode.PERMISSION_DENIED,
-                message="Vous n’êtes pas autorisé à créer un relais d’index",
-                hint="Seuls les pompi stes et superviseurs peuvent effectuer cette action",
-            )
-
-        return super().create(request, *args, **kwargs)
-
-    # ----------------------
-    # SOUMISSION
-    # ----------------------
-    @action(detail=True, methods=["post"])
-    def soumettre(self, request, pk=None):
-        relais = self.get_object()
-
-        if request.user.role not in (
-            UserRole.POMPISTE,
-            UserRole.SUPERVISEUR,
-        ):
-            raise_business_error(
-                code=ErrorCode.PERMISSION_DENIED,
-                message="Vous n’êtes pas autorisé à soumettre ce relais",
-            )
-
-        if relais.status != RelaisIndexV2.Status.BROUILLON:
-            raise_business_error(
-                code=ErrorCode.INVALID_STATE,
-                field="status",
-                message="Ce relais ne peut pas être soumis dans son état actuel",
-                hint="Seuls les relais en brouillon peuvent être soumis",
-            )
-
-        relais.status = RelaisIndexV2.Status.SOUMIS
-        relais.soumis_par = request.user
-        relais.soumis_le = timezone.now()
-        relais.save(update_fields=["status", "soumis_par", "soumis_le"])
-
-        return Response(
-            {
-                "status": "SOUMIS",
-                "message": "Relais soumis avec succès",
-            },
-            status=status.HTTP_200_OK,
-        )
-
-    # ----------------------
-    # VALIDATION / TRANSFERT
-    # ----------------------
-    @action(detail=True, methods=["post"])
-    def valider(self, request, pk=None):
-        relais = self.get_object()
-
-        if request.user.role != UserRole.SUPERVISEUR:
-            raise_business_error(
-                code=ErrorCode.PERMISSION_DENIED,
-                message="Seul un superviseur peut valider un relais",
-            )
-
-        if relais.status != RelaisIndexV2.Status.SOUMIS:
-            raise_business_error(
-                code=ErrorCode.INVALID_STATE,
-                field="status",
-                message="Ce relais ne peut pas être validé",
-                hint="Le relais doit être au statut SOUMIS",
-            )
-
-        # ======================
-        # CONTRÔLE FINANCIER
-        # ======================
-        parametrage = ParametrageStation.objects.filter(
-            tenant=relais.station.tenant
-        ).first()
-
-        if not parametrage:
-            raise_business_error(
-                code=ErrorCode.BUSINESS_RULE,
-                message="Paramétrage financier introuvable pour la station",
-                hint="Vérifiez le paramétrage de la station",
-            )
-
-        tolerance = parametrage.seuil_tolerance
-        ecart = relais.ecart_encaissement or Decimal("0.00")
-
-        if abs(ecart) > tolerance:
-            raise_business_error(
-                code=ErrorCode.BUSINESS_RULE,
-                field="ecart_encaissement",
-                message="Écart d’encaissement hors tolérance autorisée",
-                hint=f"Tolérance max : {tolerance} | Écart constaté : {ecart}",
-            )
-
-        # ======================
-        # TRANSFERT (ORDRE CRITIQUE)
-        # ======================
-        with transaction.atomic():
-
-            appliquer_stock_relais_index_v2(
-                relais=relais,
-                user=request.user,
-            )
-
-            TransactionStation.objects.create(
-                tenant=relais.station.tenant,
-                station=relais.station,
-                source_type="RELAIS_INDEX",
-                source_id=relais.id,
-                type="RECETTE",
-                montant=relais.total_encaisse,
-                date=relais.fin_relais,
-                finance_status="TRANSFERE",
-            )
-
-            relais.status = RelaisIndexV2.Status.TRANSFERE
-            relais.valide_par = request.user
-            relais.valide_le = timezone.now()
-            relais.save(update_fields=[
-                "status",
-                "valide_par",
-                "valide_le",
-                "stock_applique",
-            ])
-
-        return Response(
-            {
-                "status": "TRANSFERE",
-                "message": "Relais validé et transféré avec succès",
-            },
-            status=status.HTTP_200_OK,
-        )
-
-    # ----------------------
-    # DELETE (OPTIONNEL)
-    # ----------------------
-    @action(detail=True, methods=["delete"])
-    def supprimer(self, request, pk=None):
-        relais = self.get_object()
-
-        STAFF_CAN_DELETE = ["SUPERVISEUR", "GERANT"]
-
-        if request.user.role not in STAFF_CAN_DELETE:
-            raise_business_error(
-                code=ErrorCode.PERMISSION_DENIED,
-                message="Vous n’êtes pas autorisé à supprimer ce relais",
-            )
-
-        if relais.status != RelaisIndexV2.Status.BROUILLON:
-            raise_business_error(
-                code=ErrorCode.INVALID_STATE,
-                field="status",
-                message="Seuls les relais en brouillon peuvent être supprimés",
-            )
-
-        if relais.finance_id:
-            raise_business_error(
-                code=ErrorCode.BUSINESS_RULE,
-                message=(
-                    "Impossible de supprimer un relais déjà lié "
-                    "à une écriture financière"
-                ),
-            )
-
-        relais.delete()
-
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
-    # ----------------------
-    # ANNULER
-    # ----------------------
-    @action(detail=True, methods=["post"])
-    def annuler(self, request, pk=None):
-        relais = self.get_object()
-
-        STAFF_CAN_ANNULER = ["SUPERVISEUR", "GERANT"]
-
-        if request.user.role not in STAFF_CAN_ANNULER:
-            raise_business_error(
-                code=ErrorCode.PERMISSION_DENIED,
-                message="Vous n’êtes pas autorisé à annuler ce relais",
-            )
-
-        if relais.status != RelaisIndexV2.Status.SOUMIS:
-            raise_business_error(
-                code=ErrorCode.INVALID_STATE,
-                field="status",
-                message="Seuls les relais soumis peuvent être annulés",
-            )
-
-        relais.status = RelaisIndexV2.Status.ANNULE
-        relais.save(update_fields=["status"])
-
-        return Response(
-            {
-                "status": "ANNULE",
-                "message": "Relais annulé avec succès",
-            },
-            status=status.HTTP_200_OK,
-        )
-
-    # ----------------------
-    # PREVIEW (INCHANGÉ)
-    # ----------------------
-    @action(detail=False, methods=["post"])
-    def preview(self, request):
-        """
-        Calcul du montant total prévu (preview)
-        sans création de relais en base.
-        """
-
-        lignes = request.data.get("lignes", [])
-
-        if not isinstance(lignes, list) or not lignes:
-            return Response({"montant_total_prevu": Decimal("0.00")})
-
-        parametrage = ParametrageStation.objects.filter(
-            tenant=request.user.station.tenant
-        ).first()
-
-        if not parametrage:
-            return Response({"montant_total_prevu": Decimal("0.00")})
-
-        total = Decimal("0.00")
-
-        for ligne in lignes:
-            index_debut = Decimal(str(ligne.get("index_debut", 0)))
-            index_fin = Decimal(str(ligne.get("index_fin", 0)))
-
-            if index_fin < index_debut:
-                continue
-
-            volume = index_fin - index_debut
-
-            index_pompe = (
-                IndexPompe.objects
-                .select_related("pompe")
-                .filter(
-                    id=ligne.get("index_pompe"),
-                    pompe__station=request.user.station,
-                )
-                .first()
-            )
-
-            if not index_pompe:
-                continue
-
-            carburant = index_pompe.carburant
-
-            if carburant == "ESSENCE":
-                total += volume * parametrage.prix_essence
-            elif carburant == "GASOIL":
-                total += volume * parametrage.prix_gasoil
-
-        return Response({"montant_total_prevu": total})
-
-
-class IndexPompeWithStartIndexView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        station = request.user.station
-
-        # =====================================================
-        # 1️⃣ ÉQUIPE SORTANTE (dernier relais index)
-        # =====================================================
-        last_relais = (
-            RelaisIndexV2.objects
-            .filter(station=station)
-            .order_by("-fin_relais")
-            .first()
-        )
-
-        equipe_sortante = (
-            last_relais.equipe_entrante
-            if last_relais
-            else None
-        )
-
-        # =====================================================
-        # 2️⃣ INDEX POMPES ACTIVES + INDEX_DEBUT CALCULÉ
-        # =====================================================
-        index_pompes = (
-            IndexPompe.objects
-            .filter(
-                pompe__station=station,
-                pompe__actif=True,
-                actif=True,
-            )
-            .select_related("pompe")
-        )
-
-        lignes = []
-
-        for index in index_pompes:
-            last_ligne = (
-                RelaisIndexLigneV2.objects
-                .filter(index_pompe=index)
-                .select_related("relais")
-                .order_by("-relais__fin_relais")
-                .first()
-            )
-
-            # 🔑 Règle métier :
-            # - si relais précédent → index_fin
-            # - sinon → index_courant (ou index_initial si tu préfères)
-            index_debut = (
-                last_ligne.index_fin
-                if last_ligne
-                else index.index_courant
-            )
-
-            lignes.append({
-                "index_pompe_id": index.id,
-                "pompe_reference": index.pompe.reference,
-                "carburant": index.carburant,
-                "face": index.face,
-                "index_debut": index_debut,
-                "index_courant": index.index_courant,
-            })
-
-        # =====================================================
-        # 3️⃣ RÉPONSE UNIFIÉE
-        # =====================================================
-        return Response({
-            "equipe_sortante": equipe_sortante,
-            "lignes": lignes,
-        })
-    
+  
 class IndexPompeViewSet(ModelViewSet):
     """
     CRUD des index de pompe (paramétrage).
@@ -596,146 +406,82 @@ class IndexPompeViewSet(ModelViewSet):
             return IndexPompeReadSerializer
         return IndexPompeWriteSerializer
 
+# class IndexPompeActifListView(ListAPIView):
+#     permission_classes = [IsAuthenticated, IsStationAdminOrActor]
 
-class VenteCarburantViewSet(ModelViewSet):
-    queryset = VenteCarburant.objects.all()
-    serializer_class = VenteCarburantSerializer
-    permission_classes = [IsAuthenticated, CanAccessStations]
-    pagination_class = StandardResultsSetPagination
+#     def get_queryset(self):
+#         user = self.request.user
 
-    filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
-    filterset_fields = ["station", "produit"]
-    ordering_fields = ["date"]
+#         return (
+#             IndexPompe.objects
+#             .filter(
+#                 pompe__station=user.station,
+#                 actif=True
+#             )
+#             .select_related("pompe", "produit")
+#         )
 
-    def perform_create(self, serializer):
+#     def list(self, request, *args, **kwargs):
+#         queryset = self.get_queryset()
+
+#         data = [
+#             {
+#                 "id": idx.id,
+#                 "pompe_reference": idx.pompe.reference,
+#                 "produit_id": idx.produit.id,
+#                 "produit_code": idx.produit.code,
+#                 "index_actuel": idx.index_courant,
+#             }
+#             for idx in queryset
+#         ]
+
+#         return Response(data)
+
+
+class IndexPompeActifListView(ListAPIView):
+    permission_classes = [IsAuthenticated, IsStationAdminOrActor]
+
+    def get_queryset(self):
         user = self.request.user
 
-        if user.role not in (
-            UserRole.GERANT,
-            UserRole.SUPERVISEUR,
-            UserRole.POMPISTE,
-        ):
-            raise PermissionDenied("Rôle non autorisé.")
-
-        serializer.save(
-            tenant=user.tenant,
-            station=user.station,
-            created_by=user,
-            date=timezone.now(),
-        )
-    
-    @action(detail=True, methods=["post"])
-    def valider(self, request, pk=None):
-        vente = self.get_object()
-
-        # 🔐 Autorisation
-        if request.user.role != UserRole.SUPERVISEUR:
-            return Response({"detail": "Non autorisé"}, status=403)
-
-        # 🔁 État attendu
-        if vente.status != FaitStatus.SOUMIS:
-            return Response({"detail": "État invalide"}, status=400)
-
-        # ✅ Validation métier
-        vente.status = FaitStatus.VALIDE
-        vente.valide_par = request.user
-        vente.valide_le = timezone.now()
-        vente.save()
-
-        # 💰 Création FINANCES (idempotente)
-        TransactionStation.objects.get_or_create(
-            source_type="VenteCarburant",
-            source_id=vente.id,
-            defaults={
-                "tenant": vente.tenant,
-                "station": vente.station,
-                "type": "RECETTE",
-                "montant": vente.volume * vente.prix_unitaire,
-                "date": vente.date,
-            }
-        )
-
-        # 🔒 Verrouillage final
-        vente.status = FaitStatus.TRANSFERE
-        vente.save(update_fields=["status"])
-
-    def perform_create(self, serializer):
-        user = self.request.user
-        
-        if user.role not in (
-            UserRole.GERANT,
-            UserRole.SUPERVISEUR,
-            UserRole.POMPISTE,
-        ):
-            raise PermissionDenied("Rôle non autorisé pour créer une vente.")
-        
-        if Station.use_relais:
-            raise PermissionDenied(
-                "Les ventes sont gérées via les relais d’équipe."
+        return (
+            IndexPompe.objects
+            .filter(
+                pompe__station=user.station,
+                actif=True
             )
-
-
-        serializer.save(
-            tenant=user.tenant,
-            station=user.station,
-            created_by=user,
-            date=timezone.now()
+            .select_related("pompe", "produit")
         )
-    
-    def perform_update(self, serializer):
-        instance = self.get_object()
 
-        if instance.status != FaitStatus.BROUILLON:
-            raise PermissionDenied("Cette vente ne peut plus être modifiée.")
+    def list(self, request, *args, **kwargs):
+        user = request.user
+        queryset = self.get_queryset()
 
-        serializer.save()
+        # 🔥 Charger tous les prix actifs en une requête
+        prix_map = {
+            p.produit_id: p.prix_unitaire
+            for p in PrixCarburant.objects.filter(
+                tenant=user.tenant,
+                station=user.station,
+                actif=True
+            )
+        }
 
-    def destroy(self, request, *args, **kwargs):
-        vente = self.get_object()
+        data = []
 
-        if vente.status != FaitStatus.BROUILLON:
-            raise PermissionDenied("Suppression interdite pour cette vente.")
+        for idx in queryset:
+            data.append({
+                "id": idx.id,
+                "pompe_reference": idx.pompe.reference,
+                "produit_id": idx.produit.id,
+                "produit_code": idx.produit.code,
+                "index_actuel": idx.index_courant,
+                "prix_unitaire": float(
+                    prix_map.get(idx.produit.id, 0)
+                ),
+            })
 
-        return super().destroy(request, *args, **kwargs)
-    
-    @action(detail=True, methods=["post"])
-    def soumettre(self, request, pk=None):
-        vente = self.get_object()
-
-        if request.user.role not in (
-            UserRole.POMPISTE,
-            UserRole.SUPERVISEUR,
-        ):
-            return Response({"detail": "Non autorisé"}, status=403)
-
-        if vente.status != FaitStatus.BROUILLON:
-            return Response({"detail": "État invalide"}, status=400)
-
-        vente.status = FaitStatus.SOUMIS
-        vente.soumis_par = request.user
-        vente.soumis_le = timezone.now()
-        vente.save(update_fields=["status", "soumis_par", "soumis_le"])
-
-        return Response({"status": "soumis"})
-
-class LocalViewSet(TenantViewSetMixin, ModelViewSet):
-    queryset = Local.objects.all()
-    serializer_class = LocalSerializer
-    permission_classes = [CanAccessStations]
-    pagination_class = StandardResultsSetPagination
-    filter_backends = [DjangoFilterBackend, SearchFilter]
-    filterset_fields = ["station", "occupe"]
-    search_fields = ["nom", "type_local"]
-
-
-class ContratLocationViewSet(TenantViewSetMixin, ModelViewSet):
-    queryset = ContratLocation.objects.all()
-    serializer_class = ContratLocationSerializer
-    permission_classes = [CanAccessStations]
-    pagination_class = StandardResultsSetPagination
-    filter_backends = [DjangoFilterBackend, SearchFilter]
-    filterset_fields = ["actif"]
-    search_fields = ["locataire"]
+        return Response(data)
 
 
 class StationDashboardView(APIView):
@@ -840,26 +586,32 @@ class StationDashboardView(APIView):
         })
 
 class RelaisEquipeViewSet(ModelViewSet):
-    queryset = RelaisEquipe.objects.all()
+
     serializer_class = RelaisEquipeSerializer
-    permission_classes = [CanAccessStations]
+    permission_classes = [IsAuthenticated, CanAccessStations]
     pagination_class = StandardResultsSetPagination
 
     def get_queryset(self):
         user = self.request.user
 
-        if user.is_superuser:
-            return RelaisEquipe.objects.all()
+        qs = RelaisEquipe.objects.select_related(
+            "station",
+            "tenant"
+        ).prefetch_related("produits")
 
-        return RelaisEquipe.objects.filter(
+        if user.is_superuser:
+            return qs.order_by("-created_at")
+
+        return qs.filter(
             tenant=user.tenant,
             station=user.station
-        )
+        ).order_by("-created_at")
 
     # ======================
-    # CRÉATION RELAIS
+    # CREATE
     # ======================
     def perform_create(self, serializer):
+
         user = self.request.user
 
         if user.role not in (
@@ -878,9 +630,10 @@ class RelaisEquipeViewSet(ModelViewSet):
         )
 
     # ======================
-    # MODIFICATION RELAIS
+    # UPDATE
     # ======================
     def perform_update(self, serializer):
+
         instance = self.get_object()
 
         if instance.status != FaitStatus.BROUILLON:
@@ -891,7 +644,7 @@ class RelaisEquipeViewSet(ModelViewSet):
         serializer.save()
 
     # ======================
-    # SOUMISSION
+    # SOUMETTRE
     # ======================
     @action(detail=True, methods=["post"])
     def soumettre(self, request, pk=None):
@@ -905,25 +658,34 @@ class RelaisEquipeViewSet(ModelViewSet):
             return Response({"detail": "Non autorisé"}, status=403)
 
         try:
-            relais.changer_statut(RelaisStatus.SOUMIS, request.user)
+            relais.changer_statut(
+                FaitStatus.SOUMIS,
+                request.user
+            )
         except ValidationError as e:
             return Response({"detail": str(e)}, status=400)
 
         return Response({"status": relais.status})
 
     # ======================
-    # VALIDATION & FINANCES
+    # VALIDER
     # ======================
     @action(detail=True, methods=["post"])
     def valider(self, request, pk=None):
 
         relais = self.get_object()
 
+        if not self.produits.exists():
+            raise ValidationError("Aucun produit dans le relais.")
+
         if request.user.role != UserRole.SUPERVISEUR:
             return Response({"detail": "Non autorisé"}, status=403)
 
         try:
-            relais.changer_statut(RelaisStatus.VALIDE, request.user)
+            relais.changer_statut(
+                FaitStatus.VALIDE,
+                request.user
+            )
         except ValidationError as e:
             return Response({"detail": str(e)}, status=400)
 
@@ -941,7 +703,10 @@ class RelaisEquipeViewSet(ModelViewSet):
             return Response({"detail": "Non autorisé"}, status=403)
 
         try:
-            relais.changer_statut(RelaisStatus.TRANSFERE, request.user)
+            relais.changer_statut(
+                FaitStatus.TRANSFERE,
+                request.user
+            )
         except ValidationError as e:
             return Response({"detail": str(e)}, status=400)
 
@@ -1039,3 +804,81 @@ class AdminTenantStationDashboardView(APIView):
             "top_services": [],
         })
 
+class StockGlobalProduitAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+
+        user = request.user
+
+        if not user.station:
+            return Response(
+                {"detail": "Utilisateur sans station"},
+                status=403
+            )
+
+        station = user.station
+
+        produits = station.tenant.produits_carburant.filter(actif=True)
+
+        data = []
+
+        for produit in produits:
+
+            stock_global = get_stock_global_produit(station, produit)
+            seuil = get_seuil_critique_reel(station, produit)
+            capacite = get_capacite_totale_produit(station, produit)
+
+            data.append({
+                "produit": produit.code,
+                "stock_global": float(stock_global),
+                "capacite_totale": float(capacite),
+                "seuil_critique": float(seuil),
+                "critique": stock_global <= seuil,
+                "pourcentage_remplissage":
+                    float((stock_global / capacite) * 100)
+                    if capacite > 0 else 0
+            })
+
+        return Response(data)
+
+class PrixCarburantViewSet(ModelViewSet):
+
+    serializer_class = PrixCarburantSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+
+        qs = PrixCarburant.objects.select_related(
+            "produit",
+            "station"
+        ).filter(
+            tenant=user.tenant
+        )
+
+        station_id = self.request.query_params.get("station_id")
+        actif = self.request.query_params.get("actif")
+
+        if station_id:
+            qs = qs.filter(station_id=station_id)
+
+        if actif == "true":
+            qs = qs.filter(actif=True)
+
+        return qs.order_by("-date_debut")
+
+    def perform_create(self, serializer):
+        user = self.request.user
+
+        if user.role != UserRole.ADMIN_TENANT_STATION:
+            raise PermissionDenied("Non autorisé.")
+
+        instance = serializer.save(
+            tenant=user.tenant,
+            created_by=user,
+            date_debut=timezone.now(),
+            actif=False
+        )
+
+        instance.activer()

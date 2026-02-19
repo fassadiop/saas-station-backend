@@ -25,3 +25,11 @@ class TenantSerializer(serializers.ModelSerializer):
                 "email": obj.created_by.email,
             }
         return None
+
+    def create(self, validated_data):
+        request = self.context["request"]
+
+        return Tenant.objects.create(
+            **validated_data,
+            created_by=request.user,
+        )

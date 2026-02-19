@@ -41,6 +41,8 @@ urlpatterns = [
     path("api/v1/finances/", include("finances_station.urls")),
 
     path("api/v1/", include(router.urls)),
+    path("api/v1/", include("tenants.urls")),
+    path("api/v1/", include("accounts.urls")),
 
     path("api/v1/me/", MeView.as_view()),
     path("api/v1/sync/", SyncView.as_view()),
@@ -55,6 +57,6 @@ urlpatterns = [
         SpectacularSwaggerView.as_view(url='/api/schema/'),
         name='swagger-ui'
     ),
-
+    
     path("admin/", admin.site.urls),
 ]

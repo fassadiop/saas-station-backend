@@ -3,36 +3,44 @@
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
-
-from stations.models_depotage import Depotage, Cuve, MouvementStock, depotage
-from stations.serializers_depotage.depotage import DepotageSerializer
-from finances_station.models import TransactionStation
-from stations.constants import DepotageStatus
-from stations.permissions import IsStationAdminOrActor
-from accounts.constants import UserRole
+from rest_framework.exceptions import ValidationError
 
 from django.db import transaction
 from django.utils import timezone
-from rest_framework.exceptions import ValidationError
 
-from stations.services.stock import appliquer_stock_depotage
+from dashboard.permissions import IsAdminTenantStation
+from stations.models_depotage import Depotage, Cuve, MouvementStock
+from stations.serializers_depotage.depotage import DepotageSerializer
+from stations.constants import DepotageStatus
+from stations.permissions import IsGerantOrSuperviseur, IsStationAdminOrActor
+
+from finances_station.models import TransactionStation
+from accounts.constants import UserRole
 
 
 class DepotageViewSet(viewsets.ModelViewSet):
     """
     API Dépotage carburant (station)
 
-    - BROUILLON : création / modification
-    - SOUMIS : en attente validation
-    - CONFIRME : verrouillé
+    Workflow :
+    BROUILLON → SOUMIS → CONFIRME → TRANSFERE
     """
 
     serializer_class = DepotageSerializer
-    permission_classes = [IsStationAdminOrActor]
+    permission_classes = [IsGerantOrSuperviseur]
+
+    # ==========================================================
+    # QUERYSET
+    # ==========================================================
 
     def get_queryset(self):
         user = self.request.user
-        qs = Depotage.objects.filter(station__tenant=user.tenant)
+
+        qs = Depotage.objects.select_related(
+            "station",
+            "cuve",
+            "tenant",
+        ).filter(tenant=user.tenant)
 
         if user.role == UserRole.ADMIN_TENANT_STATION:
             station_id = self.request.query_params.get("station_id")
@@ -42,37 +50,53 @@ class DepotageViewSet(viewsets.ModelViewSet):
 
         return qs.filter(station=user.station)
 
+    # ==========================================================
+    # CREATE
+    # ==========================================================
+    def get_permissions(self):
+
+        # 🔹 Lecture → gérant & superviseur
+        if self.action in ["list", "retrieve"]:
+            return [IsGerantOrSuperviseur()]
+
+        # 🔹 Création → gérant & superviseur
+        if self.action == "create":
+            return [IsGerantOrSuperviseur()]
+
+        # 🔹 Transitions métier
+        if self.action in ["soumettre", "confirmer", "transferer"]:
+            return [IsGerantOrSuperviseur()]
+
+        # 🔹 Sécurité par défaut
+        return [IsAdminTenantStation()]
+
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
-    
-    @transaction.atomic
-    def perform_update(self, serializer):
-        depotage = serializer.save()
+        serializer.save(
+            created_by=self.request.user,
+            tenant=self.request.user.tenant,
+            station=self.request.user.station,
+        )
 
-        if depotage.statut == "CONFIRME" and depotage.cuve:
-            cuve = depotage.cuve
-            cuve.stock_actuel += depotage.quantite_livree
-            cuve.save(update_fields=["stock_actuel"])
-
-    # =========================
-    # TRANSITIONS DE STATUT
-    # =========================
+    # ==========================================================
+    # TRANSITIONS
+    # ==========================================================
 
     @action(detail=True, methods=["post"])
     def soumettre(self, request, pk=None):
         depotage = self.get_object()
 
         if depotage.statut != DepotageStatus.BROUILLON:
-            return Response(
-                {"detail": "Seul un dépotage brouillon peut être soumis."},
-                status=status.HTTP_400_BAD_REQUEST,
+            raise ValidationError(
+                "Seul un dépotage brouillon peut être soumis."
             )
 
         depotage.statut = DepotageStatus.SOUMIS
-        depotage.save(update_fields=["statut"])
+        depotage.save(update_fields=["statut", "updated_at"])
 
-        return Response({"detail": "Dépotage soumis."})
-    
+        return Response({"status": "soumis"})
+
+    # ----------------------------------------------------------
+
     @action(detail=True, methods=["post"])
     def confirmer(self, request, pk=None):
         depotage = self.get_object()
@@ -80,107 +104,71 @@ class DepotageViewSet(viewsets.ModelViewSet):
         if depotage.statut != DepotageStatus.SOUMIS:
             raise ValidationError("Dépotage non soumis.")
 
-        with transaction.atomic():
-            try:
-                Cuve.objects.select_for_update().get(
-                    station=depotage.station,
-                    produit=depotage.produit,
-                    actif=True,
-                )
-            except Cuve.DoesNotExist:
-                raise ValidationError(
-                    "Aucune cuve active n’est configurée pour ce produit."
-                )
-
-            depotage.statut = DepotageStatus.CONFIRME
-            depotage.validated_by = request.user
-            depotage.save(update_fields=["statut", "validated_by", "updated_at"])
-
-        return Response({"status": "confirme"})
-
-        # ======================================================
-        # 1️⃣ CONFIRMATION DÉPOTAGE
-        # ======================================================
         depotage.statut = DepotageStatus.CONFIRME
         depotage.validated_by = request.user
         depotage.validated_at = timezone.now()
-        depotage.save
-
-        # ======================================================
-        # 2️⃣ MISE À JOUR STOCK (CUVE)
-        # ======================================================
-        try:
-            cuve = Cuve.objects.select_for_update().get(
-                station=depotage.station,
-                produit=depotage.produit,
-            )
-        except Cuve.DoesNotExist:
-            raise ValidationError(
-                "Aucune cuve n’est configurée pour ce produit sur cette station. "
-                "Veuillez créer la cuve avant de confirmer le dépotage."
-            )
-
-        # Mouvement de stock (ENTRÉE)
-        MouvementStock.objects.create(
-            tenant=depotage.station.tenant,
-            station=depotage.station,
-            cuve=cuve,
-            type_mouvement=MouvementStock.MOUVEMENT_ENTREE,
-            quantite=depotage.quantite_livree,
-            source_type="DEPOTAGE",
-            source_id=depotage.id,
-            date_mouvement=depotage.date_depotage,
+        depotage.save(
+            update_fields=[
+                "statut",
+                "validated_by",
+                "validated_by",
+                "updated_at",
+            ]
         )
 
-        # Mise à jour du stock courant
-        cuve.stock_actuel += depotage.quantite_livree
-        cuve.save(update_fields=["stock_actuel"])
+        return Response({"status": "confirme"})
 
-        # ======================================================
-        # 3️⃣ CALCUL ÉCART DE JAUGE (INFORMATIF)
-        # ======================================================
-        variation_jauge = (
-            depotage.jauge_apres - depotage.jauge_avant
-        )
-
-        depotage.ecart_jauge = (
-            variation_jauge - depotage.quantite_livree
-        )
-        depotage.save(update_fields=["ecart_jauge"])
-
-        # ======================================================
-        # 4️⃣ DÉPENSE FINANCIÈRE OFFICIELLE
-        # ======================================================
-        TransactionStation.objects.create(
-            tenant=depotage.station.tenant,
-            station=depotage.station,
-            date=timezone.now(),  # pour les KPI jour/mois
-            type="DEPENSE",
-            montant=depotage.montant_total,
-            source_type="DEPOTAGE",
-            source_id=depotage.id,
-            ffinance_status="CONFIRMEE",
-            created_by=request.user,
-        )
+    # ----------------------------------------------------------
 
     @action(detail=True, methods=["post"])
     def transferer(self, request, pk=None):
         depotage = self.get_object()
 
-        if depotage.statut != "CONFIRME":
+        if depotage.statut != DepotageStatus.CONFIRME:
             raise ValidationError("Dépotage non confirmé.")
 
-        with transaction.atomic():
-            # 1️⃣ Stock (service métier)
-            cuve = appliquer_stock_depotage(
-                depotage=depotage,
-                user=request.user,
+        if depotage.stock_applique:
+            raise ValidationError("Stock déjà appliqué.")
+
+        if not depotage.cuve:
+            raise ValidationError(
+                "Aucune cuve associée à ce dépotage."
             )
 
-            # 2️⃣ Dépense financière (ALIGNÉE AU MODÈLE RÉEL)
+        with transaction.atomic():
+
+            # 🔐 Lock cuve (anti double écriture concurrente)
+            cuve = Cuve.objects.select_for_update().get(
+                pk=depotage.cuve.pk,
+                tenant=request.user.tenant,
+            )
+
+            # ======================================================
+            # 1️⃣ MOUVEMENT STOCK (ENTRÉE)
+            # ======================================================
+            MouvementStock.objects.create(
+                tenant=cuve.station.tenant,
+                station=cuve.station,
+                cuve=cuve,
+                type_mouvement=MouvementStock.MOUVEMENT_ENTREE,
+                quantite=depotage.quantite_acceptee,
+                source_type="DEPOTAGE",
+                source_id=depotage.id,
+                date_mouvement=timezone.now(),
+            )
+
+            # ======================================================
+            # 2️⃣ MAJ STOCK CUVE
+            # ======================================================
+            cuve.stock_actuel += depotage.quantite_acceptee
+            cuve.save(update_fields=["stock_actuel"])
+
+            # ======================================================
+            # 3️⃣ DÉPENSE FINANCIÈRE
+            # ======================================================
             TransactionStation.objects.create(
-                tenant=depotage.station.tenant,
-                station=depotage.station,
+                tenant=cuve.station.tenant,
+                station=cuve.station,
                 date=timezone.now(),
                 type="DEPENSE",
                 montant=depotage.montant_total,
@@ -189,9 +177,14 @@ class DepotageViewSet(viewsets.ModelViewSet):
                 finance_status="CONFIRMEE",
             )
 
-            # 3️⃣ Statut final
-            depotage.statut = "TRANSFERE"
-            depotage.save(update_fields=["statut"])
+            # ======================================================
+            # 4️⃣ FINALISATION
+            # ======================================================
+            depotage.stock_applique = True
+            depotage.statut = DepotageStatus.TRANSFERE
+            depotage.save(
+                update_fields=["stock_applique", "statut", "updated_at"]
+            )
 
         return Response(
             {

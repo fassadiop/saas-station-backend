@@ -1,4 +1,5 @@
 # accounts/views/personnel_station.py
+
 from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -13,6 +14,14 @@ from accounts.permissions import (
     CanCreateStationPersonnel,
     IsGerantOrAdminTenantStation,
 )
+
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.exceptions import PermissionDenied
+from django.contrib.auth import get_user_model
+
+from accounts.serializers.gerant import GerantSerializer
+
+User = get_user_model()
 
 
 class PersonnelStationViewSet(viewsets.ModelViewSet):
@@ -133,3 +142,34 @@ class PersonnelStationViewSet(viewsets.ModelViewSet):
                 })
 
         serializer.save()
+
+
+class GerantViewSet(ModelViewSet):
+    """
+    CRUD des gérants (ADMIN_TENANT uniquement).
+    """
+
+    serializer_class = GerantSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.role != UserRole.ADMIN_TENANT_STATION:
+            return User.objects.none()
+
+        return User.objects.filter(
+            tenant=user.tenant,
+            role=UserRole.GERANT
+        )
+
+    def perform_create(self, serializer):
+        user = self.request.user
+
+        if user.role != UserRole.ADMIN_TENANT_STATION:
+            raise PermissionDenied("Non autorisé.")
+
+        serializer.save(
+            tenant=user.tenant,
+            role=UserRole.GERANT
+        )

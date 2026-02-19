@@ -1,4 +1,5 @@
 # accounts/constants.py (ou équivalent)
+
 class UserRole:
     SUPERADMIN = "SUPERADMIN"
     ADMIN_TENANT_FINANCE = "ADMIN_TENANT_FINANCE"

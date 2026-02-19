@@ -10,9 +10,12 @@ class DepotageSerializer(serializers.ModelSerializer):
         fields = "__all__"
         read_only_fields = (
             "id",
+            "tenant",
             "station",
             "statut",
             "variation_cuve",
+            "montant_total",
+            "stock_applique",
             "created_by",
             "validated_by",
             "created_at",

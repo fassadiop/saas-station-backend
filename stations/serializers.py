@@ -1,24 +1,20 @@
 from rest_framework import serializers
-from accounts.models import Utilisateur
-
-from .constants import REGIONS_DEPARTEMENTS
 from django.db import transaction
-from django.core.exceptions import ValidationError
 from django.db.models import Q
-from decimal import Decimal
-from rest_framework import serializers
+from django.core.exceptions import ValidationError as DjangoValidationError
+
+from accounts.models import Utilisateur
+from .constants import REGIONS_DEPARTEMENTS
 from .models import (
-    IndexPompe,
-    JustificationDepotage,
-    Pompe,
     Station,
-    VenteCarburant,
-    Local,
-    ContratLocation,
+    Pompe,
+    IndexPompe,
     RelaisEquipe,
+    RelaisProduit,
     FaitStatus,
 )
-from stations.models import ParametrageStation, RelaisEquipe, IndexPompe
+from stations.models_depotage.cuve import Cuve, CuveStatus
+from stations.models_produit import PrixCarburant, ProduitCarburant
 
 # ============================================================
 # GERANT – Serializer interne (création uniquement)
@@ -98,86 +94,228 @@ class StationSerializer(serializers.ModelSerializer):
 
         return attrs
 
-
 # ============================================================
-# VENTES CARBURANT
+# CUVES
 # ============================================================
+class CuveSerializer(serializers.ModelSerializer):
 
-class VenteCarburantSerializer(serializers.ModelSerializer):
+    produit_code = serializers.CharField(
+        source="produit.code",
+        read_only=True
+    )
+
+    en_alerte = serializers.BooleanField(
+        read_only=True
+    )
+
     class Meta:
-        model = VenteCarburant
-        fields = "__all__"
+        model = Cuve
+        fields = (
+            "id",
+            "tenant",
+            "station",
+            "reference",
+            "produit",
+            "produit_code",
+            "capacite_max",
+            "stock_actuel",
+            "seuil_alerte",
+            "statut",
+            "en_alerte",
+            "created_at",
+            "updated_at",
+        )
         read_only_fields = (
             "tenant",
-            "created_by",
-            "status",
-            "soumis_par",
-            "soumis_le",
-            "valide_par",
-            "valide_le",
+            "stock_actuel",
+            "statut",
+            "created_at",
+            "updated_at",
         )
 
-    def update(self, instance, validated_data):
-        if instance.status != FaitStatus.BROUILLON:
+    # ==========================================================
+    # VALIDATION GLOBALE
+    # ==========================================================
+    def validate(self, data):
+
+        request = self.context["request"]
+        user = request.user
+
+        produit = data.get("produit")
+
+        if not produit:
             raise serializers.ValidationError(
-                "Cette vente ne peut plus être modifiée."
+                {"produit": "Produit obligatoire."}
             )
+
+        # 🔒 Produit doit appartenir au tenant
+        if produit.tenant != user.tenant:
+            raise serializers.ValidationError(
+                {"produit": "Produit invalide pour ce tenant."}
+            )
+        
+        station = data.get("station")
+
+        if not station:
+            raise serializers.ValidationError(
+                {"station": "Station obligatoire."}
+            )
+
+        if station.tenant != user.tenant:
+            raise serializers.ValidationError(
+                {"station": "Station invalide pour ce tenant."}
+            )
+
+        # 🔒 Vérifier capacité cohérente
+        capacite = data.get("capacite_max")
+        if capacite is not None and capacite <= 0:
+            raise serializers.ValidationError(
+                {"capacite_max": "La capacité doit être > 0."}
+            )
+
+        return data
+
+    # ==========================================================
+    # CREATE
+    # ==========================================================
+    def create(self, validated_data):
+        request = self.context["request"]
+        user = request.user
+
+        station = validated_data.get("station")
+
+        if not station:
+            raise serializers.ValidationError(
+                {"station": "Station obligatoire."}
+            )
+
+        return Cuve.objects.create(
+            tenant=user.tenant,
+            statut=CuveStatus.STANDBY,
+            stock_actuel=0,
+            **validated_data
+        )
+
+    # ==========================================================
+    # UPDATE
+    # ==========================================================
+    def update(self, instance, validated_data):
+
+        # 🔒 Interdire modification directe du stock
+        if "stock_actuel" in validated_data:
+            raise serializers.ValidationError(
+                {"stock_actuel": "Le stock est géré par les mouvements."}
+            )
+
+        # 🔒 Interdire modification directe du statut
+        if "statut" in validated_data:
+            raise serializers.ValidationError(
+                {"statut": "Utilisez l’action changer_statut."}
+            )
+
         return super().update(instance, validated_data)
+    
+    def validate_reference(self, value):
+        if not value.strip():
+            raise serializers.ValidationError(
+                "La référence est obligatoire."
+            )
+        return value
 
+# ==========================================================
+# PRODUIT CARBURANT
+# ==========================================================
+class ProduitCarburantSerializer(serializers.ModelSerializer):
 
-# ============================================================
-# LOCAUX
-# ============================================================
+    stock_global = serializers.DecimalField(
+        max_digits=14,
+        decimal_places=2,
+        read_only=True
+    )
 
-class LocalSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Local
-        fields = "__all__"
-        read_only_fields = ("tenant",)
+        model = ProduitCarburant
+        fields = (
+            "id",
+            "nom",
+            "code",
+            "seuil_critique_percent",
+            "stock_global",
+            "actif",
+            "created_at",
+        )
+        read_only_fields = ("id", "created_at")
+
+    def validate(self, data):
+        request = self.context["request"]
+        user = request.user
+
+        code = data.get("code")
+
+        if code:
+            exists = ProduitCarburant.objects.filter(
+                tenant=user.tenant,
+                code__iexact=code
+            )
+
+            if self.instance:
+                exists = exists.exclude(id=self.instance.id)
+
+            if exists.exists():
+                raise serializers.ValidationError(
+                    {"code": "Un produit avec ce code existe déjà."}
+                )
+
+        seuil = data.get("seuil_critique_percent")
+        if seuil is not None:
+            if seuil <= 0 or seuil > 100:
+                raise serializers.ValidationError(
+                    {"seuil_critique_percent": "Doit être entre 1 et 100."}
+                )
+
+        return data
+
+    def create(self, validated_data):
+        request = self.context["request"]
+
+        return ProduitCarburant.objects.create(
+            tenant=request.user.tenant,
+            **validated_data
+        )
 
 
 # ============================================================
-# CONTRATS DE LOCATION
-# ============================================================
-
-class ContratLocationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ContratLocation
-        fields = "__all__"
-        read_only_fields = ("tenant",)
-
-
-# ============================================================
-# RELAIS D’ÉQUIPE
+# INEX POMPE
 # ============================================================
 
 class IndexPompeReadSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = IndexPompe
-        fields = [
-            "id",
-            "pompe",
-            "carburant",
-            "face",
-            "index_initial",
-            "index_courant",
-            "actif",
-        ]
-        read_only_fields = fields
 
-
-class IndexPompeWriteSerializer(serializers.ModelSerializer):
-    pompe_type = serializers.CharField(
-        write_only=True,
-        required=False
+    produit_code = serializers.CharField(
+        source="produit.code",
+        read_only=True
     )
 
     class Meta:
         model = IndexPompe
         fields = [
+            "id",
             "pompe",
-            "pompe_type",
-            "carburant",
+            "produit",
+            "produit_code",
+            "face",
+            "index_initial",
+            "index_courant",
+            "actif",
+        ]
+
+
+class IndexPompeWriteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = IndexPompe
+        fields = [
+            "pompe",
+            "produit",
             "face",
             "index_initial",
             "index_courant",
@@ -186,20 +324,32 @@ class IndexPompeWriteSerializer(serializers.ModelSerializer):
 
     def validate(self, data):
         pompe = data["pompe"]
+        produit = data["produit"]
         face = data.get("face", "A")
 
-        # 🔒 RÈGLE MÉTIER CENTRALE
-        if pompe.type_pompe == "MIXTE" and face != "A":
+        # 🔒 1️⃣ Max 2 index par pompe
+        if self.instance is None:  # création
+            if IndexPompe.objects.filter(pompe=pompe).count() >= 2:
+                raise serializers.ValidationError(
+                    "Cette pompe a déjà deux index configurés."
+                )
+
+        # 🔒 2️⃣ Pas de doublon produit + face
+        qs = IndexPompe.objects.filter(
+            pompe=pompe,
+            produit=produit,
+            face=face
+        )
+
+        if self.instance:
+            qs = qs.exclude(pk=self.instance.pk)
+
+        if qs.exists():
             raise serializers.ValidationError(
-                "Les pompes mixtes ne peuvent avoir qu’une seule face (A)."
+                "Un index existe déjà pour ce produit et cette face."
             )
 
         return data
-
-    def update(self, instance, validated_data):
-        validated_data.pop("pompe_type", None)
-        validated_data.pop("face", None)
-        return super().update(instance, validated_data)
 
 # ============================================================
 # POMPE
@@ -220,38 +370,13 @@ class PompeSerializer(serializers.ModelSerializer):
             "station",
             "station_id",
             "reference",
-            "type_pompe",
             "actif",
             "index_pompes",
         ]
         read_only_fields = ["id", "station", "index_pompes"]
 
     def create(self, validated_data):
-        """
-        Création d'une pompe + génération automatique
-        des IndexPompe associés selon le type.
-        """
-        pompe = Pompe.objects.create(**validated_data)
-
-        if pompe.type_pompe == "SIMPLE":
-            IndexPompe.objects.create(
-                pompe=pompe,
-                carburant="ESSENCE",
-                index_initial=0,
-                index_courant=0,
-            )
-
-        elif pompe.type_pompe == "MIXTE":
-            for carburant in ["ESSENCE", "GASOIL"]:
-                IndexPompe.objects.create(
-                    pompe=pompe,
-                    carburant=carburant,
-                    index_initial=0,
-                    index_courant=0,
-                )
-
-        return pompe
-    
+        return Pompe.objects.create(**validated_data)
 
 # ============================================================
 # POMPE ACTIVE
@@ -261,7 +386,7 @@ class IndexPompeActiveSerializer(serializers.ModelSerializer):
         model = IndexPompe
         fields = [
             "id",
-            "carburant",
+            "produit",
             "face",
             "index_courant",
         ]
@@ -287,7 +412,20 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
     volume_total_vendu = serializers.DecimalField(
         max_digits=12, decimal_places=2, read_only=True
     )
+
     volumes_par_carburant = serializers.SerializerMethodField()
+
+    total_theorique = serializers.DecimalField(
+        max_digits=14,
+        decimal_places=2,
+        read_only=True
+    )
+
+    ecart_caisse = serializers.DecimalField(
+        max_digits=14,
+        decimal_places=2,
+        read_only=True
+    )
 
     class Meta:
         model = RelaisEquipe
@@ -306,6 +444,9 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
             "equipe_entrante",
             "status",
             "created_at",
+            "total_theorique",
+            "ecart_caisse",
+
         ]
         read_only_fields = (
             "status",
@@ -355,8 +496,8 @@ class RelaisEquipeListSerializer(serializers.ModelSerializer):
 
 
 class RelaisProduitSerializer(serializers.ModelSerializer):
+
     volume_vendu = serializers.ReadOnlyField()
-    variation_cuve = serializers.ReadOnlyField()
 
     class Meta:
         model = RelaisProduit
@@ -365,17 +506,15 @@ class RelaisProduitSerializer(serializers.ModelSerializer):
             "produit",
             "index_debut",
             "index_fin",
-            "jauge_debut",
-            "jauge_fin",
-            "encaisse_ticket",
             "volume_vendu",
-            "variation_cuve",
         )
+
 
 
 class RelaisEquipeSerializer(serializers.ModelSerializer):
 
     produits = RelaisProduitSerializer(many=True)
+
     total_volume_vendu = serializers.ReadOnlyField()
     total_encaisse = serializers.ReadOnlyField()
 
@@ -388,8 +527,12 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
             "status",
             "created_by",
             "created_at",
+            "stock_applique",
         )
 
+    # ==========================
+    # VALIDATION MÉTIER
+    # ==========================
     def validate(self, data):
 
         user = self.context["request"].user
@@ -402,7 +545,7 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
                 "La fin du relais doit être postérieure au début."
             )
 
-        # 🔒 Vérification chevauchement
+        # 🔒 Anti chevauchement
         if debut and fin:
 
             conflit = RelaisEquipe.objects.filter(
@@ -420,7 +563,7 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
                     "Un relais existe déjà sur cette période."
                 )
 
-        # 🔒 Vérifie produits
+        # 🔒 Produits obligatoires
         produits = self.initial_data.get("produits", [])
 
         if not produits:
@@ -436,6 +579,9 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
 
         return data
 
+    # ==========================
+    # CREATE ATOMIC
+    # ==========================
     def create(self, validated_data):
 
         produits_data = validated_data.pop("produits")
@@ -449,16 +595,15 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
                 station=user.station,
                 tenant=user.tenant,
                 created_by=user,
-                status="BROUILLON",
+                status=FaitStatus.BROUILLON,
             )
 
-            produits_instances = []
+            instances = []
 
             for produit_data in produits_data:
 
                 produit = produit_data["produit"]
 
-                # 🔒 Sécurité multi-tenant
                 if produit.tenant_id != user.tenant_id:
                     raise serializers.ValidationError(
                         "Produit incompatible avec le tenant."
@@ -469,15 +614,16 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
                     **produit_data
                 )
 
-                # 🔒 Validation modèle
                 instance.full_clean()
+                instances.append(instance)
 
-                produits_instances.append(instance)
+            RelaisProduit.objects.bulk_create(instances)
 
-            RelaisProduit.objects.bulk_create(produits_instances)
+        return relais
 
-            return relais
-    
+    # ==========================
+    # UPDATE SÉCURISÉ
+    # ==========================
     def update(self, instance, validated_data):
 
         if instance.stock_applique:
@@ -487,17 +633,12 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
 
         return super().update(instance, validated_data)
     
-    def delete(self, *args, **kwargs):
 
-        if self.stock_applique:
-            raise ValidationError(
-                "Impossible de supprimer un relais dont le stock a été appliqué."
-            )
-
-        super().delete(*args, **kwargs)
-    
-    
 class RelaisEquipeListSerializer(serializers.ModelSerializer):
+
+    total_volume_vendu = serializers.ReadOnlyField()
+    total_encaisse = serializers.ReadOnlyField()
+
     class Meta:
         model = RelaisEquipe
         fields = (
@@ -506,340 +647,34 @@ class RelaisEquipeListSerializer(serializers.ModelSerializer):
             "fin_relais",
             "equipe_sortante",
             "equipe_entrante",
+            "total_volume_vendu",
             "total_encaisse",
-            "volume_essence_vendu",
-            "volume_gasoil_vendu",
             "status",
             "created_at",
         )
 
-class JustificationDepotageSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = JustificationDepotage
-        fields = "__all__"
-        read_only_fields = ("justifie_par", "created_at")
 
+class PrixCarburantSerializer(serializers.ModelSerializer):
 
-class ParametrageStationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ParametrageStation
-        fields = [
-            "prix_essence",
-            "prix_gasoil",
-            "seuil_tolerance",
-        ]
-
-    def validate(self, data):
-        if data.get("prix_essence", 0) <= 0:
-            raise serializers.ValidationError(
-                "Le prix de l’essence doit être supérieur à 0."
-            )
-        if data.get("prix_gasoil", 0) <= 0:
-            raise serializers.ValidationError(
-                "Le prix du gasoil doit être supérieur à 0."
-            )
-        if data.get("seuil_tolerance", 0) < 0:
-            raise serializers.ValidationError(
-                "Le seuil de tolérance ne peut pas être négatif."
-            )
-        return data
-
-class RelaisIndexLigneV2Serializer(serializers.ModelSerializer):
-    class Meta:
-        model = RelaisIndexLigneV2
-        fields = [
-            "index_pompe",
-            "index_debut",
-            "index_fin",
-        ]
-
-    def validate(self, data):
-        if data["index_fin"] < data["index_debut"]:
-            raise serializers.ValidationError(
-                "Index fin inférieur à l’index début."
-            )
-        return data
-
-    
-class RelaisIndexLigneV2Serializer(serializers.ModelSerializer):
-    carburant = serializers.CharField(
-        source="index_pompe.carburant",
-        read_only=True
-    )
-    pompe_reference = serializers.CharField(
-        source="index_pompe.pompe.reference",
+    produit_code = serializers.CharField(
+        source="produit.code",
         read_only=True
     )
 
     class Meta:
-        model = RelaisIndexLigneV2
+        model = PrixCarburant
         fields = [
             "id",
-            "index_pompe",
-            "pompe_reference",
-            "carburant",
-            "index_debut",
-            "index_fin",
-        ]
-
-    def validate(self, data):
-        if data["index_fin"] < data["index_debut"]:
-            raise serializers.ValidationError(
-                "Index fin inférieur à l’index de début."
-            )
-        return data
-
-
-class RelaisIndexV2Serializer(serializers.ModelSerializer):
-    equipe_sortante = serializers.CharField(
-        required=False,
-        allow_blank=True,
-        allow_null=True
-    )
-    # ======================
-    # LIGNES
-    # ======================
-    lignes = RelaisIndexLigneV2Serializer(
-        many=True,
-        write_only=True,
-        required=False
-    )
-
-    lignes_detail = RelaisIndexLigneV2Serializer(
-        source="lignes",
-        many=True,
-        read_only=True
-    )
-
-    # ======================
-    # FINANCIER (CALCULÉ)
-    # ======================
-    total_encaisse = serializers.SerializerMethodField()
-    montant_total_prevu = serializers.SerializerMethodField()
-    ecart_encaissement = serializers.SerializerMethodField()
-    volume_total_vendu = serializers.SerializerMethodField()
-    volumes_par_carburant = serializers.SerializerMethodField()
-
-    class Meta:
-        model = RelaisIndexV2
-        fields = [
-            # identité
-            "id",
             "station",
-
-            # période
-            "debut_relais",
-            "fin_relais",
-
-            # équipes
-            "equipe_sortante",
-            "equipe_entrante",
-
-            # workflow
-            "status",
-
-            # encaissement
-            "encaisse_liquide",
-            "encaisse_carte",
-            "encaisse_ticket",
-            "total_encaisse",
-
-            # index
-            "lignes",          # écriture
-            "lignes_detail",   # lecture
-
-            # financier
-            "total_encaisse",
-            "montant_total_prevu",
-            "ecart_encaissement",
-
-            # volumes
-            "volume_total_vendu",
-            "volumes_par_carburant",
-
-            # meta
-            "created_at",
+            "produit",
+            "produit_code",
+            "prix_unitaire",
+            "date_debut",
+            "date_fin",
+            "actif",
         ]
-
-        read_only_fields = (
-            "station",
-            "status",
-            "created_at",
-            "total_encaisse",
-        )
-
-    # ======================
-    # METHODS
-    # ======================
-    def validate(self, attrs):
-        request = self.context["request"]
-        user = request.user
-        station = user.station
-
-        if not station:
-            raise serializers.ValidationError(
-                "Utilisateur non rattaché à une station."
-            )
-
-        # 🔒 RÈGLE CRITIQUE : un seul relais BROUILLON à la fois
-        relais_brouillon_existe = RelaisIndexV2.objects.filter(
-            station=station,
-            status=RelaisIndexV2.Status.BROUILLON
-        ).exists()
-
-        if relais_brouillon_existe:
-            raise serializers.ValidationError({
-                "detail": (
-                    "Un relais non soumis existe déjà pour cette station. "
-                    "Veuillez le soumettre ou l’annuler avant d’en créer un nouveau."
-                )
-            })
-
-        # 🔍 Dernier relais VALIDÉ (pas brouillon)
-        dernier_relais = (
-            RelaisIndexV2.objects
-            .filter(station=station)
-            .exclude(status=RelaisIndexV2.Status.BROUILLON)
-            .order_by("-fin_relais")
-            .first()
-        )
-
-        # ==========================
-        # ÉQUIPE SORTANTE
-        # ==========================
-        if dernier_relais is None:
-            # 👉 PREMIER RELAIS
-            attrs["equipe_sortante"] = "PREMIER_RELAIS"
-        else:
-            # 👉 RELAIS SUIVANT
-            attrs["equipe_sortante"] = dernier_relais.equipe_entrante
-
-        # ==========================
-        # ÉQUIPE ENTRANTE
-        # ==========================
-        if not attrs.get("equipe_entrante"):
-            raise serializers.ValidationError({
-                "equipe_entrante": "L’équipe entrante est obligatoire."
-            })
-        
-        # ==========================
-        # CONTRÔLE DES LIGNES (UNICITÉ INDEX)
-        # ==========================
-        lignes = attrs.get("lignes", [])
-
-        index_ids = []
-        for ligne in lignes:
-            index_pompe = ligne.get("index_pompe")
-            if index_pompe:
-                index_ids.append(index_pompe.id)
-
-        if len(index_ids) != len(set(index_ids)):
-            raise serializers.ValidationError({
-                "lignes": (
-                    "Un même index de pompe ne peut pas être utilisé "
-                    "plus d’une fois dans un relais."
-                )
-            })
-
-        return attrs
-
-    def create(self, validated_data):
-        lignes_data = validated_data.pop("lignes", [])
-
-        request = self.context["request"]
-        user = request.user
-
-        with transaction.atomic():
-            relais = RelaisIndexV2.objects.create(
-                station=user.station,
-                created_by=user,
-                **validated_data
-            )
-
-            for ligne in lignes_data:
-                RelaisIndexLigneV2.objects.create(
-                    relais=relais,
-                    **ligne
-                )
-
-        # ============================
-        # 2️⃣ CALCUL DU TOTAL PRÉVU
-        # ============================
-
-        parametrage = ParametrageStation.objects.filter(
-            tenant=user.station.tenant
-        ).first()
-
-        if not parametrage:
-            raise serializers.ValidationError(
-                "Paramétrage station manquant."
-            )
-
-        montant_total_prevu = Decimal("0.00")
-
-        for ligne in lignes_data:
-            index_debut = Decimal(str(ligne["index_debut"]))
-            index_fin = Decimal(str(ligne["index_fin"]))
-
-            if index_fin < index_debut:
-                raise serializers.ValidationError(
-                    "Index fin inférieur à l’index début."
-                )
-
-            volume = index_fin - index_debut
-
-            index_pompe = ligne["index_pompe"]  # ✅ déjà une instance
-
-            if index_pompe.pompe.station != user.station:
-                raise serializers.ValidationError(
-                    "Index pompe non autorisé pour cette station."
-                )
-
-            if index_pompe.carburant == "ESSENCE":
-                montant_total_prevu += volume * parametrage.prix_essence
-
-            elif index_pompe.carburant == "GASOIL":
-                montant_total_prevu += volume * parametrage.prix_gasoil
-
-        # ============================
-        # 3️⃣ CALCUL ÉCART & TOLÉRANCE
-        # ============================
-
-        total_encaisse = (
-            relais.encaisse_liquide
-            + relais.encaisse_carte
-            + relais.encaisse_ticket
-        )
-
-        ecart = total_encaisse - montant_total_prevu
-
-        tolerance = (
-            parametrage.seuil_tolerance
-            if parametrage.seuil_tolerance is not None
-            else Decimal("0.00")
-        )
-
-        if abs(ecart) > tolerance:
-            raise serializers.ValidationError({
-                "ecart_encaissement": (
-                    f"Écart hors tolérance ({ecart} FCFA). "
-                    f"Tolérance autorisée : ±{tolerance} FCFA."
-                )
-            })
-
-        return relais
-
-    def get_total_encaisse(self, obj):
-        return obj.total_encaisse
-
-    def get_montant_total_prevu(self, obj):
-        return obj.montant_total_prevu
-
-    def get_ecart_encaissement(self, obj):
-        return obj.ecart_encaissement
-
-    def get_volume_total_vendu(self, obj):
-        return obj.volume_total_vendu
-
-    def get_volumes_par_carburant(self, obj):
-        return obj.volumes_par_carburant
+        read_only_fields = [
+            "date_debut",
+            "date_fin",
+            "actif",
+        ]

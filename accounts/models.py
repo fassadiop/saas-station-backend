@@ -1,3 +1,5 @@
+# accounts/models.py
+
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
@@ -25,31 +27,8 @@ class Utilisateur(AbstractUser):
         related_name="admins"
     )
 
-    ROLE_CHOICES = (
-        ('SuperAdmin', 'SuperAdmin'),
-        ('AdminTenantFinance', 'Administrateur Saas finance'),
-        ('AdminTenantStation', 'Administrateur Saas station'),
-        ('Tresorier', 'Trésorier'),
-
-
-
-        # Station – hiérarchie
-        ('Gerant', 'Chef de station'),
-        ('Superviseur', 'Chef de piste'),
-
-        # Station – opérationnel
-        ('Pompiste', 'Agent de distribution'),
-        ('Caissier', 'Vendeur boutique'),
-        ('PersonnelEntretien', 'Nettoyage'),
-        ('Securite', 'Prévention des risques'),
-
-        # Autres
-        ('Collecteur', 'Collecteur'),
-        ('Lecteur', 'Lecteur'),
-    )
-
     role = models.CharField(
-        max_length=30,
+        max_length=40,
         choices=UserRole.CHOICES,
         default='Lecteur'
     )

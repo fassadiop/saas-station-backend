@@ -79,3 +79,40 @@ class IsStationAdminOrActor(BasePermission):
 
         # Staff station → doit avoir une station
         return user.station is not None
+    
+
+class CanAccessStationStructure(BasePermission):
+    def has_permission(self, request, view):
+        if not request.user.is_authenticated:
+            return False
+
+        return request.user.module in (
+            "station",
+            "admin-tenant-station",
+        )
+
+class IsAdminTenantStation(BasePermission):
+    def has_permission(self, request, view):
+        return (
+            request.user.is_authenticated
+            and request.user.role == "ADMIN_TENANT_STATION"
+        )
+    
+
+class IsGerantOrSuperviseur(BasePermission):
+    """
+    Autorise uniquement :
+    - GERANT
+    - SUPERVISEUR
+    """
+
+    def has_permission(self, request, view):
+        user = request.user
+
+        if not user or not user.is_authenticated:
+            return False
+
+        return user.role in [
+            UserRole.GERANT,
+            UserRole.SUPERVISEUR,
+        ]

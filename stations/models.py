@@ -1,12 +1,18 @@
 # stations/models.py
 
-from datetime import timezone
 from django.db import models
-from tenants.models import Tenant
-from .constants import REGION_CHOICES, RelaisStatus
 from django.conf import settings
 from django.core.exceptions import ValidationError
+from django.utils import timezone
+from stations.models_produit import PrixCarburant
+from tenants.models import Tenant
+from .constants import REGION_CHOICES
+from stations.services.stock import appliquer_stock_relais
 
+
+# ============================================================
+# WORKFLOW STATUS
+# ============================================================
 
 class FaitStatus(models.TextChoices):
     BROUILLON = "BROUILLON", "Brouillon"
@@ -14,6 +20,10 @@ class FaitStatus(models.TextChoices):
     VALIDE = "VALIDE", "Validé"
     TRANSFERE = "TRANSFERE", "Transféré"
 
+
+# ============================================================
+# STATION
+# ============================================================
 
 class Station(models.Model):
     tenant = models.ForeignKey(
@@ -47,13 +57,13 @@ class Station(models.Model):
 
     def __str__(self):
         return self.nom
-    
+
+
+# ============================================================
+# POMPE
+# ============================================================
 
 class Pompe(models.Model):
-    TYPE_POMPE_CHOICES = (
-        ("SIMPLE", "Simple"),
-        ("MIXTE", "Mixte"),
-    )
 
     station = models.ForeignKey(
         Station,
@@ -63,12 +73,7 @@ class Pompe(models.Model):
 
     reference = models.CharField(
         max_length=50,
-        help_text="Référence physique de la pompe (ex: P1, P2, Ilot A)"
-    )
-
-    type_pompe = models.CharField(
-        max_length=10,
-        choices=TYPE_POMPE_CHOICES
+        help_text="Référence physique de la pompe (ex: P1, P2)"
     )
 
     actif = models.BooleanField(default=True)
@@ -80,10 +85,15 @@ class Pompe(models.Model):
         unique_together = ("station", "reference")
 
     def __str__(self):
-        return f"{self.station.code_station} - {self.reference}"
-    
+        return f"{self.station.nom} - {self.reference}"
+
+
+# ============================================================
+# INDEX POMPE (DYNAMIQUE PAR PRODUIT)
+# ============================================================
+
 class IndexPompe(models.Model):
-    
+
     FACE_CHOICES = (
         ("A", "Face A"),
         ("B", "Face B"),
@@ -102,21 +112,18 @@ class IndexPompe(models.Model):
 
     index_initial = models.DecimalField(
         max_digits=12,
-        decimal_places=2,
-        help_text="Index initial du compteur"
+        decimal_places=2
     )
 
     index_courant = models.DecimalField(
         max_digits=12,
-        decimal_places=2,
-        help_text="Dernier index connu"
+        decimal_places=2
     )
 
     face = models.CharField(
         max_length=1,
         choices=FACE_CHOICES,
-        default="A",
-        help_text="Face du compteur (A / B)"
+        default="A"
     )
 
     actif = models.BooleanField(default=True)
@@ -124,89 +131,58 @@ class IndexPompe(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ["pompe", "carburant", "face"]
-
+        ordering = ["pompe", "produit", "face"]
         constraints = [
             models.UniqueConstraint(
-                fields=["pompe", "carburant", "face"],
+                fields=["pompe", "produit", "face"],
                 name="unique_index_par_face",
             )
         ]
 
     def __str__(self):
-        return f"{self.pompe.reference} - {self.carburant}"
+        return f"{self.pompe.reference} - {self.produit.code}"
+    
+    def clean(self):
+
+        # 🔒 Vérifier que le produit appartient au même tenant que la station
+        if self.produit.tenant_id != self.pompe.station.tenant_id:
+            raise ValidationError(
+                "Produit incompatible avec la station."
+            )
+
+        # 🔒 Limite à 2 index maximum par pompe
+        total_index = IndexPompe.objects.filter(
+            pompe=self.pompe
+        ).exclude(pk=self.pk).count()
+
+        if total_index >= 2:
+            raise ValidationError(
+                "Une pompe ne peut avoir plus de 2 index."
+            )
+
+        # 🔒 Limite à 2 produits maximum par pompe
+        produits_existants = set(
+            IndexPompe.objects.filter(
+                pompe=self.pompe
+            )
+            .exclude(pk=self.pk)
+            .values_list("produit_id", flat=True)
+        )
+
+        if self.produit_id not in produits_existants:
+            if len(produits_existants) >= 2:
+                raise ValidationError(
+                    "Une pompe ne peut distribuer plus de 2 produits."
+                )
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
 
 
-class VenteCarburant(models.Model):
-    PRODUIT_CHOICES = (
-        ("Super", "Super"),
-        ("Gasoil", "Gasoil"),
-    )
-
-    tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
-    station = models.ForeignKey(Station, on_delete=models.CASCADE)
-
-    date = models.DateTimeField()
-    produit = models.CharField(max_length=50, choices=PRODUIT_CHOICES)
-    volume = models.DecimalField(max_digits=10, decimal_places=2)
-    prix_unitaire = models.DecimalField(max_digits=10, decimal_places=2)
-
-    # 🔒 Flux métier
-    status = models.CharField(
-        max_length=20,
-        choices=FaitStatus.choices,
-        default=FaitStatus.BROUILLON
-    )
-
-    created_by = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.SET_NULL,
-        null=True,
-        related_name="ventes_creees"
-    )
-    soumis_par = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        null=True, blank=True,
-        on_delete=models.SET_NULL,
-        related_name="ventes_soumises"
-    )
-    valide_par = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        null=True, blank=True,
-        on_delete=models.SET_NULL,
-        related_name="ventes_validees"
-    )
-
-    soumis_le = models.DateTimeField(null=True, blank=True)
-    valide_le = models.DateTimeField(null=True, blank=True)
-
-    class Meta:
-        ordering = ["-date"]
-
-
-class Local(models.Model):
-    tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
-    station = models.ForeignKey(Station, on_delete=models.CASCADE)
-    nom = models.CharField(max_length=100)
-    type_local = models.CharField(max_length=50)  # boutique, lavage, garage…
-    loyer_mensuel = models.DecimalField(max_digits=12, decimal_places=2)
-    occupe = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.nom
-
-
-class ContratLocation(models.Model):
-    tenant = models.ForeignKey(Tenant, on_delete=models.CASCADE)
-    local = models.ForeignKey(Local, on_delete=models.CASCADE)
-    locataire = models.CharField(max_length=150)
-    date_debut = models.DateField()
-    date_fin = models.DateField(null=True, blank=True)
-    actif = models.BooleanField(default=True)
-
-    class Meta:
-        ordering = ["-date_debut"]
-
+# ============================================================
+# RELAIS EQUIPE (MOTEUR OFFICIEL)
+# ============================================================
 
 class RelaisEquipe(models.Model):
 
@@ -215,6 +191,7 @@ class RelaisEquipe(models.Model):
         on_delete=models.CASCADE,
         related_name="relais_equipes"
     )
+
     station = models.ForeignKey(
         Station,
         on_delete=models.CASCADE,
@@ -227,11 +204,15 @@ class RelaisEquipe(models.Model):
     equipe_sortante = models.CharField(max_length=100)
     equipe_entrante = models.CharField(max_length=100)
 
-    # Encaissements généraux
     encaisse_liquide = models.DecimalField(
         max_digits=12, decimal_places=2, default=0
     )
+
     encaisse_carte = models.DecimalField(
+        max_digits=12, decimal_places=2, default=0
+    )
+
+    encaisse_ticket = models.DecimalField(
         max_digits=12, decimal_places=2, default=0
     )
 
@@ -250,6 +231,25 @@ class RelaisEquipe(models.Model):
         related_name="relais_crees"
     )
 
+    soumis_par = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="relais_soumis"
+    )
+
+    valide_par = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="relais_valides"
+    )
+
+    soumis_le = models.DateTimeField(null=True, blank=True)
+    valide_le = models.DateTimeField(null=True, blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -265,36 +265,57 @@ class RelaisEquipe(models.Model):
             raise ValidationError(
                 "La fin du relais doit être postérieure au début."
             )
-        
+
     def changer_statut(self, nouveau_statut, user):
 
-        ancien_statut = self.status
-
         transitions = {
-            RelaisStatus.BROUILLON: [RelaisStatus.SOUMIS],
-            RelaisStatus.SOUMIS: [RelaisStatus.VALIDE],
-            RelaisStatus.VALIDE: [RelaisStatus.TRANSFERE],
-            RelaisStatus.TRANSFERE: [],
+            FaitStatus.BROUILLON: [FaitStatus.SOUMIS],
+            FaitStatus.SOUMIS: [FaitStatus.VALIDE],
+            FaitStatus.VALIDE: [FaitStatus.TRANSFERE],
+            FaitStatus.TRANSFERE: [],
         }
 
         if nouveau_statut not in transitions[self.status]:
-            raise ValidationError(
-                f"Transition invalide : {self.status} → {nouveau_statut}"
-            )
+            raise ValidationError("Transition invalide.")
 
-        # 🔁 TRANSITION MÉTIER
-        if nouveau_statut == RelaisStatus.SOUMIS:
+        ancien_statut = self.status
+
+        if nouveau_statut == FaitStatus.SOUMIS:
             self.soumis_par = user
             self.soumis_le = timezone.now()
 
-        if nouveau_statut == RelaisStatus.VALIDE:
+        if nouveau_statut == FaitStatus.VALIDE:
             self.valide_par = user
             self.valide_le = timezone.now()
 
-        if nouveau_statut == RelaisStatus.TRANSFERE:
+            if not self.produits.exists():
+                raise ValidationError("Aucun produit dans le relais.")
 
-            from stations.services.stock import appliquer_stock_relais
-            from finances_station.models import TransactionStation
+            for produit_relais in self.produits.all():
+
+                prix = PrixCarburant.objects.filter(
+                    tenant=self.tenant,
+                    station=self.station,
+                    produit=produit_relais.produit,
+                    actif=True
+                ).first()
+
+                if not prix:
+                    raise ValidationError(
+                        f"Aucun prix actif défini pour {produit_relais.produit.code}"
+                    )
+
+                produit_relais.prix_unitaire = prix.prix_unitaire
+                produit_relais.montant_theorique = (
+                    produit_relais.volume_vendu * prix.prix_unitaire
+                )
+
+                produit_relais.save(
+                    update_fields=["prix_unitaire", "montant_theorique"],
+                    bypass_lock=True
+                )
+        from finances_station.models import TransactionStation
+        if nouveau_statut == FaitStatus.TRANSFERE:
 
             appliquer_stock_relais(self)
 
@@ -314,9 +335,15 @@ class RelaisEquipe(models.Model):
             self.stock_applique = True
 
         self.status = nouveau_statut
-        self.save()
+        super().save(update_fields=[
+            "status",
+            "soumis_par",
+            "soumis_le",
+            "valide_par",
+            "valide_le",
+            "stock_applique"
+        ])
 
-        # 🔎 AUDIT
         RelaisAudit.objects.create(
             relais=self,
             tenant=self.tenant,
@@ -338,28 +365,37 @@ class RelaisEquipe(models.Model):
             + sum(p.encaisse_ticket for p in self.produits.all())
         )
     
-    def save(self, *args, **kwargs):
+    @property
+    def total_theorique(self):
+        return sum(
+            p.montant_theorique or 0
+            for p in self.produits.all()
+        )
 
+    @property
+    def ecart_caisse(self):
+        return self.total_encaisse - self.total_theorique
+
+    def save(self, *args, **kwargs):
         if self.pk:
             ancien = RelaisEquipe.objects.get(pk=self.pk)
-
-            # 🔒 Interdit toute modification hors BROUILLON
-            if ancien.status != RelaisStatus.BROUILLON:
+            if ancien.status != FaitStatus.BROUILLON:
                 raise ValidationError(
                     "Modification impossible : relais non en brouillon."
                 )
-
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-
-        if self.status != RelaisStatus.BROUILLON:
+        if self.status != FaitStatus.BROUILLON:
             raise ValidationError(
                 "Suppression impossible : relais non en brouillon."
             )
-
         super().delete(*args, **kwargs)
 
+
+# ============================================================
+# RELAIS PRODUIT
+# ============================================================
 
 class RelaisProduit(models.Model):
 
@@ -377,18 +413,18 @@ class RelaisProduit(models.Model):
     index_debut = models.DecimalField(max_digits=12, decimal_places=2)
     index_fin = models.DecimalField(max_digits=12, decimal_places=2)
 
-    jauge_debut = models.DecimalField(
-        max_digits=12, decimal_places=2,
-        null=True, blank=True
-    )
-    jauge_fin = models.DecimalField(
-        max_digits=12, decimal_places=2,
-        null=True, blank=True
+    prix_unitaire = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        null=True,
+        blank=True
     )
 
-    encaisse_ticket = models.DecimalField(
-        max_digits=12, decimal_places=2,
-        default=0
+    montant_theorique = models.DecimalField(
+        max_digits=14,
+        decimal_places=2,
+        null=True,
+        blank=True
     )
 
     class Meta:
@@ -400,32 +436,25 @@ class RelaisProduit(models.Model):
         ]
 
     def clean(self):
-
         if self.index_fin < self.index_debut:
             raise ValidationError(
                 f"Index fin < début pour {self.produit.code}"
             )
-
-        if self.index_debut < 0 or self.index_fin < 0:
-            raise ValidationError(
-                "Les index ne peuvent pas être négatifs."
-            )
-
-        if (
-            self.jauge_debut is not None
-            and self.jauge_fin is not None
-            and self.jauge_fin > self.jauge_debut
-        ):
-            raise ValidationError(
-                f"Jauge fin incohérente pour {self.produit.code}"
-            )
-
         if self.produit.tenant_id != self.relais.tenant_id:
             raise ValidationError(
                 "Produit incompatible avec le tenant."
             )
 
-    def save(self, *args, **kwargs):
+    def save(self, *args, bypass_lock=False, **kwargs):
+
+        # 🔒 Bloquer modification si relais non brouillon
+        if not bypass_lock and self.pk:
+            ancien = RelaisProduit.objects.get(pk=self.pk)
+            if ancien.relais.status != FaitStatus.BROUILLON:
+                raise ValidationError(
+                    "Modification impossible : relais non en brouillon."
+                )
+
         self.full_clean()
         super().save(*args, **kwargs)
 
@@ -433,12 +462,10 @@ class RelaisProduit(models.Model):
     def volume_vendu(self):
         return self.index_fin - self.index_debut
 
-    @property
-    def variation_cuve(self):
-        if self.jauge_debut is None or self.jauge_fin is None:
-            return None
-        return self.jauge_debut - self.jauge_fin
-    
+
+# ============================================================
+# AUDIT
+# ============================================================
 
 class RelaisAudit(models.Model):
 
@@ -477,27 +504,3 @@ class RelaisAudit(models.Model):
             f"{self.relais.id} "
             f"{self.ancien_statut} → {self.nouveau_statut}"
         )
-
-
-
-class JustificationDepotage(models.Model):
-    depotage = models.OneToOneField(
-        "Depotage",
-        on_delete=models.CASCADE,
-        related_name="justification"
-    )
-
-    motif = models.CharField(max_length=255)
-    commentaire = models.TextField(blank=True)
-
-    justifie_par = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.PROTECT
-    )
-
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        verbose_name = "Justification de dépotage"
-        verbose_name_plural = "Justifications de dépotage"
-

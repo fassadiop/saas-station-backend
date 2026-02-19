@@ -1,20 +1,24 @@
 # stations/urls.py
+
+from stations.views_depotage.mouvement_stock import MouvementStockViewSet
+from stations.views_stock import StockGlobalStationView
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
 from .views_depotage.depotage import DepotageViewSet
-from .views_depotage.justification import JustificationDepotageViewSet
 
-from .views_dashboard import StationOperationalDashboardAPIView
 from .dashboard_views import StationRelaisListView
 from .views_operations import StationLastOperationsAPIView
 from accounts.views import PersonnelStationViewSet
 
 from .views import (
+    CuveViewSet,
+    IndexPompeActifListView,
+    IndexPompeViewSet,
+    PompeViewSet,
+    PrixCarburantViewSet,
+    ProduitCarburantViewSet,
     StationViewSet,
-    VenteCarburantViewSet,
-    LocalViewSet,
-    ContratLocationViewSet,
     StationDashboardView,
     RelaisEquipeViewSet,
     AdminTenantStationDashboardAPIView,
@@ -24,14 +28,11 @@ from .views import (
 router = DefaultRouter()
 router.register(r"depotages", DepotageViewSet, basename="depotage")
 router.register(r"stations", StationViewSet, basename="station")
-router.register(r"ventes-carburant", VenteCarburantViewSet, basename="ventes-carburant")
-router.register(r"locaux", LocalViewSet, basename="locaux")
-router.register(r"contrats-location", ContratLocationViewSet, basename="contrats-location")
-
+router.register(r"cuves", CuveViewSet, basename="cuve")
 router.register(
-    "depotages/justifications",
-    JustificationDepotageViewSet,
-    basename="justification-depotage"
+    r"produits-carburant",
+    ProduitCarburantViewSet,
+    basename="produits"
 )
 
 router.register(
@@ -46,22 +47,46 @@ router.register(
     basename="relais-equipes"
 )
 
+router.register(
+    r"prix",
+    PrixCarburantViewSet,
+    basename="prix"
+)
+
+router.register(
+    r"pompes",
+    PompeViewSet,
+    basename="pompes"
+)
+
+router.register(
+    r"index-pompes",
+    IndexPompeViewSet,
+    basename="index-pompes"
+)
+
+router.register(
+    r"mouvements-stock",
+    MouvementStockViewSet,
+    basename="mouvements-stock"
+)
+
 
 urlpatterns = [
+    path("stock/global/", StockGlobalStationView.as_view()),
     path(
         "operations/dernieres/",
         StationLastOperationsAPIView.as_view(),
         name="station-last-operations",
     ),
     path(
+        "index-pompes/actifs/",
+        IndexPompeActifListView.as_view(),
+    ),
+    path(
         "station/relais-equipes/",
         StationRelaisListView.as_view(),
         name="station-relais-list"
-    ),
-    path(
-        "dashboard/operationnel/",
-        StationOperationalDashboardAPIView.as_view(),
-        name="station-dashboard-operationnel",
     ),
     path(
         "dashboard/admin-tenant/",
