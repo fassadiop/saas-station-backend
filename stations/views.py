@@ -1,5 +1,5 @@
 # saas-backend/stations/views.py
-
+    
 from django.db.models import DecimalField as ModelDecimalField
 from rest_framework import status
 from django.core.exceptions import ValidationError as DjangoValidationError
@@ -597,15 +597,20 @@ class RelaisEquipeViewSet(ModelViewSet):
         qs = RelaisEquipe.objects.select_related(
             "station",
             "tenant"
-        ).prefetch_related("produits")
+        ).prefetch_related("indexes")
 
-        if user.is_superuser:
-            return qs.order_by("-created_at")
+        if not user.is_superuser:
+            qs = qs.filter(
+                tenant=user.tenant,
+                station=user.station
+            )
 
-        return qs.filter(
-            tenant=user.tenant,
-            station=user.station
-        ).order_by("-created_at")
+        # ✅ FILTRE STATUS
+        status_param = self.request.query_params.get("status")
+        if status_param:
+            qs = qs.filter(status=status_param)
+
+        return qs.order_by("-created_at")
 
     # ======================
     # CREATE
@@ -675,7 +680,7 @@ class RelaisEquipeViewSet(ModelViewSet):
 
         relais = self.get_object()
 
-        if not self.produits.exists():
+        if not relais.indexes.exists():
             raise ValidationError("Aucun produit dans le relais.")
 
         if request.user.role != UserRole.SUPERVISEUR:
@@ -711,6 +716,74 @@ class RelaisEquipeViewSet(ModelViewSet):
             return Response({"detail": str(e)}, status=400)
 
         return Response({"status": relais.status})
+
+    # ======================
+    # STATS
+    # ======================
+    @action(detail=False, methods=["get"])
+    def stats(self, request):
+        user = request.user
+
+        qs = RelaisEquipe.objects.all()
+
+        if not user.is_superuser:
+            qs = qs.filter(
+                tenant=user.tenant,
+                station=user.station
+            )
+
+        stats = qs.values("status").annotate(
+            total=Count("id")
+        )
+
+        # Initialiser tous les statuts à 0
+        result = {
+            "BROUILLON": 0,
+            "SOUMIS": 0,
+            "VALIDE": 0,
+            "TRANSFERE": 0,
+        }
+
+        for item in stats:
+            result[item["status"]] = item["total"]
+
+        return Response(result)
+    
+    # ======================
+    # NEXT INDEXES
+    # ======================
+    @action(detail=False, methods=["get"], url_path="next-indexes")
+    def next_indexes(self, request):
+
+        user = request.user
+
+        last_relais = (
+            RelaisEquipe.objects
+            .filter(
+                station=user.station,
+                status=FaitStatus.TRANSFERE
+            )
+            .prefetch_related("indexes")
+            .order_by("-fin_relais")
+            .first()
+        )
+
+        if not last_relais:
+            return Response({
+                "indexes": [],
+                "equipe_sortante": None
+            })
+
+        return Response({
+            "indexes": [
+                {
+                    "index_pompe": idx.index_pompe_id,
+                    "dernier_index_fin": idx.index_fin,
+                }
+                for idx in last_relais.indexes.all()
+            ],
+            "equipe_sortante": last_relais.equipe_entrante
+        })
 
 
 class AdminTenantStationDashboardAPIView(APIView):

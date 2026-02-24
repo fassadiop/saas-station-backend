@@ -2,15 +2,16 @@ from rest_framework import serializers
 from django.db import transaction
 from django.db.models import Q
 from django.core.exceptions import ValidationError as DjangoValidationError
+from decimal import Decimal
 
 from accounts.models import Utilisateur
 from .constants import REGIONS_DEPARTEMENTS
 from .models import (
+    RelaisIndex,
     Station,
     Pompe,
     IndexPompe,
     RelaisEquipe,
-    RelaisProduit,
     FaitStatus,
 )
 from stations.models_depotage.cuve import Cuve, CuveStatus
@@ -131,6 +132,7 @@ class CuveSerializer(serializers.ModelSerializer):
             "statut",
             "created_at",
             "updated_at",
+            "reference",
         )
 
     # ==========================================================
@@ -404,79 +406,24 @@ class PompeActiveSerializer(serializers.ModelSerializer):
             "index_pompes",
         ]
 
+
+class RelaisIndexSerializer(serializers.ModelSerializer):
+
+    volume_vendu = serializers.ReadOnlyField()
+
+    class Meta:
+        model = RelaisIndex
+        fields = (
+            "id",
+            "index_pompe",
+            "index_debut",
+            "index_fin",
+            "volume_vendu",
+        )
+
 # ============================================================
 # RELAIS D’ÉQUIPE
 # ============================================================
-
-class RelaisEquipeSerializer(serializers.ModelSerializer):
-    volume_total_vendu = serializers.DecimalField(
-        max_digits=12, decimal_places=2, read_only=True
-    )
-
-    volumes_par_carburant = serializers.SerializerMethodField()
-
-    total_theorique = serializers.DecimalField(
-        max_digits=14,
-        decimal_places=2,
-        read_only=True
-    )
-
-    ecart_caisse = serializers.DecimalField(
-        max_digits=14,
-        decimal_places=2,
-        read_only=True
-    )
-
-    class Meta:
-        model = RelaisEquipe
-        fields = "__all__"
-
-    def get_volumes_par_carburant(self, obj):
-        return obj.volumes_par_carburant
-    
-    class Meta:
-        model = RelaisEquipe
-        fields = [
-            "id",
-            "debut_relais",
-            "fin_relais",
-            "equipe_sortante",
-            "equipe_entrante",
-            "status",
-            "created_at",
-            "total_theorique",
-            "ecart_caisse",
-
-        ]
-        read_only_fields = (
-            "status",
-            "created_at",
-        )
-
-    def validate(self, data):
-        debut = data.get("debut_relais")
-        fin = data.get("fin_relais")
-
-        if debut and fin and fin <= debut:
-            raise serializers.ValidationError(
-                "La fin du relais doit être postérieure au début."
-            )
-        return data
-
-    def create(self, validated_data):
-        request = self.context["request"]
-        user = request.user
-
-        validated_data.update({
-            "station": user.station,
-            "tenant": user.tenant,
-            "created_by": user,
-            "status": "BROUILLON",
-        })
-
-        return RelaisEquipe.objects.create(**validated_data)
-
-    
     
 class RelaisEquipeListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -495,28 +442,12 @@ class RelaisEquipeListSerializer(serializers.ModelSerializer):
         )
 
 
-class RelaisProduitSerializer(serializers.ModelSerializer):
-
-    volume_vendu = serializers.ReadOnlyField()
-
-    class Meta:
-        model = RelaisProduit
-        fields = (
-            "id",
-            "produit",
-            "index_debut",
-            "index_fin",
-            "volume_vendu",
-        )
-
-
-
 class RelaisEquipeSerializer(serializers.ModelSerializer):
 
-    produits = RelaisProduitSerializer(many=True)
+    indexes = RelaisIndexSerializer(many=True)
 
     total_volume_vendu = serializers.ReadOnlyField()
-    total_encaisse = serializers.ReadOnlyField()
+    total_theorique = serializers.ReadOnlyField()
 
     class Meta:
         model = RelaisEquipe
@@ -524,10 +455,14 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
         read_only_fields = (
             "tenant",
             "station",
-            "status",
             "created_by",
+            "status",
             "created_at",
             "stock_applique",
+            "soumis_par",
+            "soumis_le",
+            "valide_par",
+            "valide_le",
         )
 
     # ==========================
@@ -563,63 +498,120 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
                     "Un relais existe déjà sur cette période."
                 )
 
-        # 🔒 Produits obligatoires
-        produits = self.initial_data.get("produits", [])
+        # 🔒 indexes obligatoires
+        indexes = self.initial_data.get("indexes", [])
 
-        if not produits:
+        if not indexes:
             raise serializers.ValidationError(
-                "Un relais doit contenir au moins un produit."
+                "Un relais doit contenir au moins un indexes."
+            )
+        
+        indexes_ids = [p.get("index_pompe") for p in indexes if p.get("index_pompe")]
+
+        if len(indexes_ids) != len(set(indexes_ids)):
+            raise serializers.ValidationError(
+                "Un index ne peut apparaître qu'une seule fois dans un relais."
+            )
+        
+        # 🔒 Blocage si un relais non transféré existe (CREATE uniquement)
+        if not self.instance:
+
+            open_relais = (
+                RelaisEquipe.objects
+                .filter(station=user.station)
+                .exclude(status=FaitStatus.TRANSFERE)
             )
 
-        produits_ids = [p.get("produit") for p in produits]
-        if len(produits_ids) != len(set(produits_ids)):
-            raise serializers.ValidationError(
-                "Un produit ne peut apparaître qu'une seule fois."
+            if open_relais.exists():
+                raise serializers.ValidationError(
+                    "Le relais précédent doit être transféré avant d'en créer un nouveau."
+                )
+
+            # 🔒 Continuité des index avec dernier relais TRANSFERE
+
+            last_relais = (
+                RelaisEquipe.objects
+                .filter(
+                    station=user.station,
+                    status=FaitStatus.TRANSFERE
+                )
+                .order_by("-fin_relais")
+                .first()
             )
+
+            if last_relais:
+
+                last_indexes = {
+                    idx.index_pompe_id: idx.index_fin
+                    for idx in last_relais.indexes.all()
+                }
+
+                for idx in indexes:
+                    pompe_id = idx.get("index_pompe")
+                    index_debut = idx.get("index_debut")
+
+                    if pompe_id in last_indexes:
+
+                        expected = last_indexes[pompe_id]
+
+                        if index_debut is None:
+                            raise serializers.ValidationError(
+                                f"L’index début est obligatoire pour la pompe {pompe_id}."
+                            )
+
+                        if Decimal(str(index_debut)) != expected:
+                            raise serializers.ValidationError(
+                                f"L’index début pour la pompe {pompe_id} "
+                                f"doit être {expected} "
+                                f"(continuité du relais précédent)."
+                            )
+                        
+        # 🔒 Continuité des équipes (CREATE uniquement)
+        if not self.instance and last_relais:
+
+            expected_equipe = last_relais.equipe_entrante
+            equipe_sortante = data.get("equipe_sortante")
+
+            if equipe_sortante != expected_equipe:
+                raise serializers.ValidationError(
+                    f"L’équipe sortante doit être '{expected_equipe}' "
+                    f"(continuité du relais précédent)."
+                )        
 
         return data
 
-    # ==========================
-    # CREATE ATOMIC
-    # ==========================
     def create(self, validated_data):
 
-        produits_data = validated_data.pop("produits")
-
+        indexes_data = validated_data.pop("indexes")
         user = self.context["request"].user
 
         with transaction.atomic():
 
-            relais = RelaisEquipe.objects.create(
-                **validated_data,
-                station=user.station,
-                tenant=user.tenant,
-                created_by=user,
-                status=FaitStatus.BROUILLON,
-            )
+            relais = RelaisEquipe.objects.create(**validated_data)
 
             instances = []
 
-            for produit_data in produits_data:
+            for data in indexes_data:
 
-                produit = produit_data["produit"]
+                index_obj = data["index_pompe"]
 
-                if produit.tenant_id != user.tenant_id:
+                if index_obj.pompe.station_id != user.station_id:
                     raise serializers.ValidationError(
-                        "Produit incompatible avec le tenant."
+                        "Index invalide pour cette station."
                     )
 
-                instance = RelaisProduit(
+                instance = RelaisIndex(
                     relais=relais,
-                    **produit_data
+                    **data
                 )
 
                 instance.full_clean()
                 instances.append(instance)
 
-            RelaisProduit.objects.bulk_create(instances)
+            RelaisIndex.objects.bulk_create(instances)
 
         return relais
+
 
     # ==========================
     # UPDATE SÉCURISÉ

@@ -1,5 +1,6 @@
 # stations/urls.py
 
+from stations.views_dashboard import StationOperationalDashboardAPIView
 from stations.views_depotage.mouvement_stock import MouvementStockViewSet
 from stations.views_stock import StockGlobalStationView
 from django.urls import path, include
@@ -89,9 +90,9 @@ urlpatterns = [
         name="station-relais-list"
     ),
     path(
-        "dashboard/admin-tenant/",
-        AdminTenantStationDashboardView.as_view(),
-        name="dashboard-admin-tenant-station",
+        "dashboard/operationnel/",
+        StationOperationalDashboardAPIView.as_view(),
+        name="station-dashboard-operationnel",
     ),
     path(
         "dashboard/admin-tenant/",

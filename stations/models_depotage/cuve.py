@@ -60,7 +60,7 @@ class Cuve(models.Model):
 
     reference = models.CharField(
         max_length=50,
-        help_text="Identifiant métier (ex: CUV-ESS-01)"
+        editable=False
     )
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -79,6 +79,22 @@ class Cuve(models.Model):
                 name="unique_cuve_reference_per_station",
             ),
         ]
+
+    def save(self, *args, **kwargs):
+
+        if not self.reference:
+            prefix = f"CUVE-{self.produit.code}"
+
+            # Compter cuves existantes pour ce produit dans la station
+            total = Cuve.objects.filter(
+                station=self.station,
+                produit=self.produit
+            ).count()
+
+            numero = total + 1
+            self.reference = f"{prefix}-{numero:02d}"
+
+        super().save(*args, **kwargs)
 
     def changer_statut(self, nouveau_statut):
 

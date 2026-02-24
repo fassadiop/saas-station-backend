@@ -111,7 +111,6 @@ class DepotageViewSet(viewsets.ModelViewSet):
             update_fields=[
                 "statut",
                 "validated_by",
-                "validated_by",
                 "updated_at",
             ]
         )
@@ -122,6 +121,7 @@ class DepotageViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=["post"])
     def transferer(self, request, pk=None):
+
         depotage = self.get_object()
 
         if depotage.statut != DepotageStatus.CONFIRME:
@@ -131,9 +131,13 @@ class DepotageViewSet(viewsets.ModelViewSet):
             raise ValidationError("Stock déjà appliqué.")
 
         if not depotage.cuve:
-            raise ValidationError(
-                "Aucune cuve associée à ce dépotage."
-            )
+            raise ValidationError("Aucune cuve associée.")
+
+        if depotage.quantite_acceptee is None or depotage.quantite_acceptee <= 0:
+            raise ValidationError("Quantité acceptée invalide.")
+
+        if depotage.montant_total is None or depotage.montant_total <= 0:
+            raise ValidationError("Montant total invalide.")
 
         with transaction.atomic():
 

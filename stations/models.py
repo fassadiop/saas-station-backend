@@ -1,13 +1,12 @@
 # stations/models.py
 
-from django.db import models
+from django.db import models, transaction
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.utils import timezone
 from stations.models_produit import PrixCarburant
 from tenants.models import Tenant
 from .constants import REGION_CHOICES
-from stations.services.stock import appliquer_stock_relais
 
 
 # ============================================================
@@ -19,6 +18,7 @@ class FaitStatus(models.TextChoices):
     SOUMIS = "SOUMIS", "Soumis"
     VALIDE = "VALIDE", "Validé"
     TRANSFERE = "TRANSFERE", "Transféré"
+    CONFIRME = "CONFIRME", "Confirmé"
 
 
 # ============================================================
@@ -279,6 +279,7 @@ class RelaisEquipe(models.Model):
             raise ValidationError("Transition invalide.")
 
         ancien_statut = self.status
+        self.status = nouveau_statut
 
         if nouveau_statut == FaitStatus.SOUMIS:
             self.soumis_par = user
@@ -288,61 +289,71 @@ class RelaisEquipe(models.Model):
             self.valide_par = user
             self.valide_le = timezone.now()
 
-            if not self.produits.exists():
+            if not self.indexes.exists():
                 raise ValidationError("Aucun produit dans le relais.")
 
-            for produit_relais in self.produits.all():
+            for relais_index in self.indexes.select_related("index_pompe__produit"):
+
+                produit = relais_index.index_pompe.produit
 
                 prix = PrixCarburant.objects.filter(
                     tenant=self.tenant,
                     station=self.station,
-                    produit=produit_relais.produit,
+                    produit=produit,
                     actif=True
                 ).first()
 
                 if not prix:
                     raise ValidationError(
-                        f"Aucun prix actif défini pour {produit_relais.produit.code}"
+                        f"Aucun prix actif défini pour {produit.code}"
                     )
 
-                produit_relais.prix_unitaire = prix.prix_unitaire
-                produit_relais.montant_theorique = (
-                    produit_relais.volume_vendu * prix.prix_unitaire
+                relais_index.prix_unitaire = prix.prix_unitaire
+                relais_index.montant_theorique = (
+                    relais_index.volume_vendu * prix.prix_unitaire
                 )
 
-                produit_relais.save(
-                    update_fields=["prix_unitaire", "montant_theorique"],
-                    bypass_lock=True
+                relais_index.save(
+                    update_fields=["prix_unitaire", "montant_theorique"]
                 )
+
+
         from finances_station.models import TransactionStation
+
         if nouveau_statut == FaitStatus.TRANSFERE:
 
-            appliquer_stock_relais(self)
+            with transaction.atomic():
 
-            TransactionStation.objects.get_or_create(
-                source_type="RelaisEquipe",
-                source_id=self.id,
-                defaults={
-                    "tenant": self.tenant,
-                    "station": self.station,
-                    "type": "RECETTE",
-                    "montant": self.total_encaisse,
-                    "date": self.fin_relais,
-                    "finance_status": "PROVISOIRE",
-                }
-            )
+                from stations.services.stock import appliquer_stock_relais
+                appliquer_stock_relais(self)
 
-            self.stock_applique = True
+                TransactionStation.objects.get_or_create(
+                    source_type="RelaisEquipe",
+                    source_id=self.id,
+                    defaults={
+                        "tenant": self.tenant,
+                        "station": self.station,
+                        "type": "RECETTE",
+                        "montant": self.total_encaisse,
+                        "date": self.fin_relais,
+                        "finance_status": "PROVISOIRE",
+                    }
+                )
 
-        self.status = nouveau_statut
-        super().save(update_fields=[
-            "status",
-            "soumis_par",
-            "soumis_le",
-            "valide_par",
-            "valide_le",
-            "stock_applique"
-        ])
+                self.stock_applique = True
+                self.status = FaitStatus.TRANSFERE
+                super().save(update_fields=[
+                    "status",
+                    "stock_applique"
+                ])
+        else:
+            super().save(update_fields=[
+                "status",
+                "soumis_par",
+                "soumis_le",
+                "valide_par",
+                "valide_le",
+            ])
 
         RelaisAudit.objects.create(
             relais=self,
@@ -355,26 +366,33 @@ class RelaisEquipe(models.Model):
 
     @property
     def total_volume_vendu(self):
-        return sum(p.volume_vendu for p in self.produits.all())
+        return sum(i.volume_vendu for i in self.indexes.all())
+
+    @property
+    def total_theorique(self):
+        return sum(
+            i.montant_theorique or 0
+            for i in self.indexes.all()
+        )
 
     @property
     def total_encaisse(self):
         return (
-            self.encaisse_liquide
-            + self.encaisse_carte
-            + sum(p.encaisse_ticket for p in self.produits.all())
-        )
-    
-    @property
-    def total_theorique(self):
-        return sum(
-            p.montant_theorique or 0
-            for p in self.produits.all()
+            (self.encaisse_liquide or 0)
+            + (self.encaisse_carte or 0)
+            + (self.encaisse_ticket or 0)
         )
 
     @property
     def ecart_caisse(self):
         return self.total_encaisse - self.total_theorique
+
+    def delete(self, *args, **kwargs):
+        if self.status != FaitStatus.BROUILLON:
+            raise ValidationError(
+                "Suppression impossible : relais non en brouillon."
+            )
+        super().delete(*args, **kwargs)
 
     def save(self, *args, **kwargs):
         if self.pk:
@@ -385,33 +403,30 @@ class RelaisEquipe(models.Model):
                 )
         super().save(*args, **kwargs)
 
-    def delete(self, *args, **kwargs):
-        if self.status != FaitStatus.BROUILLON:
-            raise ValidationError(
-                "Suppression impossible : relais non en brouillon."
-            )
-        super().delete(*args, **kwargs)
+    
 
-
-# ============================================================
-# RELAIS PRODUIT
-# ============================================================
-
-class RelaisProduit(models.Model):
+class RelaisIndex(models.Model):
 
     relais = models.ForeignKey(
         RelaisEquipe,
         on_delete=models.CASCADE,
-        related_name="produits"
+        related_name="indexes"
     )
 
-    produit = models.ForeignKey(
-        "stations.ProduitCarburant",
+    index_pompe = models.ForeignKey(
+        "stations.IndexPompe",
         on_delete=models.PROTECT
     )
 
-    index_debut = models.DecimalField(max_digits=12, decimal_places=2)
-    index_fin = models.DecimalField(max_digits=12, decimal_places=2)
+    index_debut = models.DecimalField(
+        max_digits=12,
+        decimal_places=2
+    )
+
+    index_fin = models.DecimalField(
+        max_digits=12,
+        decimal_places=2
+    )
 
     prix_unitaire = models.DecimalField(
         max_digits=12,
@@ -430,33 +445,10 @@ class RelaisProduit(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields=["relais", "produit"],
-                name="unique_produit_per_relais"
+                fields=["relais", "index_pompe"],
+                name="unique_index_per_relais"
             )
         ]
-
-    def clean(self):
-        if self.index_fin < self.index_debut:
-            raise ValidationError(
-                f"Index fin < début pour {self.produit.code}"
-            )
-        if self.produit.tenant_id != self.relais.tenant_id:
-            raise ValidationError(
-                "Produit incompatible avec le tenant."
-            )
-
-    def save(self, *args, bypass_lock=False, **kwargs):
-
-        # 🔒 Bloquer modification si relais non brouillon
-        if not bypass_lock and self.pk:
-            ancien = RelaisProduit.objects.get(pk=self.pk)
-            if ancien.relais.status != FaitStatus.BROUILLON:
-                raise ValidationError(
-                    "Modification impossible : relais non en brouillon."
-                )
-
-        self.full_clean()
-        super().save(*args, **kwargs)
 
     @property
     def volume_vendu(self):

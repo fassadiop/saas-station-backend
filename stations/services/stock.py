@@ -5,6 +5,7 @@ from django.db import transaction
 from django.db.models import F, Sum
 from rest_framework.exceptions import ValidationError
 
+from stations.models import RelaisEquipe
 from stations.models_depotage.cuve import Cuve, CuveStatus
 from stations.models_depotage.mouvement_stock import MouvementStock
 
@@ -118,16 +119,26 @@ def appliquer_stock_relais(relais):
             "Le stock de ce relais a déjà été appliqué."
         )
 
-    lignes = relais.produits.select_for_update()
+    # 🔁 Nouvelle source des lignes
+    lignes = (
+        relais.indexes
+        .select_related("index_pompe__produit")
+        .select_for_update()
+    )
 
     for ligne in lignes:
 
-        volume_total = ligne.volume_vendu
+        # Volume vendu via les index
+        volume_total = (
+            ligne.index_fin - ligne.index_debut
+        )
 
         if volume_total is None or volume_total <= 0:
             continue
 
         volume_total = Decimal(volume_total)
+
+        produit = ligne.index_pompe.produit
 
         # ============================================
         # 1️⃣ CONTRÔLE STOCK GLOBAL
@@ -135,13 +146,13 @@ def appliquer_stock_relais(relais):
 
         stock_global = get_stock_global_produit(
             station=relais.station,
-            produit=ligne.produit,
+            produit=produit,
         )
 
         if stock_global < volume_total:
             raise ValidationError(
                 f"Stock global insuffisant pour "
-                f"{ligne.produit.code}. "
+                f"{produit.code}. "
                 f"Disponible: {stock_global} | "
                 f"Demandé: {volume_total}"
             )
@@ -152,17 +163,17 @@ def appliquer_stock_relais(relais):
 
         if is_stock_critique(
             station=relais.station,
-            produit=ligne.produit,
+            produit=produit,
             volume_a_deduire=volume_total,
         ):
             raise ValidationError(
                 f"Stock critique atteint pour "
-                f"{ligne.produit.code}. "
+                f"{produit.code}. "
                 f"Relais bloqué."
             )
 
         # ============================================
-        # 3️⃣ DÉDUCTION UNIQUEMENT CUVE ACTIVE
+        # 3️⃣ DÉDUCTION CUVE ACTIVE
         # ============================================
 
         cuve_active = (
@@ -170,7 +181,7 @@ def appliquer_stock_relais(relais):
             .select_for_update()
             .filter(
                 station=relais.station,
-                produit=ligne.produit,
+                produit=produit,
                 statut=CuveStatus.ACTIVE,
             )
             .first()
@@ -179,14 +190,14 @@ def appliquer_stock_relais(relais):
         if not cuve_active:
             raise ValidationError(
                 f"Aucune cuve ACTIVE pour "
-                f"{ligne.produit.code}."
+                f"{produit.code}."
             )
 
         if cuve_active.stock_actuel < volume_total:
             raise ValidationError(
                 f"La cuve active ne contient pas "
                 f"assez de stock pour "
-                f"{ligne.produit.code}. "
+                f"{produit.code}. "
                 f"Stock cuve: {cuve_active.stock_actuel}"
             )
 
@@ -206,8 +217,9 @@ def appliquer_stock_relais(relais):
             date_mouvement=relais.fin_relais,
         )
 
-    relais.stock_applique = True
-    relais.save(update_fields=["stock_applique"])
+    RelaisEquipe.objects.filter(pk=relais.pk).update(
+        stock_applique=True
+    )
 
 
 # ============================================================
