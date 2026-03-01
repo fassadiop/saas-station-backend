@@ -258,7 +258,11 @@ class RelaisEquipe(models.Model):
                 fields=["station", "debut_relais", "fin_relais"],
                 name="idx_station_periode_relais"
             ),
-        ]
+            models.Index(
+                fields=["tenant", "status", "fin_relais"],
+                name="idx_tenant_status_periode"
+            ),
+        ]	
 
     def clean(self):
         if self.fin_relais <= self.debut_relais:
@@ -335,6 +339,7 @@ class RelaisEquipe(models.Model):
                         "station": self.station,
                         "type": "RECETTE",
                         "montant": self.total_encaisse,
+                        "volume": self.total_volume_vendu,
                         "date": self.fin_relais,
                         "finance_status": "PROVISOIRE",
                     }

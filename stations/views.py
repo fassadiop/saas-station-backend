@@ -1,6 +1,17 @@
 # saas-backend/stations/views.py
-    
-from django.db.models import DecimalField as ModelDecimalField
+
+from datetime import datetime
+from calendar import monthrange
+from decimal import Decimal
+
+from django.db import models
+from django.db.models import (
+    Sum,
+    Count,
+    F,
+    Q,
+    DecimalField
+)
 from rest_framework import status
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.db.models import Count, Sum, Q
@@ -10,6 +21,8 @@ from django.utils.timezone import now
 from django.db.models.functions import TruncDate
 from django_filters.rest_framework import DjangoFilterBackend
 
+
+from stations.models import RelaisIndex
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
@@ -37,10 +50,12 @@ from .models import (
     RelaisEquipe,
     FaitStatus,
 )
+from stations.models_objectif import ObjectifStation
 from .serializers import (
     CuveSerializer,
     IndexPompeReadSerializer,
     IndexPompeWriteSerializer,
+    ObjectifStationSerializer,
     PompeActiveSerializer,
     PompeSerializer,
     PrixCarburantSerializer,
@@ -241,13 +256,13 @@ class ProduitCarburantViewSet(ModelViewSet):
                                 CuveStatus.STANDBY,
                             ]
                         ),
-                        output_field=ModelDecimalField(
+                        output_field=DecimalField(
                             max_digits=12,
                             decimal_places=2,
                         ),
                     ),
                     0,
-                    output_field=ModelDecimalField(
+                    output_field=DecimalField(
                         max_digits=12,
                         decimal_places=2,
                     ),
@@ -405,37 +420,6 @@ class IndexPompeViewSet(ModelViewSet):
         if self.action in ["list", "retrieve"]:
             return IndexPompeReadSerializer
         return IndexPompeWriteSerializer
-
-# class IndexPompeActifListView(ListAPIView):
-#     permission_classes = [IsAuthenticated, IsStationAdminOrActor]
-
-#     def get_queryset(self):
-#         user = self.request.user
-
-#         return (
-#             IndexPompe.objects
-#             .filter(
-#                 pompe__station=user.station,
-#                 actif=True
-#             )
-#             .select_related("pompe", "produit")
-#         )
-
-#     def list(self, request, *args, **kwargs):
-#         queryset = self.get_queryset()
-
-#         data = [
-#             {
-#                 "id": idx.id,
-#                 "pompe_reference": idx.pompe.reference,
-#                 "produit_id": idx.produit.id,
-#                 "produit_code": idx.produit.code,
-#                 "index_actuel": idx.index_courant,
-#             }
-#             for idx in queryset
-#         ]
-
-#         return Response(data)
 
 
 class IndexPompeActifListView(ListAPIView):
@@ -786,40 +770,6 @@ class RelaisEquipeViewSet(ModelViewSet):
         })
 
 
-class AdminTenantStationDashboardAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        user = request.user
-
-        # 🔒 Sécurité : uniquement AdminTenantStation
-        if user.role != "ADMIN_TENANT_STATION":
-            return Response(
-                {"detail": "Accès non autorisé."},
-                status=403
-            )
-
-        qs = Station.objects.filter(tenant=user.tenant)
-
-        total_stations = qs.count()
-        active_stations = qs.filter(active=True).count()
-        inactive_stations = qs.filter(active=False).count()
-
-        stations_by_region = (
-            qs.values("region")
-            .annotate(count=Count("id"))
-            .order_by("region")
-        )
-
-        return Response({
-            "totals": {
-                "total": total_stations,
-                "active": active_stations,
-                "inactive": inactive_stations,
-            },
-            "by_region": list(stations_by_region),
-        })
-    
 class AdminTenantStationDashboardView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -829,8 +779,30 @@ class AdminTenantStationDashboardView(APIView):
         if user.role != UserRole.ADMIN_TENANT_STATION:
             return Response({"detail": "Accès interdit"}, status=403)
 
-        start_date = request.query_params.get("startDate")
-        end_date = request.query_params.get("endDate")
+        # ===============================
+        # PARAMÈTRES MENSUELS (OBLIGATOIRES)
+        # ===============================
+
+        annee = request.query_params.get("annee")
+        mois = request.query_params.get("mois")
+
+        if not annee or not mois:
+            return Response(
+                {"detail": "annee et mois sont obligatoires"},
+                status=400
+            )
+
+        annee = int(annee)
+        mois = int(mois)
+
+        last_day = monthrange(annee, mois)[1]
+        start_date = datetime(annee, mois, 1)
+        end_date = datetime(annee, mois, last_day)
+
+        # ===============================
+        # FILTRAGE STATIONS
+        # ===============================
+
         station_id = request.query_params.get("station")
 
         stations_qs = Station.objects.filter(tenant=user.tenant)
@@ -838,24 +810,13 @@ class AdminTenantStationDashboardView(APIView):
         if station_id:
             stations_qs = stations_qs.filter(id=station_id)
 
-        # 🔹 STATS STATIONS
+        # ===============================
+        # STATS STATIONS
+        # ===============================
+
         total_stations = stations_qs.count()
         active_stations = stations_qs.filter(active=True).count()
         inactive_stations = total_stations - active_stations
-
-        # 🔹 TRANSACTIONS
-        transactions = TransactionStation.objects.filter(
-            station__in=stations_qs,
-            date__range=[start_date, end_date],
-        )
-
-        total_recettes = transactions.filter(
-            type="RECETTE"
-        ).aggregate(total=Sum("montant"))["total"] or 0
-
-        total_depenses = transactions.filter(
-            type="DEPENSE"
-        ).aggregate(total=Sum("montant"))["total"] or 0
 
         by_region = (
             stations_qs
@@ -864,17 +825,221 @@ class AdminTenantStationDashboardView(APIView):
             .order_by("region")
         )
 
+        # ===============================
+        # VOLUME RÉSEAU PAR PRODUIT
+        # ===============================
+
+        volume_par_produit_qs = (
+            RelaisIndex.objects
+            .filter(
+                relais__tenant=user.tenant,
+                relais__station__in=stations_qs,
+                relais__status="TRANSFERE",
+                relais__fin_relais__range=[start_date, end_date],
+            )
+            .values("index_pompe__produit__code")
+            .annotate(
+                volume=Coalesce(
+                    Sum(F("index_fin") - F("index_debut")),
+                    Decimal("0")
+                )
+            )
+        )
+
+        volume_par_produit = [
+            {
+                "produit": row["index_pompe__produit__code"],
+                "volume": row["volume"]
+            }
+            for row in volume_par_produit_qs
+        ]
+
+        # ===============================
+        # TRANSACTIONS RÉSEAU
+        # ===============================
+
+        transactions = TransactionStation.objects.filter(
+            tenant=user.tenant,
+            station__in=stations_qs,
+            date__range=[start_date, end_date],
+        )
+
+        recettes = transactions.filter(type="RECETTE")
+
+        totals = transactions.aggregate(
+            total_recettes=Coalesce(
+                Sum("montant", filter=models.Q(type="RECETTE")),
+                Decimal("0")
+            ),
+            total_depenses=Coalesce(
+                Sum("montant", filter=models.Q(type="DEPENSE")),
+                Decimal("0")
+            ),
+            volume_total=Coalesce(
+                Sum("volume", filter=models.Q(type="RECETTE")),
+                Decimal("0")
+            ),
+        )
+
+        # ===============================
+        # OBJECTIFS (UNE SEULE REQUÊTE)
+        # ===============================
+
+        objectifs_qs = (
+            ObjectifStation.objects
+            .filter(
+                tenant=user.tenant,
+                annee=annee,
+                mois=mois,
+                station__in=stations_qs
+            )
+            .values(
+                "station_id",
+                "produit_id",
+                "volume_cible",
+                "ca_cible"
+            )
+        )
+
+        # Indexation rapide
+        objectifs_dict = {}
+        volume_cible_par_station = {}
+        ca_cible_par_station = {}
+
+        for o in objectifs_qs:
+            key = (o["station_id"], o["produit_id"])
+            objectifs_dict[key] = o["volume_cible"]
+
+            volume_cible_par_station.setdefault(o["station_id"], Decimal("0"))
+            volume_cible_par_station[o["station_id"]] += o["volume_cible"]
+
+            ca_cible_par_station.setdefault(o["station_id"], Decimal("0"))
+            ca_cible_par_station[o["station_id"]] += o["ca_cible"]
+
+        # ===============================
+        # VOLUME RÉEL PAR STATION
+        # ===============================
+
+        volume_reel_qs = (
+            RelaisIndex.objects
+            .filter(
+                relais__tenant=user.tenant,
+                relais__station__in=stations_qs,
+                relais__status="TRANSFERE",
+                relais__fin_relais__range=[start_date, end_date],
+            )
+            .values("relais__station_id")
+            .annotate(
+                volume_reel=Coalesce(
+                    Sum(F("index_fin") - F("index_debut")),
+                    Decimal("0")
+                )
+            )
+        )
+
+        volume_reel_dict = {
+            row["relais__station_id"]: row["volume_reel"]
+            for row in volume_reel_qs
+        }
+
+        # ===============================
+        # CA RÉEL PAR STATION
+        # ===============================
+
+        ca_reel_qs = (
+            recettes
+            .values("station_id")
+            .annotate(
+                ca_total_reel=Coalesce(
+                    Sum("montant"),
+                    Decimal("0")
+                )
+            )
+        )
+
+        ca_reel_dict = {
+            row["station_id"]: row["ca_total_reel"]
+            for row in ca_reel_qs
+        }
+
+        # ===============================
+        # CALCUL PERFORMANCE STATION
+        # ===============================
+
+        stations_resume = []
+
+        for station in stations_qs:
+            sid = station.id
+
+            volume_reel = volume_reel_dict.get(sid, Decimal("0"))
+            volume_cible = volume_cible_par_station.get(sid, Decimal("0"))
+
+            if volume_cible > 0:
+                perf_volume = (volume_reel / volume_cible) * Decimal("100")
+            else:
+                perf_volume = Decimal("0")
+
+            ca_reel = ca_reel_dict.get(sid, Decimal("0"))
+            ca_cible = ca_cible_par_station.get(sid, Decimal("0"))
+
+            if ca_cible > 0:
+                perf_ca = (ca_reel / ca_cible) * Decimal("100")
+            else:
+                perf_ca = Decimal("0")
+
+            weight_volume = Decimal("0.5")
+            weight_ca = Decimal("0.5")
+
+            score_global = (
+                (perf_volume * weight_volume)
+                + (perf_ca * weight_ca)
+            )
+
+            stations_resume.append({
+                "station_id": sid,
+                "station_nom": station.nom,
+                "volume_total_reel": volume_reel,
+                "volume_total_cible": volume_cible,
+                "performance_volume_percent": round(perf_volume, 2),
+                "ca_total_reel": ca_reel,
+                "ca_total_cible": ca_cible,
+                "performance_ca_percent": round(perf_ca, 2),
+                "score_global": round(score_global, 2),
+            })
+
+        stations_resume_sorted = sorted(
+            stations_resume,
+            key=lambda x: x["score_global"],
+            reverse=True
+        )
+
+        top_5 = stations_resume_sorted[:5]
+        bottom_5 = stations_resume_sorted[-5:]
+
+        stations_avec_transactions = recettes.values_list(
+            "station_id", flat=True
+        ).distinct()
+
+        stations_sans_activite = stations_qs.exclude(
+            id__in=stations_avec_transactions
+        ).values("id", "nom")
+
         return Response({
             "totals": {
                 "total": total_stations,
                 "active": active_stations,
                 "inactive": inactive_stations,
+                "total_recettes": totals["total_recettes"],
+                "total_depenses": totals["total_depenses"],
+                "solde": totals["total_recettes"] - totals["total_depenses"],
+                "volume_total": totals["volume_total"],
             },
+            "volume_par_produit": volume_par_produit,
+            "stations_resume": stations_resume,
+            "top_5": top_5,
+            "bottom_5": bottom_5,
+            "stations_sans_activite": list(stations_sans_activite),
             "by_region": list(by_region),
-            "total_recettes": total_recettes,
-            "total_depenses": total_depenses,
-            "solde": total_recettes - total_depenses,
-            "top_services": [],
         })
 
 class StockGlobalProduitAPIView(APIView):
@@ -955,3 +1120,38 @@ class PrixCarburantViewSet(ModelViewSet):
         )
 
         instance.activer()
+
+
+class ObjectifStationViewSet(ModelViewSet):
+    queryset = ObjectifStation.objects.all()
+    serializer_class = ObjectifStationSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        qs = ObjectifStation.objects.filter(
+            tenant=user.tenant
+        ).order_by("produit__code")
+
+        station = self.request.query_params.get("station")
+        annee = self.request.query_params.get("annee")
+        mois = self.request.query_params.get("mois")
+
+        print("ANNEE:", annee, type(annee))
+        print("MOIS:", mois, type(mois))
+
+        if station:
+            qs = qs.filter(station_id=station)
+
+        if annee:
+            qs = qs.filter(annee=annee)
+
+        if mois:
+            qs = qs.filter(mois=mois)
+
+        return qs
+
+    def perform_create(self, serializer):
+        serializer.save(
+            tenant=self.request.user.tenant
+        )

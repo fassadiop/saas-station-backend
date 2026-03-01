@@ -5,6 +5,7 @@ from django.core.exceptions import ValidationError as DjangoValidationError
 from decimal import Decimal
 
 from accounts.models import Utilisateur
+from stations.models_objectif import ObjectifStation
 from .constants import REGIONS_DEPARTEMENTS
 from .models import (
     RelaisIndex,
@@ -670,3 +671,51 @@ class PrixCarburantSerializer(serializers.ModelSerializer):
             "date_fin",
             "actif",
         ]
+
+
+class ObjectifStationSerializer(serializers.ModelSerializer):
+
+    station_nom = serializers.CharField(
+        source="station.nom",
+        read_only=True
+    )
+
+    produit_code = serializers.CharField(
+        source="produit.code",
+        read_only=True
+    )
+
+    class Meta:
+        model = ObjectifStation
+        fields = [
+            "id",
+            "tenant",
+            "station",
+            "station_nom",
+            "produit",
+            "produit_code",
+            "annee",
+            "mois",
+            "volume_cible",
+            "ca_cible",
+            "created_at",
+        ]
+        read_only_fields = ["tenant", "created_at"]
+
+    def validate(self, data):
+        tenant = self.context["request"].user.tenant
+
+        exists = ObjectifStation.objects.filter(
+            tenant=tenant,
+            station=data["station"],
+            produit=data["produit"],
+            annee=data["annee"],
+            mois=data["mois"],
+        ).exists()
+
+        if exists and self.instance is None:
+            raise serializers.ValidationError(
+                "Objectif déjà défini pour cette période."
+            )
+
+        return data

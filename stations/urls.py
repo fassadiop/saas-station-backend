@@ -16,13 +16,13 @@ from .views import (
     CuveViewSet,
     IndexPompeActifListView,
     IndexPompeViewSet,
+    ObjectifStationViewSet,
     PompeViewSet,
     PrixCarburantViewSet,
     ProduitCarburantViewSet,
     StationViewSet,
     StationDashboardView,
     RelaisEquipeViewSet,
-    AdminTenantStationDashboardAPIView,
     AdminTenantStationDashboardView,
 )
 
@@ -72,6 +72,12 @@ router.register(
     basename="mouvements-stock"
 )
 
+router.register(
+    r"objectifs",
+    ObjectifStationViewSet,
+    basename="objectifs-station"
+)
+
 
 urlpatterns = [
     path("stock/global/", StockGlobalStationView.as_view()),
@@ -96,7 +102,7 @@ urlpatterns = [
     ),
     path(
         "dashboard/admin-tenant/",
-        AdminTenantStationDashboardAPIView.as_view(),
+        AdminTenantStationDashboardView.as_view(),
         name="admin-tenant-station-dashboard",
     ),  
     path("dashboard/", StationDashboardView.as_view(), name="station-dashboard"),

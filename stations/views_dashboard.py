@@ -3,6 +3,8 @@
 from django.db.models import Sum, F
 from django.utils.timezone import localdate
 from django.utils import timezone
+from calendar import monthrange
+from datetime import datetime
 
 from dashboard.permissions import CanAccessStationOperationalDashboard
 from finances_station.models import TransactionStation
@@ -54,48 +56,83 @@ class StationOperationalDashboardAPIView(APIView):
         else:
             station = user.station
 
+        # ======================================================
+        # 📅 PARAMÈTRES PÉRIODE (SANS CASSER L’EXISTANT)
+        # ======================================================
+
+        annee = request.query_params.get("annee")
+        mois = request.query_params.get("mois")
+
         today = timezone.localdate()
-        first_day_month = today.replace(day=1)
-        start_30j = today - timedelta(days=30)
+
+        if annee and mois:
+            annee = int(annee)
+            mois = int(mois)
+        else:
+            annee = today.year
+            mois = today.month
+
+        from calendar import monthrange
+        from datetime import datetime
+
+        last_day = monthrange(annee, mois)[1]
+
+        start_date = timezone.make_aware(
+            datetime(annee, mois, 1),
+            timezone.get_current_timezone()
+        )
+
+        end_date = timezone.make_aware(
+            datetime(annee, mois, last_day, 23, 59, 59),
+            timezone.get_current_timezone()
+        )
+
+        start_30j = timezone.now() - timedelta(days=30)
 
         # ======================================================
-        # 1️⃣ FINANCES (SOURCE DE VÉRITÉ = CONFIRMEE)
+        # 1️⃣ FINANCES
         # ======================================================
+
         finances_qs = TransactionStation.objects.filter(
             tenant=tenant,
             station=station,
             finance_status="CONFIRMEE"
         )
 
-        recettes_today = finances_qs.filter(
-            type="RECETTE",
-            date__date=today
-        ).aggregate(total=Sum("montant"))["total"] or 0
+        # 🔹 Recettes du jour (seulement si mois courant)
+        if annee == today.year and mois == today.month:
+            recettes_today = finances_qs.filter(
+                type="RECETTE",
+                date__date=today
+            ).aggregate(total=Sum("montant"))["total"] or 0
+        else:
+            recettes_today = 0
 
+        # 🔹 Recettes du mois sélectionné
         recettes_month = finances_qs.filter(
             type="RECETTE",
-            date__date__gte=first_day_month
+            date__range=[start_date, end_date]
         ).aggregate(total=Sum("montant"))["total"] or 0
 
+        # 🔹 Dépenses du mois sélectionné
         depenses_month = finances_qs.filter(
             type="DEPENSE",
-            date__date__gte=first_day_month
+            date__range=[start_date, end_date]
         ).aggregate(total=Sum("montant"))["total"] or 0
 
         # ======================================================
-        # 2️⃣ RELAIS TRANSFÉRÉS DU JOUR
+        # 2️⃣ RELAIS (PÉRIODE SÉLECTIONNÉE)
         # ======================================================
+
         relais_qs = RelaisEquipe.objects.filter(
             tenant=tenant,
-            debut_relais__date=today
+            station=station,
+            debut_relais__range=[start_date, end_date]
         )
 
         if user.role == UserRole.GERANT:
             relais_qs = relais_qs.filter(
-                status__in=[
-                    FaitStatus.CONFIRME,
-                    FaitStatus.TRANSFERE
-                ]
+                status__in=[FaitStatus.CONFIRME, FaitStatus.TRANSFERE]
             )
         else:
             relais_qs = relais_qs.filter(
@@ -106,16 +143,17 @@ class StationOperationalDashboardAPIView(APIView):
             "relais_effectues": relais_qs.count(),
             "total_encaisse": (
                 relais_qs.aggregate(
-                    total=Sum("encaisse_liquide") +
-                          Sum("encaisse_carte") +
-                          Sum("encaisse_ticket")
+                    total=Sum("encaisse_liquide")
+                        + Sum("encaisse_carte")
+                        + Sum("encaisse_ticket")
                 )["total"] or 0
             )
         }
 
         # ======================================================
-        # 3️⃣ ALERTES OPÉRATIONNELLES
+        # 3️⃣ ALERTES
         # ======================================================
+
         alerts = {
             "relais_en_attente": RelaisEquipe.objects.filter(
                 tenant=tenant,
@@ -127,32 +165,36 @@ class StationOperationalDashboardAPIView(APIView):
         # ======================================================
         # 4️⃣ DÉPOTAGE
         # ======================================================
+
         depotages_qs = Depotage.objects.filter(
             station=station
         )
 
-        depotage_volume_today = (
-            depotages_qs.filter(date_depotage__date=today)
-            .aggregate(total=Sum("quantite_livree"))["total"] or 0
-        )
+        # 🔹 Volume du jour (si mois courant)
+        if annee == today.year and mois == today.month:
+            depotage_volume_today = (
+                depotages_qs.filter(date_depotage__date=today)
+                .aggregate(total=Sum("quantite_livree"))["total"] or 0
+            )
+        else:
+            depotage_volume_today = 0
 
+        # 🔹 Volume du mois
         depotage_volume_month = (
-            depotages_qs.filter(date_depotage__date__gte=first_day_month)
+            depotages_qs.filter(date_depotage__range=[start_date, end_date])
             .aggregate(total=Sum("quantite_livree"))["total"] or 0
         )
 
         # ======================================================
-        # 5️⃣ AUTONOMIE BASÉE SUR CONSOMMATION RÉELLE
+        # 5️⃣ AUTONOMIE (30 JOURS GLISSANTS)
         # ======================================================
+
         from stations.models import RelaisIndex
 
         autonomie = {}
 
         for produit_code in ["ESSENCE", "GASOIL"]:
 
-            # =========================
-            # 1️⃣ Stock actuel
-            # =========================
             stock_cuve = Cuve.objects.filter(
                 station=station,
                 produit__code=produit_code
@@ -160,9 +202,6 @@ class StationOperationalDashboardAPIView(APIView):
 
             stock_actuel = stock_cuve.stock_actuel if stock_cuve else 0
 
-            # =========================
-            # 2️⃣ Consommation 30 jours
-            # =========================
             consommation_30j = (
                 RelaisIndex.objects.filter(
                     relais__station=station,
@@ -170,14 +209,10 @@ class StationOperationalDashboardAPIView(APIView):
                     relais__fin_relais__date__gte=start_30j,
                     index_pompe__produit__code=produit_code
                 )
-                .aggregate(
-                    total=Sum(F("index_fin") - F("index_debut"))
-                )["total"] or 0
+                .aggregate(total=Sum(F("index_fin") - F("index_debut")))
+                ["total"] or 0
             )
 
-            # =========================
-            # 3️⃣ Calcul autonomie
-            # =========================
             conso_jour = consommation_30j / 30 if consommation_30j > 0 else 0
 
             jours_autonomie = (
@@ -194,6 +229,7 @@ class StationOperationalDashboardAPIView(APIView):
         # ======================================================
         # 🔹 RÉPONSE
         # ======================================================
+
         return Response({
             "jour": {
                 "recettes": recettes_today,

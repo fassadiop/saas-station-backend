@@ -30,6 +30,14 @@ class TransactionStation(models.Model):
     source_id = models.PositiveIntegerField()
 
     montant = models.DecimalField(max_digits=12, decimal_places=2)
+
+    volume = models.DecimalField(
+        max_digits=14,
+        decimal_places=2,
+        null=True,
+        blank=True
+    )
+    
     date = models.DateTimeField()
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -37,6 +45,10 @@ class TransactionStation(models.Model):
     class Meta:
         unique_together = ("source_type", "source_id")
         ordering = ["-date"]
+        indexes = [
+            models.Index(fields=["tenant", "date", "type"]),
+            models.Index(fields=["tenant", "station"]),
+        ]
 
     def __str__(self):
         return f"{self.type} - {self.montant} ({self.station})"

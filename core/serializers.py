@@ -15,11 +15,30 @@ User = get_user_model()
 # -----------------------
 # Me serializer
 # -----------------------
+# class MeSerializer(serializers.ModelSerializer):
+#     """
+#     Serializer léger pour l'endpoint /auth/me/ (ou /api/v1/me/).
+#     Expose is_superuser/is_staff et les infos de base utilisées par le front.
+#     """
+#     class Meta:
+#         model = Utilisateur
+#         fields = (
+#             "id",
+#             "username",
+#             "email",
+#             "first_name",
+#             "last_name",
+#             "is_superuser",
+#             "is_staff",
+#             "role", 
+#             "module",
+#             "tenant",
+#         )
 class MeSerializer(serializers.ModelSerializer):
-    """
-    Serializer léger pour l'endpoint /auth/me/ (ou /api/v1/me/).
-    Expose is_superuser/is_staff et les infos de base utilisées par le front.
-    """
+
+    station = serializers.SerializerMethodField()
+    tenant_id = serializers.UUIDField(source="tenant.id", read_only=True)
+
     class Meta:
         model = Utilisateur
         fields = (
@@ -30,10 +49,20 @@ class MeSerializer(serializers.ModelSerializer):
             "last_name",
             "is_superuser",
             "is_staff",
-            "role", 
+            "role",
             "module",
             "tenant",
+            "tenant_id",
+            "station",   # 👈 AJOUT
         )
+
+    def get_station(self, obj):
+        if obj.station:
+            return {
+                "id": obj.station.id,
+                "nom": obj.station.nom,
+            }
+        return None
 
 
 # -----------------------
