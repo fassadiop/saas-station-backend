@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <style>
+
+        @page {
+            size: A4 portrait;
+            margin: 10mm;
+        }
+
+        body{
+            font-family: Arial, sans-serif;
+            font-size:11px;
+            color:#1e293b;
+            line-height:1.2;
+        }
+
+        .header{
+            background:#0B3C91;
+            color:white;
+            padding:5px;
+            border-radius:5px;
+            margin-bottom:10px;
+        }
+
+        .header h1{
+            margin:0;
+            font-size:24px;
+            text-align: center;
+        }
+
+        .header h2{
+            margin-top:5px;
+            font-size:14px;
+            font-weight:bold;
+            text-align:left;
+        }
+
+        .section-title{
+            background:#f1f5f9;
+            color:#0B3C91;
+            padding:10px;
+            margin-top:10px;
+            margin-bottom:5px;
+            border-left:5px solid #0B3C91;
+            font-size:14px;
+            font-weight:bold;
+        }
+
+        table{
+            width:100%;
+            border-collapse:collapse;
+            margin-top:10px;
+        }
+
+        th{
+            background:#0B3C91;
+            color:white;
+            font-weight:bold;
+            padding:8px;
+            border:1px solid #dbe2ea;
+        }
+
+        td{
+            border:1px solid #dbe2ea;
+            padding:7px;
+        }
+
+        tr:nth-child(even){
+            background:#f8fafc;
+        }
+
+        .info-table td{
+            width:25%;
+        }
+
+        .kpi{
+            width:100%;
+            margin-top:15px;
+        }
+
+        .kpi td{
+            text-align:center;
+            padding:12px;
+        }
+
+        .kpi-value{
+            font-size:16px;
+            font-weight:bold;
+            color:#0B3C91;
+        }
+
+        .total-row{
+            background:#e2e8f0 !important;
+            font-weight:bold;
+        }
+
+        .manque{
+            color:#dc2626;
+            font-weight:bold;
+        }
+
+        .excedent{
+            color:#16a34a;
+            font-weight:bold;
+        }
+
+        .signature-table td{
+            height:100px;
+            vertical-align:bottom;
+            text-align:center;
+        }
+
+        .footer{
+            margin-top:30px;
+            text-align:center;
+            font-size:10px;
+            color:#64748b;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+
+        <h2>{{ data.meta.tenant }}</h2>
+
+        <h2>
+            Station {{ data.meta.station }}
+        </h2>
+
+        <h1>
+            Fiche de clôture de relais N°{{ data.meta.relais_id }}
+        </h1>
+
+    </div>
+
+    <table>
+
+        <tr>
+            <td><strong>Réseau</strong></td>
+            <td>{{ data.meta.tenant }}</td>
+
+            <td><strong>Station</strong></td>
+            <td>{{ data.meta.station }}</td>
+        </tr>
+
+        <tr>
+            <td><strong>Relais</strong></td>
+            <td>#{{ data.meta.relais_id }}</td>
+
+            <td><strong>Statut</strong></td>
+            <td>{{ data.meta.statut }}</td>
+        </tr>
+
+        <tr>
+            <td><strong>Responsable sortant</strong></td>
+            <td>{{ data.equipes.sortante }}</td>
+
+            <td><strong>Responsable entrant</strong></td>
+            <td>{{ data.equipes.entrante }}</td>
+        </tr>
+
+        <tr>
+            <td><strong>Début du relais</strong></td>
+            <td>{{ data.meta.date_debut }}</td>
+
+            <td><strong>Fin du relais</strong></td>
+            <td>{{ data.meta.date_fin }}</td>
+        </tr>
+
+    </table>
+
+    <div class="section-title">
+        Index des pompes
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Îlot</th>
+                <th>Pompe</th>
+                <th>Produit</th>
+                <th>Face</th>
+                <th>Début</th>
+                <th>Fin</th>
+                <th>Volume</th>
+                <th>Prix</th>
+                <th>Montant</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for item in data.indexes %}
+
+            <tr>
+
+                <td>{{ item.ilot }}</td>
+
+                <td>{{ item.pompe }}</td>
+
+                <td>{{ item.produit }}</td>
+
+                <td>{{ item.face }}</td>
+
+                <td>{{ item.index_debut }}</td>
+
+                <td>{{ item.index_fin }}</td>
+
+                <td>{{ item.volume }}</td>
+
+                <td>{{ item.prix_unitaire }}</td>
+
+                <td>{{ item.montant_theorique }}</td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+
+{% if data.credits.details %}
+
+<div class="section-title">
+    Crédits accordés
+</div>
+
+<table>
+
+    <thead>
+        <tr>
+            <th>Produit</th>
+            <th>Volume</th>
+            <th>Montant</th>
+            <th>Statut</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    {% for credit in data.credits.details %}
+
+        <tr>
+
+            <td>{{ credit.produit }}</td>
+
+            <td>{{ credit.volume }}</td>
+
+            <td>{{ credit.montant }}</td>
+
+            <td>{{ credit.statut }}</td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endif %}
+
+{% if data.encaissements.par_mode %}
+
+<div class="section-title">
+    Encaissements par mode de paiement
+</div>
+
+<table>
+
+    <tbody>
+
+    {% for item in data.encaissements.par_mode %}
+
+        <tr>
+
+            <td>
+                {{ item.mode }}
+            </td>
+
+            <td>
+                {{ item.montant }}
+            </td>
+
+            <td>
+                {{ item.pourcentage }} %
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    <tr class="total-row">
+        <td>
+            <strong>TOTAL</strong>
+        </td>
+
+        <td>
+            <strong>
+                {{ data.encaissements.total }}
+            </strong>
+        </td>
+
+        <td>
+            <strong>100 %</strong>
+        </td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+{% endif %}
+
+    <div class="section-title">
+        Résumé du relais
+    </div>
+
+    <table class="kpi">
+
+        <tr>
+            <td>
+                <div>Volume vendu</div>
+                <div class="kpi-value">
+                    {{ data.resume.volume_vendu }}
+                </div>
+            </td>
+
+            <td>
+                <div>Vente théorique</div>
+                <div class="kpi-value">
+                    {{ data.resume.vente_theorique }}
+                </div>
+            </td>
+
+            <td>
+                <div>Encaissements</div>
+                <div class="kpi-value">
+                    {{ data.resume.encaissements }}
+                </div>
+            </td>
+
+            <td>
+                <div>Ecarts</div>
+                <div class="kpi-value">
+                    {{ data.synthese.manques }}
+                </div>
+            </td>
+
+            <td>
+                <div>Crédit</div>
+                <div class="kpi-value">
+                    {{ data.credits.montant_total }}
+                </div>
+            </td>
+        </tr>
+
+    </table>
+
+    <div class="section-title">
+        Validation et signatures
+    </div>
+
+    <table class="signature-table">
+
+        <tr>
+            <td>
+                Responsable sortant
+            </td>
+
+            <td>
+                Responsable entrant
+            </td>
+
+            <td>
+                Superviseur
+            </td>
+
+            <td>
+                Gérant
+            </td>
+        </tr>
+
+    </table>
+</body>
+</html>

@@ -4,37 +4,72 @@ from decimal import Decimal
 from django.db import transaction
 from django.db.models import F, Sum
 from rest_framework.exceptions import ValidationError
+from collections import defaultdict
 
-from stations.models import RelaisEquipe
+from stations.models import RelaisEquipe, RelaisIndex
 from stations.models_depotage.cuve import Cuve, CuveStatus
 from stations.models_depotage.mouvement_stock import MouvementStock
-
+import logging
+logger = logging.getLogger(__name__)
 
 # ============================================================
 # STOCK GLOBAL PRODUIT
 # ============================================================
 
-def get_stock_global_produit(station, produit):
+def get_volumes_par_produit(relais):
     """
-    Stock global réel exploitable :
-    ACTIVE + STANDBY
+    Source UNIQUE de calcul des volumes vendus par produit.
+    Filtre strict des lignes invalides.
     """
 
-    total = (
+    volumes = defaultdict(Decimal)
+
+    lignes = (
+        RelaisIndex.objects
+        .filter(relais_ilot__relais=relais)
+        .select_related("index_pompe__produit")
+    )
+
+    for ligne in lignes:
+
+        # 🔒 index non terminé
+        if ligne.index_fin is None:
+            continue
+
+        volume = Decimal(ligne.index_fin - ligne.index_debut)
+
+        # 🔒 volume nul ou négatif
+        if volume <= 0:
+            continue
+
+        # 🔥 FILTRE MÉTIER CRITIQUE (anti-bruit)
+        if volume < Decimal("0.01"):
+            continue
+
+        produit = ligne.index_pompe.produit
+        volumes[produit.id] += volume
+
+    return volumes
+
+def get_stock_exploitable_produit(station, produit):
+    """
+    Stock réellement vendable :
+    UNIQUEMENT la cuve ACTIVE
+    """
+    cuve = (
         Cuve.objects
         .filter(
             station=station,
             produit=produit,
-            statut__in=[
-                CuveStatus.ACTIVE,
-                CuveStatus.STANDBY,
-            ],
+            statut=CuveStatus.ACTIVE,
         )
-        .aggregate(total=Sum("stock_actuel"))
-        .get("total")
+        .first()
     )
 
-    return total or Decimal("0.00")
+    if not cuve:
+        return Decimal("0.00")
+
+    return cuve.stock_actuel
 
 
 # ============================================================
@@ -91,7 +126,7 @@ def is_stock_critique(station, produit, volume_a_deduire=Decimal("0.00")):
     après déduction éventuelle.
     """
 
-    stock_global = get_stock_global_produit(station, produit)
+    stock_global = get_stock_exploitable_produit(station, produit)
 
     if stock_global <= 0:
         return True
@@ -109,118 +144,106 @@ def is_stock_critique(station, produit, volume_a_deduire=Decimal("0.00")):
 
 @transaction.atomic
 def appliquer_stock_relais(relais):
-    """
-    Déduit le volume vendu de la cuve ACTIVE uniquement.
-    Vérifie stock global + seuil critique avant déduction.
-    """
 
     if relais.stock_applique:
-        raise ValidationError(
-            "Le stock de ce relais a déjà été appliqué."
-        )
+        raise ValidationError("Stock déjà appliqué.")
 
-    # 🔁 Nouvelle source des lignes
     lignes = (
-        relais.indexes
+        RelaisIndex.objects
         .select_related("index_pompe__produit")
         .select_for_update()
+        .filter(relais_ilot__relais=relais)
     )
 
+    # ✅ volumes DOIT être ici (avant toute utilisation)
+    volumes = defaultdict(Decimal)
+
+    # ======================================================
+    # 1️⃣ AGRÉGATION
+    # ======================================================
     for ligne in lignes:
 
-        # Volume vendu via les index
-        volume_total = (
-            ligne.index_fin - ligne.index_debut
-        )
-
-        if volume_total is None or volume_total <= 0:
+        if ligne.index_fin is None:
             continue
 
-        volume_total = Decimal(volume_total)
+        volume = Decimal(ligne.volume_vendu or 0)
+
+        if volume <= 0:
+            continue
+
+        if volume < Decimal("0.5"):
+            continue
 
         produit = ligne.index_pompe.produit
+        volumes[produit.id] += volume
 
-        # ============================================
-        # 1️⃣ CONTRÔLE STOCK GLOBAL
-        # ============================================
+    
+    logger.warning(f"[VOLUMES RELAIS] {volumes}")
+    # ======================================================
+    # 2️⃣ DEBUG (optionnel)
+    # ======================================================
+    # print(volumes)  # ou logger.warning(volumes)
 
-        stock_global = get_stock_global_produit(
+    # ======================================================
+    # 3️⃣ CUVE
+    # ======================================================
+    cuves = (
+        Cuve.objects
+        .select_for_update()
+        .filter(
             station=relais.station,
-            produit=produit,
+            statut=CuveStatus.ACTIVE
         )
+    )
 
-        if stock_global < volume_total:
+    cuves_map = {c.produit_id: c for c in cuves}
+
+    # ======================================================
+    # 4️⃣ VÉRIFICATION
+    # ======================================================
+    for produit_id, volume in volumes.items():
+
+        cuve = cuves_map.get(produit_id)
+
+        if not cuve:
             raise ValidationError(
-                f"Stock global insuffisant pour "
-                f"{produit.code}. "
-                f"Disponible: {stock_global} | "
-                f"Demandé: {volume_total}"
+                "Aucune cuve ACTIVE pour ce produit."
             )
 
-        # ============================================
-        # 2️⃣ CONTRÔLE SEUIL CRITIQUE
-        # ============================================
-
-        if is_stock_critique(
-            station=relais.station,
-            produit=produit,
-            volume_a_deduire=volume_total,
-        ):
+        if cuve.stock_actuel < volume:
             raise ValidationError(
-                f"Stock critique atteint pour "
-                f"{produit.code}. "
-                f"Relais bloqué."
+                f"Stock insuffisant pour {cuve.produit.code}"
             )
 
-        # ============================================
-        # 3️⃣ DÉDUCTION CUVE ACTIVE
-        # ============================================
+    # ======================================================
+    # 5️⃣ DÉDUCTION
+    # ======================================================
+    for produit_id, volume in volumes.items():
 
-        cuve_active = (
-            Cuve.objects
-            .select_for_update()
-            .filter(
-                station=relais.station,
-                produit=produit,
-                statut=CuveStatus.ACTIVE,
-            )
-            .first()
-        )
+        cuve = cuves_map[produit_id]
 
-        if not cuve_active:
-            raise ValidationError(
-                f"Aucune cuve ACTIVE pour "
-                f"{produit.code}."
-            )
+        cuve.stock_actuel = F("stock_actuel") - volume
+        cuve.save(update_fields=["stock_actuel", "updated_at"])
 
-        if cuve_active.stock_actuel < volume_total:
-            raise ValidationError(
-                f"La cuve active ne contient pas "
-                f"assez de stock pour "
-                f"{produit.code}. "
-                f"Stock cuve: {cuve_active.stock_actuel}"
-            )
-
-        # Déduction atomique
-        cuve_active.stock_actuel = F("stock_actuel") - volume_total
-        cuve_active.save(update_fields=["stock_actuel", "updated_at"])
-
-        # Mouvement stock
         MouvementStock.objects.create(
             tenant=relais.tenant,
             station=relais.station,
-            cuve=cuve_active,
+            cuve=cuve,
             type_mouvement=MouvementStock.MOUVEMENT_SORTIE,
-            quantite=volume_total,
+            quantite=volume,
             source_type="RELAIS",
             source_id=relais.id,
             date_mouvement=relais.fin_relais,
         )
 
+    # ======================================================
+    # 6️⃣ FINAL
+    # ======================================================
+    # relais.stock_applique = True
+    # relais.save(update_fields=["stock_applique"])
     RelaisEquipe.objects.filter(pk=relais.pk).update(
-        stock_applique=True
-    )
-
+    stock_applique=True
+)
 
 # ============================================================
 # DEPOTAGE → ENTRÉE STOCK

@@ -95,8 +95,11 @@ class UtilisateurSerializer(serializers.ModelSerializer):
     )
 
     # 🔹 Station (clé métier)
-    station = serializers.PrimaryKeyRelatedField(
+    station = serializers.SerializerMethodField()
+    station_id = serializers.PrimaryKeyRelatedField(
+        source="station",
         queryset=Station.objects.all(),
+        write_only=True,
         required=False,
         allow_null=True
     )
@@ -121,6 +124,7 @@ class UtilisateurSerializer(serializers.ModelSerializer):
             "tenant",
             "tenant_id",
             "station",
+            "station_id",
             "password",
             "is_active",
             "is_superuser",
@@ -128,6 +132,14 @@ class UtilisateurSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ["id", "is_superuser", "is_staff"]
 
+    def get_station(self, obj):
+        if not obj.station:
+            return None
+
+        return {
+            "id": obj.station.id,
+            "nom": obj.station.nom,
+        }
     # ------------------------------------------------------------------
     # VALIDATION MÉTIER PAR RÔLE (POINT CLÉ)
     # ------------------------------------------------------------------

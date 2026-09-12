@@ -5,6 +5,9 @@ from stations.models_depotage import Depotage
 from stations.constants import DepotageStatus
 
 class DepotageSerializer(serializers.ModelSerializer):
+    
+    produit = serializers.CharField(source="cuve.produit.nom", read_only=True)
+
     class Meta:
         model = Depotage
         fields = "__all__"
@@ -59,7 +62,20 @@ class DepotageSerializer(serializers.ModelSerializer):
             validated_data["quantite_acceptee"] * validated_data["prix_unitaire"]
         )
 
+        variation = validated_data["variation_cuve"]
+
+        q_livree = validated_data.get("quantite_livree")
+
+        if q_livree is not None:
+            validated_data["manquant_camion"] = q_livree - variation
+
+        q_acceptee = validated_data.get("quantite_acceptee")
+
+        if q_acceptee is not None:
+            validated_data["ecart_depotage"] = variation - q_acceptee
+
         return super().create(validated_data)
+    
 
     def update(self, instance, validated_data):
         if instance.statut == DepotageStatus.CONFIRME:
@@ -73,5 +89,22 @@ class DepotageSerializer(serializers.ModelSerializer):
         instance.variation_cuve = instance.jauge_apres - instance.jauge_avant
         instance.montant_total = instance.quantite_acceptee * instance.prix_unitaire
         instance.save(update_fields=["variation_cuve", "montant_total"])
+
+        variation = instance.variation_cuve
+
+        if instance.quantite_livree is not None:
+            instance.manquant_camion = instance.quantite_livree - variation
+
+        if instance.quantite_acceptee is not None:
+            instance.ecart_depotage = variation - instance.quantite_acceptee
+
+        instance.save(
+            update_fields=[
+                "variation_cuve",
+                "montant_total",
+                "manquant_camion",
+                "ecart_depotage",
+            ]
+        )
 
         return instance

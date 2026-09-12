@@ -19,6 +19,10 @@ from core.views import (
     StaffViewSet,
 )
 
+from stations.views import (
+    RelaisEcartDashboardView,
+)
+
 from core.views_tenant import TenantViewSet
 
 app_name = "saas_finance"
@@ -35,6 +39,16 @@ router.register(r'staff', StaffViewSet, basename="staff")
 
 
 urlpatterns = [
+    path(
+        "relais-ecarts/dashboard/",
+        RelaisEcartDashboardView.as_view(),
+        name="relais-ecarts-dashboard"
+    ),
+
+    path(
+        "api/v1/notifications/",
+        include("stations.urls_notifications")
+    ),
     path("api/v1/dashboard/", include("dashboard.urls")),
     
     path("api/v1/station/", include("stations.urls")),

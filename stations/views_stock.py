@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from stations.models_depotage.cuve import Cuve, CuveStatus
 from stations.models_produit import ProduitCarburant
-from stations.services.stock import get_stock_global_produit
+from stations.services.stock import get_stock_exploitable_produit
 
 
 class StockGlobalStationView(APIView):
@@ -23,7 +23,7 @@ class StockGlobalStationView(APIView):
 
         for produit in produits:
 
-            stock_global = get_stock_global_produit(
+            stock_global = get_stock_exploitable_produit(
                 station=station,
                 produit=produit
             )

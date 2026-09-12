@@ -13,17 +13,35 @@ from .views_operations import StationLastOperationsAPIView
 from accounts.views import PersonnelStationViewSet
 
 from .views import (
+    CategorieDepenseViewSet,
+    ClientStationViewSet,
+    ClotureJournaliereView,
+    ClotureRelaisListView,
+    ClotureRelaisPdfView,
+    ClotureRelaisView,
     CuveViewSet,
+    DepenseViewSet,
+    DetteStationViewSet,
+    EcartSyntheseMensuelleView,
+    EncaissementRelaisViewSet,
+    IlotViewSet,
     IndexPompeActifListView,
     IndexPompeViewSet,
+    ModePaiementViewSet,
     ObjectifStationViewSet,
     PompeViewSet,
     PrixCarburantViewSet,
     ProduitCarburantViewSet,
+    RelaisEcartViewSet,
+    RelaisIlotViewSet,
+    RemboursementEcartViewSet,
     StationViewSet,
     StationDashboardView,
     RelaisEquipeViewSet,
     AdminTenantStationDashboardView,
+    VersementViewSet,
+    list_notifications,
+    mark_as_read,
 )
 
 router = DefaultRouter()
@@ -78,9 +96,104 @@ router.register(
     basename="objectifs-station"
 )
 
+router.register(
+    "ilots",
+    IlotViewSet,
+    basename="station-ilots"
+)
+
+router.register(
+    r"relais-ilots",
+    RelaisIlotViewSet,
+    basename="relais-ilots"
+)
+
+router.register(
+    "modes-paiement",
+    ModePaiementViewSet,
+    basename="modes-paiement"
+)
+
+router.register(
+    r"encaissements",
+    EncaissementRelaisViewSet,
+    basename="encaissements"
+)
+
+router.register(
+    r"versements",
+    VersementViewSet,
+    basename="versements"
+)
+
+router.register(
+    r"depenses",
+    DepenseViewSet,
+    basename="depenses"
+)
+
+router.register(
+    "categories-depense",
+    CategorieDepenseViewSet,
+    basename="categories-depense"
+)
+
+router.register(
+    "dettes",
+    DetteStationViewSet,
+    basename="dettes"
+)
+
+router.register(
+    "clients",
+    ClientStationViewSet,
+    basename="clients"
+)
+
+router.register(
+    r"relais-ecarts",
+    RelaisEcartViewSet,
+    basename="relais-ecarts"
+)
+
+router.register(
+    r"remboursements-ecarts",
+    RemboursementEcartViewSet,
+    basename="remboursements-ecarts"
+)
 
 urlpatterns = [
-    path("stock/global/", StockGlobalStationView.as_view()),
+    path(
+        "cloture-relais/<int:relais_id>/pdf/",
+        ClotureRelaisPdfView.as_view(),
+    ),
+
+    path(
+        "cloture-relais/",
+        ClotureRelaisListView.as_view(),
+    ),
+
+    path(
+        "cloture-relais/<int:relais_id>/",
+        ClotureRelaisView.as_view(),
+    ),
+
+    path(
+        "cloture-journaliere/",
+        ClotureJournaliereView.as_view(),
+        name="cloture-journaliere",
+    ),
+
+    path(
+        "relais-ecarts/synthese-mensuelle/",
+        EcartSyntheseMensuelleView.as_view(),
+    ),
+
+    path(
+        "stock/global/", 
+        StockGlobalStationView.as_view()
+    ),
+
     path(
         "operations/dernieres/",
         StationLastOperationsAPIView.as_view(),
@@ -91,7 +204,7 @@ urlpatterns = [
         IndexPompeActifListView.as_view(),
     ),
     path(
-        "station/relais-equipes/",
+        "station/relais-equipes-list/",
         StationRelaisListView.as_view(),
         name="station-relais-list"
     ),
@@ -107,4 +220,7 @@ urlpatterns = [
     ),  
     path("dashboard/", StationDashboardView.as_view(), name="station-dashboard"),
     path("", include(router.urls)),
+
+    path("", list_notifications),
+    path("<int:pk>/read/", mark_as_read),
 ]

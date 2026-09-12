@@ -35,11 +35,39 @@ class Depotage(models.Model):
         related_name="depotages"
     )
 
+    # =========================
+    # TRANSPORT
+    # =========================
+
     fournisseur = models.CharField(
         max_length=150
     )
 
+    numero_camion = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True
+    )
+
+    transporteur = models.CharField(
+        max_length=150,
+        null=True,
+        blank=True
+    )
+
+    chauffeur = models.CharField(
+        max_length=150,
+        null=True,
+        blank=True
+    )
+
     date_depotage = models.DateTimeField()
+
+    date_commande = models.DateField(
+        null=True,
+        blank=True,
+        help_text="Date de la commande fournisseur"
+    )
 
     # =========================
     # COMMANDE / LIVRAISON
@@ -79,6 +107,34 @@ class Depotage(models.Model):
         max_digits=10,
         decimal_places=2,
         help_text="Calculé : jauge_apres - jauge_avant"
+    )
+
+    # =========================
+    # CONTRÔLES PHYSIQUES
+    # =========================
+
+    temperature = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text="Température carburant (°C)"
+    )
+
+    manquant_camion = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text="Quantité manquante camion (BL - volume mesuré)"
+    )
+
+    ecart_depotage = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        null=True,
+        blank=True,
+        help_text="Ecart entre quantité acceptée et variation cuve"
     )
 
     # =========================

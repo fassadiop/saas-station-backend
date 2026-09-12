@@ -14,6 +14,8 @@ class GerantSerializer(serializers.ModelSerializer):
         write_only=True
     )
 
+    station = serializers.SerializerMethodField()
+
     class Meta:
         model = Utilisateur
         fields = (
@@ -24,9 +26,19 @@ class GerantSerializer(serializers.ModelSerializer):
             "email",
             "password",
             "station_id",
+            "station",
             "is_active",
         )
         read_only_fields = ("id",)
+
+    def get_station(self, obj):
+        if not obj.station:
+            return None
+
+        return {
+            "id": obj.station.id,
+            "nom": obj.station.nom,
+        }
 
     def create(self, validated_data):
         request = self.context["request"]

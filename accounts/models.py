@@ -66,3 +66,24 @@ class Utilisateur(AbstractUser):
             self.module = "admin"
 
         super().save(*args, **kwargs)
+
+    @property
+    def total_ecart(self):
+        return sum(
+            e.montant_ecart
+            for e in self.relaisecart_set.all()
+        )
+    
+    @property
+    def total_manques(self):
+        return sum(
+            e.montant
+            for e in self.ecarts_relais.filter(type_ecart="MANQUE")
+        )
+
+    @property
+    def total_excedents(self):
+        return sum(
+            e.montant
+            for e in self.ecarts_relais.filter(type_ecart="EXCEDENT")
+        )

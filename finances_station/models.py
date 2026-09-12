@@ -48,6 +48,7 @@ class TransactionStation(models.Model):
         indexes = [
             models.Index(fields=["tenant", "date", "type"]),
             models.Index(fields=["tenant", "station"]),
+            models.Index(fields=["source_type", "source_id"]),
         ]
 
     def __str__(self):
