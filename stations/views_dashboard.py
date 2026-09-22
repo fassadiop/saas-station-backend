@@ -215,7 +215,44 @@ class StationOperationalDashboardAPIView(APIView):
         ca_total = ca_essence + ca_gasoil
 
         # ======================================================
-        # 5️⃣ AUTONOMIE
+        # 4️⃣ BIS. CA LUBRIFIANTS
+        # ======================================================
+
+        ca_lubrifiant = (
+            finances_qs
+            .filter(
+                type="RECETTE",
+                source_type="RelaisEquipe_LUBRIFIANTS",
+                date__range=[start_date, end_date],
+            )
+            .aggregate(
+                total=Sum("montant")
+            )["total"] or Decimal("0")
+        )
+
+        # ======================================================
+        # 5️⃣ CA BAIE
+        # ======================================================
+
+        ca_baie = (
+            finances_qs
+            .filter(
+                type="RECETTE",
+                source_type="RelaisEquipe_BAIE",
+                date__range=[start_date, end_date],
+            )
+            .aggregate(total=Sum("montant"))["total"]
+            or Decimal("0")
+        )
+
+        ca_global = (
+            ca_total
+            + ca_lubrifiant
+            + ca_baie
+        )
+
+        # ======================================================
+        #  AUTONOMIE
         # ======================================================
         conso_qs = (
             RelaisIndex.objects
@@ -433,6 +470,18 @@ class StationOperationalDashboardAPIView(APIView):
                     "marge": marge_totale
                 }
             },
+
+            # ======================================================
+            # CHIFFRE D'AFFAIRES GLOBAL
+            # ======================================================
+
+            "chiffre_affaires": {
+                "carburant": ca_total,
+                "lubrifiant": ca_lubrifiant,
+                "baie": ca_baie,
+                "global": ca_global,
+            },
+
             "stock": {
                 "essence": {
                     "quantite": autonomie["ESSENCE"]["stock"],

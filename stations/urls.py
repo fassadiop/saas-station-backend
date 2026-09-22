@@ -2,6 +2,18 @@
 
 from stations.views_dashboard import StationOperationalDashboardAPIView
 from stations.views_depotage.mouvement_stock import MouvementStockViewSet
+
+from stations.views_lubrifiant import LubrifiantViewSet
+from stations.views_lubrifiant_vente import VenteLubrifiantViewSet
+from stations.views_lubrifiant_stock import (
+    StockLubrifiantViewSet,
+    MouvementStockLubrifiantViewSet,
+)
+from stations.views_baie import (
+    OperationBaieViewSet,
+    PrestationBaieViewSet,
+)
+
 from stations.views_stock import StockGlobalStationView
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
@@ -15,6 +27,7 @@ from accounts.views import PersonnelStationViewSet
 from .views import (
     CategorieDepenseViewSet,
     ClientStationViewSet,
+    ClotureJournalierePdfView,
     ClotureJournaliereView,
     ClotureRelaisListView,
     ClotureRelaisPdfView,
@@ -34,6 +47,8 @@ from .views import (
     ProduitCarburantViewSet,
     RelaisEcartViewSet,
     RelaisIlotViewSet,
+    RelaisIndexPhotoViewSet,
+    RelaisJaugeViewSet,
     RemboursementEcartViewSet,
     StationViewSet,
     StationDashboardView,
@@ -55,6 +70,42 @@ router.register(
 )
 
 router.register(
+    r"lubrifiants",
+    LubrifiantViewSet,
+    basename="lubrifiants"
+)
+
+router.register(
+    r"stocks-lubrifiants",
+    StockLubrifiantViewSet,
+    basename="stocks-lubrifiants",
+)
+
+router.register(
+    r"mouvements-stock-lubrifiants",
+    MouvementStockLubrifiantViewSet,
+    basename="mouvements-stock-lubrifiants",
+)
+
+router.register(
+    r"ventes-lubrifiants",
+    VenteLubrifiantViewSet,
+    basename="ventes-lubrifiants",
+)
+
+router.register(
+    r"operations-baie",
+    OperationBaieViewSet,
+    basename="operation-baie",
+)
+
+router.register(
+    r"prestations-baie",
+    PrestationBaieViewSet,
+    basename="prestation-baie",
+)
+
+router.register(
     r"personnel",
     PersonnelStationViewSet,
     basename="station-personnel"
@@ -64,6 +115,12 @@ router.register(
     r"relais-equipes",
     RelaisEquipeViewSet,
     basename="relais-equipes"
+)
+
+router.register(
+    r"relais-jauges",
+    RelaisJaugeViewSet,
+    basename="relais-jauge"
 )
 
 router.register(
@@ -82,6 +139,12 @@ router.register(
     r"index-pompes",
     IndexPompeViewSet,
     basename="index-pompes"
+)
+
+router.register(
+    r"relais-index-photos",
+    RelaisIndexPhotoViewSet,
+    basename="relais-index-photos"
 )
 
 router.register(
@@ -182,6 +245,12 @@ urlpatterns = [
         "cloture-journaliere/",
         ClotureJournaliereView.as_view(),
         name="cloture-journaliere",
+    ),
+
+    path(
+        "cloture-journaliere/pdf/",
+        ClotureJournalierePdfView.as_view(),
+        name="cloture-journaliere-pdf",
     ),
 
     path(

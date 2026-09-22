@@ -52,6 +52,59 @@ class ProduitCarburant(models.Model):
         self.save(update_fields=["actif"])
 
 
+class Lubrifiants(models.Model):
+    tenant = models.ForeignKey(
+        "tenants.Tenant",
+        on_delete=models.CASCADE,
+        related_name="lubrifiants"
+    )
+
+    code = models.CharField(max_length=30)
+
+    designation = models.CharField(max_length=100)
+
+    nature = models.CharField(
+        max_length=30,
+        help_text="Contenu ou format du lubrifiant : 1L, 2L, 5L, 20L, 500g, etc."
+    )
+
+    unite = models.CharField(
+        max_length=30,
+        help_text="Unité de conditionnement : BIDON, BOUTEILLE, TUBE, CARTOUCHE, etc."
+    )
+
+    prix_vente = models.DecimalField(
+        max_digits=12,
+        decimal_places=2
+    )
+
+    prix_achat = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        null=True,
+        blank=True
+    )
+
+    seuil_alerte = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        default=0
+    )
+
+    actif = models.BooleanField(default=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        unique_together = ("tenant", "code")
+        ordering = ["code"]
+
+    def __str__(self):
+        return f"{self.code} - {self.designation} ({self.nature})"
+
+
 class PrixCarburant(models.Model):
     tenant = models.ForeignKey(
         "tenants.Tenant",

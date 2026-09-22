@@ -4,7 +4,10 @@ from stations.models import (
     RelaisEcart,
     EncaissementRelais,
     DetteStation,
+    RelaisJauge,
+    VenteLubrifiant,
 )
+from stations.models_baie.operation import OperationBaie
 
 def generer_cloture_relais(relais):
 
@@ -39,6 +42,109 @@ def generer_cloture_relais(relais):
 
     total_versements = Decimal("0")
 
+    # ==================================================
+    # JAUGES
+    # ==================================================
+
+    jauges_data = []
+
+    jauges_qs = (
+        RelaisJauge.objects
+        .filter(relais=relais)
+        .select_related("produit")
+        .order_by("produit__code")
+    )
+
+    for jauge in jauges_qs:
+
+        jauges_data.append({
+            "produit": jauge.produit.nom,
+            "produit_code": jauge.produit.code,
+
+            "stock_depart": float(
+                jauge.jauge_debut
+                or Decimal("0")
+            ),
+
+            "stock_reel_arrivee": float(
+                jauge.jauge_fin
+                or Decimal("0")
+            ),
+        })
+
+    # ==================================================
+    # VENTES LUBRIFIANTS
+    # ==================================================
+
+    ventes_lubrifiants_qs = (
+        VenteLubrifiant.objects
+        .filter(relais=relais)
+        .select_related("lubrifiant")
+        .order_by("lubrifiant__designation", "id")
+    )
+
+    ventes_lubrifiants_data = []
+
+    total_ventes_lubrifiants = Decimal("0")
+
+    for vente in ventes_lubrifiants_qs:
+
+        montant = vente.montant or Decimal("0")
+
+        total_ventes_lubrifiants += montant
+
+        ventes_lubrifiants_data.append({
+            "lubrifiant": str(vente.lubrifiant),
+            "quantite": float(
+                vente.quantite
+            ),
+            "prix_unitaire": float(
+                vente.prix_unitaire
+            ),
+            "montant": float(
+                montant
+            ),
+        })
+
+    # ==================================================
+    # OPERATIONS DE BAIE
+    # ==================================================
+
+    operations_baie_qs = (
+        OperationBaie.objects
+        .filter(relais=relais)
+        .select_related("prestation")
+        .order_by("prestation__designation", "id")
+    )
+
+    operations_baie_data = []
+
+    total_operations_baie = Decimal("0")
+
+    for operation in operations_baie_qs:
+
+        montant = operation.montant or Decimal("0")
+
+        total_operations_baie += montant
+
+        operations_baie_data.append({
+            "prestation": str(
+                operation.prestation
+            ),
+            "quantite": float(
+                operation.quantite
+            ),
+            "prix_unitaire": float(
+                operation.prix_unitaire
+            ),
+            "montant": float(
+                montant
+            ),
+        })
+
+    # ==================================================
+    # ILOTS
+    # ==================================================
     for ilot in relais.ilots.all():
 
         versement = ilot.total_versement
@@ -250,6 +356,9 @@ def generer_cloture_relais(relais):
         "resume": resume,
         "ilots": ilots_data,
         "indexes": indexes_data,
+        "jauges": jauges_data,
+        "ventes_lubrifiants": ventes_lubrifiants_data,
+        "operations_baie": operations_baie_data,
         "encaissements": {
             "total": float(total_encaissements),
             "par_mode": encaissements_par_mode,

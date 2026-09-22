@@ -18,6 +18,8 @@ from .models import (
     ReglementDette,
     RelaisEcart,
     RelaisIndex,
+    RelaisIndexPhoto,
+    RelaisJauge,
     RemboursementEcart,
     Station,
     Pompe,
@@ -404,6 +406,9 @@ class RelaisIndexSerializer(serializers.ModelSerializer):
     id = serializers.IntegerField()
 
     volume_vendu = serializers.ReadOnlyField()
+
+    volume_reellement_vendu = serializers.ReadOnlyField()
+
     index_pompe = serializers.PrimaryKeyRelatedField(read_only=True)
     index_debut = serializers.ReadOnlyField()
 
@@ -422,6 +427,8 @@ class RelaisIndexSerializer(serializers.ModelSerializer):
             "index_debut",
             "index_fin",
             "volume_vendu",
+            "retour_en_cuve",
+            "volume_reellement_vendu",
             "produit",
             "prix_produit",
         )
@@ -443,6 +450,168 @@ class RelaisIndexSerializer(serializers.ModelSerializer):
         )
 
         return prix or 0
+
+
+class RelaisIndexPhotoSerializer(serializers.ModelSerializer):
+
+    # ==========================================================
+    # CAPTURE
+    # ==========================================================
+
+    capture_par_nom = serializers.SerializerMethodField()
+
+    # ==========================================================
+    # VALIDATION
+    # ==========================================================
+
+    validee_par_nom = serializers.SerializerMethodField()
+
+    # ==========================================================
+    # INFORMATIONS RELAIS / INDEX
+    # ==========================================================
+
+    relais_id = serializers.IntegerField(
+        source="relais_index.relais_ilot.relais_id",
+        read_only=True
+    )
+
+    index_pompe_id = serializers.IntegerField(
+        source="relais_index.index_pompe_id",
+        read_only=True
+    )
+
+    pompe_reference = serializers.CharField(
+        source="relais_index.index_pompe.pompe.reference",
+        read_only=True
+    )
+
+    produit_code = serializers.CharField(
+        source="relais_index.index_pompe.produit.code",
+        read_only=True
+    )
+
+    index_debut = serializers.DecimalField(
+        source="relais_index.index_debut",
+        max_digits=12,
+        decimal_places=2,
+        read_only=True
+    )
+
+    index_fin = serializers.DecimalField(
+        source="relais_index.index_fin",
+        max_digits=12,
+        decimal_places=2,
+        read_only=True
+    )
+
+    # ==========================================================
+    # META
+    # ==========================================================
+
+    class Meta:
+        model = RelaisIndexPhoto
+
+        fields = (
+            # Identité
+            "id",
+
+            # Relation métier
+            "relais_index",
+            "relais_id",
+            "index_pompe_id",
+            "pompe_reference",
+            "produit_code",
+
+            # Index
+            "index_debut",
+            "index_fin",
+
+            # Photo
+            "photo",
+
+            # OCR
+            "valeur_ocr",
+            "confiance_ocr",
+
+            # Capture
+            "date_capture",
+            "capture_par",
+            "capture_par_nom",
+
+            # Validation
+            "valeur_validee",
+            "validee_par",
+            "validee_par_nom",
+            "date_validation",
+            "commentaire_validation",
+
+            # Workflow
+            "statut",
+        )
+
+        read_only_fields = (
+            # Identité
+            "id",
+
+            # Relations calculées
+            "relais_id",
+            "index_pompe_id",
+            "pompe_reference",
+            "produit_code",
+
+            # Index
+            "index_debut",
+            "index_fin",
+
+            # OCR : écrit uniquement par l'action /ocr/
+            "valeur_ocr",
+            "confiance_ocr",
+
+            # Capture : écrit automatiquement à la création
+            "date_capture",
+            "capture_par",
+            "capture_par_nom",
+
+            # Validation : écrit uniquement par /valider/
+            "valeur_validee",
+            "validee_par",
+            "validee_par_nom",
+            "date_validation",
+            "commentaire_validation",
+
+            # Statut : piloté par les actions métier
+            "statut",
+        )
+
+    # ==========================================================
+    # NOM DU CAPTUREUR
+    # ==========================================================
+
+    def get_capture_par_nom(self, obj):
+        if not obj.capture_par:
+            return ""
+
+        nom = (
+            f"{obj.capture_par.first_name} "
+            f"{obj.capture_par.last_name}"
+        ).strip()
+
+        return nom or obj.capture_par.username
+
+    # ==========================================================
+    # NOM DU VALIDATEUR
+    # ==========================================================
+
+    def get_validee_par_nom(self, obj):
+        if not obj.validee_par:
+            return ""
+
+        nom = (
+            f"{obj.validee_par.first_name} "
+            f"{obj.validee_par.last_name}"
+        ).strip()
+
+        return nom or obj.validee_par.username
     
 
 class EncaissementRelaisSerializer(serializers.ModelSerializer):
@@ -708,6 +877,11 @@ class RelaisIlotSerializer(serializers.ModelSerializer):
                     )
 
                 index_fin = data.get("index_fin")
+                retour_en_cuve = data.get("retour_en_cuve")
+
+                # =============================
+                # VALIDATION INDEX FIN
+                # =============================
 
                 if (
                     index_fin is not None
@@ -717,7 +891,43 @@ class RelaisIlotSerializer(serializers.ModelSerializer):
                         "Index fin inférieur à l'index début."
                     )
 
+                # =============================
+                # VALIDATION RETOUR EN CUVE
+                # =============================
+
+                if (
+                    retour_en_cuve is not None
+                    and retour_en_cuve < 0
+                ):
+                    raise serializers.ValidationError(
+                        "Le retour en cuve ne peut pas être négatif."
+                    )
+
+                volume_distribue = (
+                    index_fin - idx.index_debut
+                    if index_fin is not None
+                    else 0
+                )
+
+                if (
+                    retour_en_cuve is not None
+                    and retour_en_cuve > volume_distribue
+                ):
+                    raise serializers.ValidationError(
+                        "Le retour en cuve ne peut pas être supérieur "
+                        "au volume distribué."
+                    )
+
+                # =============================
+                # AFFECTATION
+                # =============================
+
                 idx.index_fin = index_fin
+                idx.retour_en_cuve = retour_en_cuve
+
+                # =============================
+                # PRIX + MONTANT THÉORIQUE
+                # =============================
 
                 if index_fin is not None:
 
@@ -729,16 +939,29 @@ class RelaisIlotSerializer(serializers.ModelSerializer):
                             produit=idx.index_pompe.produit,
                             actif=True
                         )
-                        .values_list("prix_unitaire", flat=True)
+                        .values_list(
+                            "prix_unitaire",
+                            flat=True
+                        )
                         .first()
                     )
 
                     idx.prix_unitaire = prix or 0
 
+                    volume_reellement_vendu = (
+                        volume_distribue
+                        - (retour_en_cuve or 0)
+                    )
+
                     idx.montant_theorique = (
-                        (idx.index_fin - idx.index_debut)
+                        volume_reellement_vendu
                         * idx.prix_unitaire
                     )
+
+                else:
+
+                    idx.prix_unitaire = None
+                    idx.montant_theorique = None
 
                 to_update.append(idx)
 
@@ -747,6 +970,7 @@ class RelaisIlotSerializer(serializers.ModelSerializer):
                     to_update,
                     [
                         "index_fin",
+                        "retour_en_cuve",
                         "prix_unitaire",
                         "montant_theorique",
                     ]
@@ -966,6 +1190,9 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
     total_theorique = serializers.ReadOnlyField()
     total_encaisse = serializers.ReadOnlyField()
 
+    nombre_ventes_lubrifiants = serializers.SerializerMethodField()
+    total_ventes_lubrifiants = serializers.SerializerMethodField()
+
     equipe_sortante = serializers.CharField(
         read_only=True
     )
@@ -1076,6 +1303,29 @@ class RelaisEquipeSerializer(serializers.ModelSerializer):
             )
 
         return super().update(instance, validated_data)
+
+    def get_nombre_ventes_lubrifiants(self, obj):
+        from stations.models_lubrifiant.vente import VenteLubrifiant
+
+        return VenteLubrifiant.objects.filter(
+            tenant_id=obj.tenant_id,
+            station_id=obj.station_id,
+            relais_id=obj.id,
+        ).count()
+
+
+    def get_total_ventes_lubrifiants(self, obj):
+        from stations.models_lubrifiant.vente import VenteLubrifiant
+
+        total = VenteLubrifiant.objects.filter(
+            tenant_id=obj.tenant_id,
+            station_id=obj.station_id,
+            relais_id=obj.id,
+        ).aggregate(
+            total=Sum("montant")
+        )["total"]
+
+        return total if total is not None else Decimal("0.00")
     
 
 class RelaisEquipeListSerializer(serializers.ModelSerializer):
@@ -1116,6 +1366,42 @@ class RelaisEquipeListSerializer(serializers.ModelSerializer):
                 "montant": float(r["total"] or 0),
             }
             for r in qs
+        ]
+
+
+class RelaisJaugeSerializer(serializers.ModelSerializer):
+
+    produit_nom = serializers.CharField(
+        source="produit.nom",
+        read_only=True
+    )
+
+    produit_code = serializers.CharField(
+        source="produit.code",
+        read_only=True
+    )
+
+    class Meta:
+        model = RelaisJauge
+
+        fields = [
+            "id",
+            "relais",
+            "produit",
+            "produit_nom",
+            "produit_code",
+            "jauge_debut",
+            "jauge_fin",
+            "created_at",
+            "updated_at",
+        ]
+
+        read_only_fields = [
+            "id",
+            "produit_nom",
+            "produit_code",
+            "created_at",
+            "updated_at",
         ]
 
 
@@ -1348,11 +1634,13 @@ class DepenseSerializer(serializers.ModelSerializer):
             "categorie_nom",
             "description",
             "montant",
-            "statut"
+            "statut",
+            "relais",
         ]
         read_only_fields = [
             "tenant",
             "station",
+            "relais",
             "created_by",
             "validated_by",
             "validated_at",

@@ -155,53 +155,87 @@ def appliquer_stock_relais(relais):
         .filter(relais_ilot__relais=relais)
     )
 
-    # ✅ volumes DOIT être ici (avant toute utilisation)
-    volumes = defaultdict(Decimal)
-
     # ======================================================
     # 1️⃣ AGRÉGATION
     # ======================================================
+
+    volumes_sortie = defaultdict(Decimal)
+    volumes_retour = defaultdict(Decimal)
+
     for ligne in lignes:
 
         if ligne.index_fin is None:
             continue
 
-        volume = Decimal(ligne.volume_vendu or 0)
+        volume_distribue = Decimal(ligne.volume_vendu or 0)
+        retour = Decimal(ligne.retour_en_cuve or 0)
 
-        if volume <= 0:
-            continue
+        volume_reellement_vendu = volume_distribue - retour
 
-        if volume < Decimal("0.5"):
-            continue
+        if volume_reellement_vendu < 0:
+            raise ValidationError(
+                f"Retour en cuve supérieur au volume distribué "
+                f"pour l'index {ligne.id}."
+            )
 
         produit = ligne.index_pompe.produit
-        volumes[produit.id] += volume
 
-    
-    logger.warning(f"[VOLUMES RELAIS] {volumes}")
-    # ======================================================
-    # 2️⃣ DEBUG (optionnel)
-    # ======================================================
-    # print(volumes)  # ou logger.warning(volumes)
+        # SORTIE : volume réellement vendu
+        if volume_reellement_vendu >= Decimal("0.5"):
+            volumes_sortie[produit.id] += volume_reellement_vendu
+
+        # ENTRÉE : retour en cuve
+        if retour > 0:
+            volumes_retour[produit.id] += retour
+
+    logger.warning(
+        f"[VOLUMES SORTIE RELAIS] {volumes_sortie}"
+    )
+
+    logger.warning(
+        f"[VOLUMES RETOUR RELAIS] {volumes_retour}"
+    )
 
     # ======================================================
-    # 3️⃣ CUVE
+    # 2️⃣ PRODUITS CONCERNÉS
     # ======================================================
+
+    produits_ids = (
+        set(volumes_sortie.keys())
+        | set(volumes_retour.keys())
+    )
+
+    # Rien à appliquer
+    if not produits_ids:
+        RelaisEquipe.objects.filter(pk=relais.pk).update(
+            stock_applique=True
+        )
+        return
+
+    # ======================================================
+    # 3️⃣ CUVE ACTIVE
+    # ======================================================
+
     cuves = (
         Cuve.objects
         .select_for_update()
         .filter(
             station=relais.station,
-            statut=CuveStatus.ACTIVE
+            statut=CuveStatus.ACTIVE,
+            produit_id__in=produits_ids,
         )
     )
 
-    cuves_map = {c.produit_id: c for c in cuves}
+    cuves_map = {
+        c.produit_id: c
+        for c in cuves
+    }
 
     # ======================================================
     # 4️⃣ VÉRIFICATION
     # ======================================================
-    for produit_id, volume in volumes.items():
+
+    for produit_id in produits_ids:
 
         cuve = cuves_map.get(produit_id)
 
@@ -210,20 +244,32 @@ def appliquer_stock_relais(relais):
                 "Aucune cuve ACTIVE pour ce produit."
             )
 
-        if cuve.stock_actuel < volume:
+        volume_sortie = volumes_sortie.get(
+            produit_id,
+            Decimal("0")
+        )
+
+        if cuve.stock_actuel < volume_sortie:
             raise ValidationError(
                 f"Stock insuffisant pour {cuve.produit.code}"
             )
 
     # ======================================================
-    # 5️⃣ DÉDUCTION
+    # 5️⃣ SORTIE DE STOCK
     # ======================================================
-    for produit_id, volume in volumes.items():
+
+    for produit_id, volume in volumes_sortie.items():
 
         cuve = cuves_map[produit_id]
 
         cuve.stock_actuel = F("stock_actuel") - volume
-        cuve.save(update_fields=["stock_actuel", "updated_at"])
+
+        cuve.save(
+            update_fields=[
+                "stock_actuel",
+                "updated_at",
+            ]
+        )
 
         MouvementStock.objects.create(
             tenant=relais.tenant,
@@ -237,13 +283,40 @@ def appliquer_stock_relais(relais):
         )
 
     # ======================================================
-    # 6️⃣ FINAL
+    # 6️⃣ RETOUR EN CUVE
     # ======================================================
-    # relais.stock_applique = True
-    # relais.save(update_fields=["stock_applique"])
+
+    for produit_id, volume in volumes_retour.items():
+
+        cuve = cuves_map[produit_id]
+
+        cuve.stock_actuel = F("stock_actuel") + volume
+
+        cuve.save(
+            update_fields=[
+                "stock_actuel",
+                "updated_at",
+            ]
+        )
+
+        MouvementStock.objects.create(
+            tenant=relais.tenant,
+            station=relais.station,
+            cuve=cuve,
+            type_mouvement=MouvementStock.MOUVEMENT_ENTREE,
+            quantite=volume,
+            source_type="RETOUR_CUVE",
+            source_id=relais.id,
+            date_mouvement=relais.fin_relais,
+        )
+
+    # ======================================================
+    # 7️⃣ FINAL
+    # ======================================================
+
     RelaisEquipe.objects.filter(pk=relais.pk).update(
-    stock_applique=True
-)
+        stock_applique=True
+    )
 
 # ============================================================
 # DEPOTAGE → ENTRÉE STOCK

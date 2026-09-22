@@ -721,33 +721,72 @@ class RelaisEquipe(models.Model):
 
         ancien_statut = self.status
 
-        # -------------------------------------------------
-        # SOUMISSION
-        # -------------------------------------------------
-
-        if nouveau_statut == self.Statut.SOUMIS:
-            self.soumis_par = user
-            self.soumis_le = timezone.now()
-
-        # -------------------------------------------------
-        # VALIDATION
-        # -------------------------------------------------
+        # =========================================================
+        # SOUMISSION : BROUILLON → SOUMIS
+        # =========================================================
 
         if nouveau_statut == self.Statut.SOUMIS:
 
-            # 🔴 VALIDATION STRUCTURELLE OBLIGATOIRE
             self._valider_structure_complete()
 
             self.soumis_par = user
             self.soumis_le = timezone.now()
+
+            self.status = nouveau_statut
+            super().save()
+
+            RelaisAudit.objects.create(
+                relais=self,
+                tenant=self.tenant,
+                ancien_statut=ancien_statut,
+                nouveau_statut=nouveau_statut,
+                action="CHANGEMENT_STATUT",
+                effectue_par=user,
+            )
+
+            return
+
+        # =========================================================
+        # VALIDATION : SOUMIS → VALIDE
+        # =========================================================
 
         if nouveau_statut == self.Statut.VALIDE:
 
-            self._valider_structure_complete()
+            with transaction.atomic():
 
-            # Vérification supplémentaire (qualité des données)
-            for ilot in self.ilots.all():
-                for idx in ilot.indexes.all():
+                # -------------------------------------------------
+                # 1. Validation structurelle
+                # -------------------------------------------------
+
+                self._valider_structure_complete()
+
+                # -------------------------------------------------
+                # 2. Récupération des index du relais
+                # -------------------------------------------------
+
+                indexes = list(
+                    RelaisIndex.objects
+                    .filter(
+                        relais_ilot__relais=self
+                    )
+                    .select_related(
+                        "index_pompe",
+                        "index_pompe__pompe",
+                        "index_pompe__produit",
+                        "relais_ilot",
+                    )
+                )
+
+                if not indexes:
+                    raise ValidationError(
+                        "Impossible de valider : aucun index enregistré."
+                    )
+
+                # -------------------------------------------------
+                # 3. Contrôle de tous les index
+                # -------------------------------------------------
+
+                for idx in indexes:
 
                     if idx.index_fin is None:
                         raise ValidationError(
@@ -759,47 +798,120 @@ class RelaisEquipe(models.Model):
                             "Index fin doit être supérieur ou égal à index début."
                         )
 
-            self.valide_par = user
-            self.valide_le = timezone.now()
+                # -------------------------------------------------
+                # 4. Verrouillage des IndexPompe
+                # -------------------------------------------------
 
-            for ilot in self.ilots.all():
+                index_pompe_ids = {
+                    idx.index_pompe_id
+                    for idx in indexes
+                }
 
-                ecart = (
-                    ilot.total_encaisse
-                    - ilot.total_theorique
+                index_pompes = {
+                    index_pompe.id: index_pompe
+                    for index_pompe in (
+                        IndexPompe.objects
+                        .select_for_update()
+                        .filter(
+                            id__in=index_pompe_ids,
+                            actif=True,
+                        )
+                    )
+                }
+
+                if len(index_pompes) != len(index_pompe_ids):
+                    raise ValidationError(
+                        "Un ou plusieurs index pompe sont introuvables ou inactifs."
+                    )
+
+                # -------------------------------------------------
+                # 5. Vérification de la continuité des index
+                # -------------------------------------------------
+
+                for idx in indexes:
+
+                    index_pompe = index_pompes[idx.index_pompe_id]
+
+                    if index_pompe.index_courant != idx.index_debut:
+                        raise ValidationError(
+                            f"Incohérence d'index pour "
+                            f"{index_pompe.pompe.reference} "
+                            f"({index_pompe.produit.code}, Face {index_pompe.face}). "
+                            f"Index courant : {index_pompe.index_courant}, "
+                            f"index début du relais : {idx.index_debut}."
+                        )
+
+                # -------------------------------------------------
+                # 7. Validation du relais
+                # -------------------------------------------------
+
+                self.valide_par = user
+                self.valide_le = timezone.now()
+                self.status = nouveau_statut
+
+                # Le relais est maintenant VALIDE.
+                # bypass_validation permet de passer le verrouillage
+                # du save() lorsque le statut devient VALIDE.
+                super().save()
+
+                # -------------------------------------------------
+                # 8. Création / suppression des écarts
+                # -------------------------------------------------
+
+                for ilot in self.ilots.all():
+
+                    ecart = (
+                        ilot.total_encaisse
+                        - ilot.total_theorique
+                    )
+
+                    if ecart != Decimal("0"):
+
+                        type_ecart = (
+                            RelaisEcart.TypeEcart.EXCEDENT
+                            if ecart > 0
+                            else RelaisEcart.TypeEcart.MANQUE
+                        )
+
+                        RelaisEcart.objects.update_or_create(
+                            relais_ilot=ilot,
+                            defaults={
+                                "tenant": ilot.tenant,
+                                "relais": self,
+                                "responsable": ilot.responsable,
+                                "type_ecart": type_ecart,
+                                "montant_theorique": ilot.total_theorique,
+                                "montant_encaisse": ilot.total_encaisse,
+                                "montant": abs(ecart),
+                                "date_relais": self.fin_relais.date(),
+                                "created_by": user,
+                            }
+                        )
+
+                    else:
+
+                        RelaisEcart.objects.filter(
+                            relais_ilot=ilot
+                        ).delete()
+
+                # -------------------------------------------------
+                # 9. Audit
+                # -------------------------------------------------
+
+                RelaisAudit.objects.create(
+                    relais=self,
+                    tenant=self.tenant,
+                    ancien_statut=ancien_statut,
+                    nouveau_statut=nouveau_statut,
+                    action="CHANGEMENT_STATUT",
+                    effectue_par=user,
                 )
 
-                if ecart != Decimal("0"):
+            return
 
-                    type_ecart = (
-                        RelaisEcart.TypeEcart.EXCEDENT
-                        if ecart > 0
-                        else RelaisEcart.TypeEcart.MANQUE
-                    )
-
-                    RelaisEcart.objects.update_or_create(
-                        relais_ilot=ilot,
-                        defaults={
-                            "tenant": ilot.tenant,
-                            "relais": self,
-                            "responsable": ilot.responsable,
-                            "type_ecart": type_ecart,
-                            "montant_theorique": ilot.total_theorique,
-                            "montant_encaisse": ilot.total_encaisse,
-                            "montant": abs(ecart),
-                            "date_relais": self.fin_relais.date(),
-                            "created_by": user,
-                        }
-                    )
-
-                else:
-
-                    RelaisEcart.objects.filter(
-                        relais_ilot=ilot
-                    ).delete()
-        # -------------------------------------------------
-        # TRANSFERT FINAL (COMPTABLE)
-        # -------------------------------------------------
+        # =========================================================
+        # TRANSFERT : VALIDE → TRANSFERE
+        # =========================================================
 
         if nouveau_statut == self.Statut.TRANSFERE:
 
@@ -811,9 +923,10 @@ class RelaisEquipe(models.Model):
                     "Le relais doit être validé avant transfert."
                 )
 
-            # Vérifier présence des îlots
             if not self.ilots.exists():
-                raise ValidationError("Aucun îlot associé au relais.")
+                raise ValidationError(
+                    "Aucun îlot associé au relais."
+                )
 
             from stations.services.stock import appliquer_stock_relais
             from finances_station.models import TransactionStation
@@ -823,10 +936,8 @@ class RelaisEquipe(models.Model):
                 station=self.station,
                 statut=Depense.Statut.VALIDE,
                 date_depense__gte=self.debut_relais.date(),
-                date_depense__lte=self.fin_relais.date()
+                date_depense__lte=self.fin_relais.date(),
             )
-
-            from django.db.models import Sum
 
             total_depenses = depenses.aggregate(
                 total=Sum("montant")
@@ -834,31 +945,110 @@ class RelaisEquipe(models.Model):
 
             with transaction.atomic():
 
-                # 1️⃣ Application stock
+                indexes = list(
+                    RelaisIndex.objects
+                    .select_related("index_pompe")
+                    .filter(relais_ilot__relais=self)
+                )
+
+                if not indexes:
+                    raise ValidationError(
+                        "Impossible de transférer le relais : aucun index trouvé."
+                    )
+
+                for idx in indexes:
+                    if idx.index_fin is None:
+                        raise ValidationError(
+                            "Impossible de transférer le relais : "
+                            "tous les index doivent être complétés."
+                        )
+
+                    if idx.index_fin < idx.index_debut:
+                        raise ValidationError(
+                            "Impossible de transférer le relais : "
+                            "un index fin est inférieur à l'index début."
+                        )
+
+                index_pompe_ids = [idx.index_pompe_id for idx in indexes]
+
+                index_pompes = {
+                    ip.id: ip
+                    for ip in IndexPompe.objects
+                    .select_for_update()
+                    .filter(
+                        id__in=index_pompe_ids,
+                        actif=True,
+                    )
+                }
+
+                if len(index_pompes) != len(set(index_pompe_ids)):
+                    raise ValidationError(
+                        "Impossible de transférer le relais : "
+                        "un ou plusieurs index pompe sont introuvables ou inactifs."
+                    )
+
+                for idx in indexes:
+                    index_pompe = index_pompes[idx.index_pompe_id]
+
+                    if index_pompe.index_courant != idx.index_debut:
+                        raise ValidationError(
+                            f"Conflit d'index pour {index_pompe.pompe.reference} "
+                            f"({idx.index_pompe.produit.code}) : "
+                            f"l'index courant est {index_pompe.index_courant}, "
+                            f"alors que l'index début du relais est {idx.index_debut}."
+                        )
+
+                # -------------------------------------------------
+                # 1. Application stock
+                # -------------------------------------------------
+
                 appliquer_stock_relais(self)
 
-                # Calcul volume et recette réelle
+                # Synchronisation des index officiels
+                for idx in indexes:
+                    index_pompe = index_pompes[idx.index_pompe_id]
+
+                    index_pompe.index_courant = idx.index_fin
+                    index_pompe.save(update_fields=["index_courant"])
+
+                # -------------------------------------------------
+                # 2. Calcul volume et recette réelle
+                # -------------------------------------------------
+
                 total_volume = Decimal("0")
                 total_theorique = Decimal("0")
 
-                from stations.services.stock import get_volumes_par_produit
+                from stations.services.stock import (
+                    get_volumes_par_produit
+                )
 
                 volumes = get_volumes_par_produit(self)
 
                 for produit_id, volume in volumes.items():
 
-                    prix = PrixCarburant.objects.filter(
-                        tenant=self.tenant,
-                        station=self.station,
-                        produit_id=produit_id,
-                        actif=True
-                    ).values_list("prix_unitaire", flat=True).first() or 0
+                    prix = (
+                        PrixCarburant.objects
+                        .filter(
+                            tenant=self.tenant,
+                            station=self.station,
+                            produit_id=produit_id,
+                            actif=True,
+                        )
+                        .values_list(
+                            "prix_unitaire",
+                            flat=True
+                        )
+                        .first()
+                        or 0
+                    )
 
                     total_volume += volume
                     total_theorique += volume * prix
 
+                # -------------------------------------------------
+                # 3. RECETTE
+                # -------------------------------------------------
 
-                # 2️⃣ RECETTE
                 TransactionStation.objects.update_or_create(
                     source_type="RelaisEquipe_RECETTE",
                     source_id=self.id,
@@ -873,8 +1063,76 @@ class RelaisEquipe(models.Model):
                     }
                 )
 
-                # 3️⃣ DEPENSES VALIDÉES
+                # -------------------------------------------------
+                # 4. RECETTE LUBRIFIANTS
+                # -------------------------------------------------
+
+                from stations.models_lubrifiant.vente import VenteLubrifiant
+
+                total_lubrifiants = (
+                    VenteLubrifiant.objects
+                    .filter(
+                        tenant=self.tenant,
+                        station=self.station,
+                        relais=self,
+                    )
+                    .aggregate(
+                        total=Sum("montant")
+                    )["total"] or Decimal("0")
+                )
+
+                TransactionStation.objects.update_or_create(
+                    source_type="RelaisEquipe_LUBRIFIANTS",
+                    source_id=self.id,
+                    defaults={
+                        "tenant": self.tenant,
+                        "station": self.station,
+                        "type": "RECETTE",
+                        "montant": total_lubrifiants,
+                        "volume": None,
+                        "date": self.fin_relais,
+                        "finance_status": "CONFIRMEE",
+                    }
+                )
+
+                # -------------------------------------------------
+                # 5. RECETTE OPÉRATIONS DE BAIE
+                # -------------------------------------------------
+
+                from stations.models_baie import OperationBaie
+
+                total_baie = (
+                    OperationBaie.objects
+                    .filter(
+                        tenant=self.tenant,
+                        station=self.station,
+                        relais=self,
+                    )
+                    .aggregate(
+                        total=Sum("montant")
+                    )["total"] or Decimal("0")
+                )
+
+                TransactionStation.objects.update_or_create(
+                    source_type="RelaisEquipe_BAIE",
+                    source_id=self.id,
+                    defaults={
+                        "tenant": self.tenant,
+                        "station": self.station,
+                        "type": "RECETTE",
+                        "montant": total_baie,
+                        "volume": None,
+                        "date": self.fin_relais,
+                        "finance_status": "CONFIRMEE",
+                    }
+                )
+
+                # -------------------------------------------------
+                # 6. DEPENSES VALIDÉES
+                # -------------------------------------------------
+
                 if total_depenses > 0:
+
                     TransactionStation.objects.update_or_create(
                         source_type="RelaisEquipe_DEPENSE",
                         source_id=self.id,
@@ -890,25 +1148,24 @@ class RelaisEquipe(models.Model):
                     )
 
                 self.stock_applique = True
+                self.status = nouveau_statut
 
-        self.status = nouveau_statut
+                super().save()
 
-        super().save()
+                # -------------------------------------------------
+                # Audit
+                # -------------------------------------------------
 
-        # -------------------------------------------------
-        # AUDIT
-        # -------------------------------------------------
+                RelaisAudit.objects.create(
+                    relais=self,
+                    tenant=self.tenant,
+                    ancien_statut=ancien_statut,
+                    nouveau_statut=nouveau_statut,
+                    action="CHANGEMENT_STATUT",
+                    effectue_par=user,
+                )
 
-        from stations.models import RelaisAudit
-
-        RelaisAudit.objects.create(
-            relais=self,
-            tenant=self.tenant,
-            ancien_statut=ancien_statut,
-            nouveau_statut=nouveau_statut,
-            action="CHANGEMENT_STATUT",
-            effectue_par=user
-        )
+            return
 
     
     # -------------------------------------------------
@@ -916,7 +1173,8 @@ class RelaisEquipe(models.Model):
     # -------------------------------------------------
     def _valider_structure_complete(self):
         """
-        Vérifie que le relais est exploitable métier
+        Vérifie que le relais est exploitable métier.
+        Tous les îlots doivent posséder des index complets.
         """
 
         ilots = self.ilots.all()
@@ -927,6 +1185,7 @@ class RelaisEquipe(models.Model):
             )
 
         for ilot in ilots:
+
             indexes = ilot.indexes.all()
 
             if not indexes.exists():
@@ -935,9 +1194,21 @@ class RelaisEquipe(models.Model):
                 )
 
             for idx in indexes:
+
                 if idx.index_debut is None:
                     raise ValidationError(
-                        f"Index incomplet sur l'îlot '{ilot}'."
+                        f"Index début incomplet sur l'îlot '{ilot}'."
+                    )
+
+                if idx.index_fin is None:
+                    raise ValidationError(
+                        f"Index fin incomplet sur l'îlot '{ilot}'."
+                    )
+
+                if idx.index_fin < idx.index_debut:
+                    raise ValidationError(
+                        f"Index fin inférieur à l'index début "
+                        f"sur l'îlot '{ilot}'."
                     )
 
     # =====================================================
@@ -973,6 +1244,58 @@ class RelaisEquipe(models.Model):
 
         super().save(*args, **kwargs)
 
+
+class RelaisJauge(models.Model):
+
+    relais = models.ForeignKey(
+        "stations.RelaisEquipe",
+        on_delete=models.CASCADE,
+        related_name="jauges"
+    )
+
+    produit = models.ForeignKey(
+        "stations.ProduitCarburant",
+        on_delete=models.PROTECT,
+        related_name="jauges_relais"
+    )
+
+    jauge_debut = models.DecimalField(
+        max_digits=12,
+        decimal_places=2
+    )
+
+    jauge_fin = models.DecimalField(
+        max_digits=12,
+        decimal_places=2
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    updated_at = models.DateTimeField(
+        auto_now=True
+    )
+
+    class Meta:
+        db_table = "stations_relais_jauges"
+
+        constraints = [
+            models.UniqueConstraint(
+                fields=["relais", "produit"],
+                name="unique_jauge_produit_relais"
+            )
+        ]
+
+        ordering = ["produit__code"]
+
+    def __str__(self):
+        return (
+            f"{self.relais} - "
+            f"{self.produit.code}"
+        )
+
+
 class RelaisIndex(models.Model):
 
     relais_ilot = models.ForeignKey(
@@ -992,6 +1315,13 @@ class RelaisIndex(models.Model):
     )
 
     index_fin = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        null=True,
+        blank=True
+    )
+
+    retour_en_cuve = models.DecimalField(
         max_digits=12,
         decimal_places=2,
         null=True,
@@ -1028,6 +1358,18 @@ class RelaisIndex(models.Model):
 
         return self.index_fin - self.index_debut
 
+    @property
+    def volume_reellement_vendu(self):
+
+        volume = self.volume_vendu
+
+        if volume <= 0:
+            return Decimal("0")
+
+        retour = self.retour_en_cuve or Decimal("0")
+
+        return volume - retour
+
     def clean(self):
 
         # 🔒 Vérifier cohérence station
@@ -1051,6 +1393,118 @@ class RelaisIndex(models.Model):
             raise ValidationError(
                 "Relais transféré : modification interdite."
             )
+
+        if (
+            self.retour_en_cuve is not None
+            and self.retour_en_cuve < 0
+        ):
+            raise ValidationError(
+                "Le retour en cuve ne peut pas être négatif."
+            )
+
+        if (
+            self.index_fin is not None
+            and self.retour_en_cuve is not None
+            and self.retour_en_cuve > self.volume_vendu
+        ):
+            raise ValidationError(
+                "Le retour en cuve ne peut pas être supérieur au volume distribué."
+            )
+
+
+# ============================================================
+# RELAIS INDEX PHOTO
+# ============================================================
+class RelaisIndexPhoto(models.Model):
+
+    class Statut(models.TextChoices):
+        EN_ATTENTE = "EN_ATTENTE", "En attente"
+        OCR_EFFECTUE = "OCR_EFFECTUE", "OCR effectué"
+        VALIDE = "VALIDE", "Validé"
+        REJETE = "REJETE", "Rejeté"
+
+    relais_index = models.ForeignKey(
+        "stations.RelaisIndex",
+        on_delete=models.PROTECT,
+        related_name="photos",
+    )
+
+    photo = models.ImageField(
+        upload_to="relais/indexes/%Y/%m/%d/",
+    )
+
+    valeur_ocr = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
+
+    confiance_ocr = models.DecimalField(
+        max_digits=5,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
+
+    valeur_validee = models.DecimalField(
+        max_digits=12,
+        decimal_places=2,
+        null=True,
+        blank=True,
+    )
+
+    date_capture = models.DateTimeField(
+        auto_now_add=True,
+    )
+
+    capture_par = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        related_name="photos_indexes_capturees",
+    )
+
+    validee_par = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="photos_indexes_validees",
+    )
+
+    date_validation = models.DateTimeField(
+        null=True,
+        blank=True,
+    )
+
+    commentaire_validation = models.TextField(
+        blank=True,
+        default="",
+    )
+
+    statut = models.CharField(
+        max_length=20,
+        choices=Statut.choices,
+        default=Statut.EN_ATTENTE,
+    )
+
+    class Meta:
+        ordering = ["-date_capture"]
+
+        indexes = [
+            models.Index(
+                fields=["relais_index", "date_capture"]
+            ),
+            models.Index(
+                fields=["statut"]
+            ),
+        ]
+
+    def __str__(self):
+        return (
+            f"Photo index {self.relais_index_id} "
+            f"- {self.date_capture}"
+        )
 
 
 # ============================================================
@@ -1140,6 +1594,14 @@ class Depense(models.Model):
         "stations.Station",
         on_delete=models.CASCADE,
         related_name="depenses"
+    )
+
+    relais = models.ForeignKey(
+        "stations.RelaisEquipe",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+        related_name="depenses",
     )
 
     categorie = models.ForeignKey(
@@ -2034,3 +2496,10 @@ class Notification(models.Model):
 
     class Meta:
         ordering = ["-created_at"]
+
+
+from stations.models_lubrifiant import (
+    StockLubrifiant,
+    MouvementStockLubrifiant,
+    VenteLubrifiant,
+)

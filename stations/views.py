@@ -21,11 +21,12 @@ from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
 from weasyprint import HTML
 
+from stations.models_lubrifiant.stock import StockLubrifiant
 from stations.services.cloture_relais import generer_cloture_relais
 from .notifications.services import create_notification
 from datetime import datetime
 from calendar import monthrange
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation, ROUND_HALF_UP
 
 from django.db import models
 
@@ -56,7 +57,7 @@ from core.pagination import StandardResultsSetPagination
 from dashboard.permissions import IsAdminTenantStation
 from finances_station.models import TransactionStation
 from stations.models_depotage.cuve import Cuve, CuveStatus
-from stations.models_produit import PrixCarburant, ProduitCarburant
+from stations.models_produit import Lubrifiants, PrixCarburant, ProduitCarburant
 from stations.services.stock import get_capacite_totale_produit, get_seuil_critique_reel, get_stock_exploitable_produit
 
 from .models import (
@@ -68,12 +69,14 @@ from .models import (
     Notification,
     Pompe,
     RelaisEcart,
+    RelaisJauge,
     RemboursementEcart,
     Station,
     RelaisEquipe,
     FaitStatus,
     EncaissementRelais,
     RelaisIndex,
+    RelaisIndexPhoto,
     Ilot,
     ModePaiement,
     Versement,
@@ -97,6 +100,7 @@ from .serializers import (
     PrixCarburantSerializer,
     ProduitCarburantSerializer,
     RelaisEcartSerializer,
+    RelaisJaugeSerializer,
     RemboursementEcartSerializer,
     StationSerializer,
     RelaisEquipeSerializer,
@@ -104,6 +108,7 @@ from .serializers import (
     IlotSerializer,
     RelaisIlot,
     RelaisIlotSerializer,
+    RelaisIndexPhotoSerializer,
     ModePaiementSerializer,
     VersementSerializer,
     ReglementDetteSerializer,
@@ -113,6 +118,8 @@ from stations.services.reglement_dette_service import regler_dette
 from stations.services.cloture_journaliere import (
     generer_cloture_journaliere
 )
+
+from stations.services.ocr_index import extraire_index_ocr
 
 
 class ClotureJournaliereView(APIView):
@@ -150,7 +157,8 @@ class ClotureJournaliereView(APIView):
         data = generer_cloture_journaliere(
             station,
             date_debut,
-            date_fin
+            date_fin,
+            request.user,
         )
 
         return Response(data)
@@ -215,6 +223,26 @@ class StationViewSet(ModelViewSet):
 
             # 1️⃣ Création station
             station = serializer.save(tenant=user.tenant)
+
+            # 1️⃣ bis Création des stocks lubrifiants à zéro
+            # pour tous les lubrifiants actifs du tenant.
+            lubrifiants = Lubrifiants.objects.filter(
+                tenant=user.tenant,
+                actif=True,
+            )
+
+            StockLubrifiant.objects.bulk_create(
+                [
+                    StockLubrifiant(
+                        tenant=user.tenant,
+                        station=station,
+                        lubrifiant=lubrifiant,
+                        stock_actuel=0,
+                    )
+                    for lubrifiant in lubrifiants
+                ],
+                ignore_conflicts=True,
+            )
 
             # 2️⃣ Vérifier qu'aucun GERANT actif n'existe déjà
             if Utilisateur.objects.filter(
@@ -836,6 +864,458 @@ class IndexPompeViewSet(ModelViewSet):
         return IndexPompeWriteSerializer
 
 
+class RelaisIndexPhotoViewSet(ModelViewSet):
+
+    serializer_class = RelaisIndexPhotoSerializer
+    permission_classes = [IsAuthenticated]
+
+    @action(
+        detail=True,
+        methods=["post"],
+        url_path="ocr",
+    )
+    def ocr(self, request, pk=None):
+        """
+        Lance l'OCR sur une photo d'index.
+
+        L'OCR ne modifie jamais directement
+        RelaisIndex.index_fin.
+        """
+
+        # ==================================================
+        # RÉCUPÉRATION SÉCURISÉE
+        # ==================================================
+
+        photo = get_object_or_404(
+            RelaisIndexPhoto.objects
+            .select_related(
+                "relais_index",
+                "relais_index__relais_ilot",
+                "relais_index__relais_ilot__relais",
+                "relais_index__relais_ilot__relais__station",
+            ),
+            pk=pk,
+            relais_index__relais_ilot__relais__tenant=request.user.tenant,
+        )
+
+        relais = photo.relais_index.relais_ilot.relais
+
+        # ==================================================
+        # CONTRÔLE STATION
+        # ==================================================
+
+        if not request.user.station_id:
+            raise PermissionDenied(
+                "Votre compte n'est rattaché à aucune station."
+            )
+
+        if relais.station_id != request.user.station_id:
+            raise PermissionDenied(
+                "Cette photo n'appartient pas à votre station."
+            )
+
+        # ==================================================
+        # VERROUILLAGE MÉTIER
+        # ==================================================
+
+        if relais.status == FaitStatus.TRANSFERE:
+            raise ValidationError(
+                "Relais transféré : OCR interdit."
+            )
+
+        # ==================================================
+        # OCR
+        # ==================================================
+
+        resultat = extraire_index_ocr(
+            photo.photo,
+            index_debut=photo.relais_index.index_debut,
+        )
+
+        valeur = resultat["valeur"]
+        confiance = resultat["confiance"]
+
+        if valeur is None:
+            photo.statut = RelaisIndexPhoto.Statut.EN_ATTENTE
+            photo.valeur_ocr = None
+            photo.confiance_ocr = None
+            photo.save(
+                update_fields=[
+                    "statut",
+                    "valeur_ocr",
+                    "confiance_ocr",
+                ]
+            )
+
+            return Response(
+                {
+                    "detail": (
+                        "Aucune valeur numérique fiable "
+                        "n'a été détectée sur la photo."
+                    ),
+                    "photo_id": photo.id,
+                    "statut": photo.statut,
+                },
+                status=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            )
+
+        # ==================================================
+        # ENREGISTREMENT DE LA PROPOSITION OCR
+        # ==================================================
+
+        photo.valeur_ocr = valeur
+        photo.confiance_ocr = confiance
+        photo.statut = RelaisIndexPhoto.Statut.OCR_EFFECTUE
+
+        photo.save(
+            update_fields=[
+                "valeur_ocr",
+                "confiance_ocr",
+                "statut",
+            ]
+        )
+
+        # ==================================================
+        # RÉPONSE
+        # ==================================================
+
+        return Response(
+            {
+                "detail": "OCR effectué avec succès.",
+                "photo_id": photo.id,
+                "relais_index": photo.relais_index_id,
+                "index_debut": photo.relais_index.index_debut,
+                "valeur_ocr": valeur,
+                "confiance_ocr": confiance,
+                "statut": photo.statut,
+            },
+            status=status.HTTP_200_OK,
+        )
+
+    @action(
+        detail=True,
+        methods=["post"],
+        url_path="valider",
+    )
+    def valider(self, request, pk=None):
+        """
+        Valide ou corrige manuellement la valeur proposée par l'OCR.
+
+        La valeur validée devient la valeur officielle de
+        RelaisIndex.index_fin.
+
+        La valeur OCR originale est conservée pour audit.
+        """
+
+        # ==================================================
+        # 1. CONTRÔLE DU RÔLE
+        # ==================================================
+
+        if request.user.role not in [
+            UserRole.POMPISTE,
+            UserRole.SUPERVISEUR,
+            UserRole.GERANT,
+        ]:
+            raise PermissionDenied(
+                "Vous n'êtes pas autorisé à valider un index."
+            )
+
+        # ==================================================
+        # 2. RÉCUPÉRATION SÉCURISÉE
+        # ==================================================
+
+        photo = get_object_or_404(
+            RelaisIndexPhoto.objects
+            .select_related(
+                "relais_index",
+                "relais_index__relais_ilot",
+                "relais_index__relais_ilot__relais",
+                "relais_index__relais_ilot__relais__station",
+            ),
+            pk=pk,
+            relais_index__relais_ilot__relais__tenant=request.user.tenant,
+        )
+
+        relais = photo.relais_index.relais_ilot.relais
+
+        # ==================================================
+        # 3. CONTRÔLE STATION
+        # ==================================================
+
+        if not request.user.station_id:
+            raise PermissionDenied(
+                "Votre compte n'est rattaché à aucune station."
+            )
+
+        if relais.station_id != request.user.station_id:
+            raise PermissionDenied(
+                "Cette photo n'appartient pas à votre station."
+            )
+
+        # ==================================================
+        # 4. RELAIS TRANSFÉRÉ
+        # ==================================================
+
+        if relais.status == FaitStatus.TRANSFERE:
+            raise ValidationError(
+                "Relais transféré : validation de l'index interdite."
+            )
+
+        # ==================================================
+        # 5. CONTRÔLE DU STATUT OCR
+        # ==================================================
+
+        if photo.statut != RelaisIndexPhoto.Statut.OCR_EFFECTUE:
+            raise ValidationError(
+                "Cette photo doit d'abord être traitée par l'OCR."
+            )
+
+        if photo.valeur_ocr is None:
+            raise ValidationError(
+                "Aucune valeur OCR disponible pour cette photo."
+            )
+
+        # ==================================================
+        # 6. VALEUR À VALIDER
+        # ==================================================
+
+        valeur = request.data.get("valeur")
+
+        if valeur in [None, ""]:
+            valeur = photo.valeur_ocr
+        else:
+            try:
+                valeur = Decimal(str(valeur))
+            except (InvalidOperation, TypeError, ValueError):
+                raise ValidationError(
+                    "La valeur de l'index est invalide."
+                )
+
+        # ==================================================
+        # 7. VERROUILLAGE DU RELAIS INDEX
+        # ==================================================
+
+        with transaction.atomic():
+
+            relais_index = (
+                RelaisIndex.objects
+                .select_for_update()
+                .select_related(
+                    "relais_ilot",
+                    "relais_ilot__relais",
+                    "index_pompe",
+                    "index_pompe__produit",
+                )
+                .get(pk=photo.relais_index_id)
+            )
+
+            # ==================================================
+            # 8. CONTRÔLE INDEX
+            # ==================================================
+
+            if valeur < relais_index.index_debut:
+                raise ValidationError(
+                    "L'index fin doit être supérieur ou égal "
+                    "à l'index début."
+                )
+
+            # ==================================================
+            # 9. CONTRÔLE DU RELAIS APRÈS VERROUILLAGE
+            # ==================================================
+
+            relais = relais_index.relais_ilot.relais
+
+            if relais.status == FaitStatus.TRANSFERE:
+                raise ValidationError(
+                    "Relais transféré : validation de l'index interdite."
+                )
+
+            # ==================================================
+            # 10. CALCUL PRIX ET MONTANT THÉORIQUE
+            # ==================================================
+
+            prix = (
+                PrixCarburant.objects
+                .filter(
+                    tenant=relais_index.relais_ilot.relais.tenant,
+                    station=relais_index.relais_ilot.relais.station,
+                    produit=relais_index.index_pompe.produit,
+                    actif=True,
+                )
+                .values_list("prix_unitaire", flat=True)
+                .first()
+            )
+
+            relais_index.index_fin = valeur
+            relais_index.prix_unitaire = prix or 0
+            relais_index.montant_theorique = (
+                (relais_index.index_fin - relais_index.index_debut)
+                * relais_index.prix_unitaire
+            ).quantize(
+                Decimal("0.01"),
+                rounding=ROUND_HALF_UP,
+            )
+
+            # ==================================================
+            # 11. VALIDATION MÉTIER
+            # ==================================================
+
+            relais_index.full_clean()
+
+            relais_index.save(
+                update_fields=[
+                    "index_fin",
+                    "prix_unitaire",
+                    "montant_theorique",
+                ]
+            )
+
+            # ==================================================
+            # 11. ENREGISTREMENT DE LA VALIDATION
+            # ==================================================
+
+            photo.valeur_validee = valeur
+            photo.validee_par = request.user
+            photo.date_validation = timezone.now()
+            photo.commentaire_validation = (
+                request.data.get("commentaire", "") or ""
+            )
+            photo.statut = RelaisIndexPhoto.Statut.VALIDE
+
+            photo.save(
+                update_fields=[
+                    "valeur_validee",
+                    "validee_par",
+                    "date_validation",
+                    "commentaire_validation",
+                    "statut",
+                ]
+            )
+
+        # ==================================================
+        # 12. RÉPONSE
+        # ==================================================
+
+        volume_vendu = (
+            relais_index.index_fin
+            - relais_index.index_debut
+        )
+
+        return Response(
+            {
+                "detail": "Index validé avec succès.",
+                "photo_id": photo.id,
+                "relais_index": relais_index.id,
+                "index_debut": relais_index.index_debut,
+                "valeur_ocr": photo.valeur_ocr,
+                "valeur_validee": photo.valeur_validee,
+                "volume_vendu": volume_vendu,
+                "statut": photo.statut,
+                "validee_par": request.user.id,
+                "date_validation": photo.date_validation,
+                "commentaire_validation": (
+                    photo.commentaire_validation
+                ),
+            },
+            status=status.HTTP_200_OK,
+        )
+
+    def get_queryset(self):
+
+        user = self.request.user
+
+        qs = (
+            RelaisIndexPhoto.objects
+            .select_related(
+                "relais_index",
+                "relais_index__relais_ilot",
+                "relais_index__relais_ilot__relais",
+                "relais_index__relais_ilot__relais__station",
+                "relais_index__index_pompe",
+                "relais_index__index_pompe__pompe",
+                "relais_index__index_pompe__produit",
+                "capture_par",
+            )
+            .filter(
+                relais_index__relais_ilot__relais__tenant=user.tenant
+            )
+        )
+
+        # 🔒 Utilisateur station → sa station uniquement
+        if user.station_id:
+            qs = qs.filter(
+                relais_index__relais_ilot__relais__station_id=user.station_id
+            )
+        else:
+            # Aucun utilisateur opérationnel sans station
+            if user.role != UserRole.ADMIN_TENANT_STATION:
+                return qs.none()
+
+        # 🎯 Filtre optionnel par relais
+        relais_id = self.request.query_params.get("relais")
+
+        if relais_id:
+            qs = qs.filter(
+                relais_index__relais_ilot__relais_id=relais_id
+            )
+
+        # 🎯 Filtre optionnel par index
+        relais_index_id = self.request.query_params.get(
+            "relais_index"
+        )
+
+        if relais_index_id:
+            qs = qs.filter(
+                relais_index_id=relais_index_id
+            )
+
+        return qs.order_by("-date_capture")
+
+    def perform_create(self, serializer):
+
+        user = self.request.user
+
+        if not user.station:
+            raise PermissionDenied(
+                "Votre compte n'est rattaché à aucune station."
+            )
+
+        relais_index = serializer.validated_data["relais_index"]
+
+        # ==================================================
+        # 1. Vérification tenant / station
+        # ==================================================
+
+        relais = relais_index.relais_ilot.relais
+
+        if relais.tenant_id != user.tenant_id:
+            raise PermissionDenied(
+                "Cet index n'appartient pas à votre tenant."
+            )
+
+        if relais.station_id != user.station_id:
+            raise PermissionDenied(
+                "Cet index n'appartient pas à votre station."
+            )
+
+        # ==================================================
+        # 2. Le relais transféré est verrouillé
+        # ==================================================
+
+        if relais.status == FaitStatus.TRANSFERE:
+            raise ValidationError(
+                "Relais transféré : ajout de photo interdit."
+            )
+
+        # ==================================================
+        # 3. La photo concerne uniquement l'index fin
+        # ==================================================
+
+        serializer.save(
+            capture_par=user
+        )
+
+
 class IndexPompeActifListView(ListAPIView):
     permission_classes = [IsAuthenticated, IsStationAdminOrActor]
 
@@ -1223,6 +1703,98 @@ class RelaisEquipeViewSet(ModelViewSet):
         relais.save(bypass_validation=True)  # 🔥 clé
 
         return Response({"status": "brouillon"})
+
+
+class RelaisJaugeViewSet(ModelViewSet):
+
+    serializer_class = RelaisJaugeSerializer
+    permission_classes = [IsAuthenticated, CanAccessStations]
+
+    def get_queryset(self):
+
+        user = self.request.user
+
+        qs = (
+            RelaisJauge.objects
+            .select_related(
+                "relais",
+                "produit",
+            )
+            .filter(
+                relais__tenant_id=user.tenant_id
+            )
+        )
+
+        if user.station_id:
+            qs = qs.filter(
+                relais__station_id=user.station_id
+            )
+
+        relais_id = self.request.query_params.get("relais")
+
+        if relais_id:
+            qs = qs.filter(
+                relais_id=relais_id
+            )
+
+        return qs.order_by(
+            "produit__code"
+        )
+
+    def perform_create(self, serializer):
+
+        user = self.request.user
+
+        relais = serializer.validated_data["relais"]
+
+        if relais.tenant_id != user.tenant_id:
+            raise PermissionDenied(
+                "Ce relais n'appartient pas à votre tenant."
+            )
+
+        if user.station_id and relais.station_id != user.station_id:
+            raise PermissionDenied(
+                "Ce relais n'appartient pas à votre station."
+            )
+
+        if relais.status not in (
+            FaitStatus.BROUILLON,
+            FaitStatus.SOUMIS,
+        ):
+            raise PermissionDenied(
+                "Les jauges ne peuvent être saisies "
+                "que pour un relais en brouillon ou soumis."
+            )
+
+        serializer.save()
+
+    def perform_update(self, serializer):
+
+        instance = self.get_object()
+
+        if instance.relais.status not in (
+            FaitStatus.BROUILLON,
+            FaitStatus.SOUMIS,
+        ):
+            raise PermissionDenied(
+                "Les jauges ne peuvent être modifiées "
+                "que pour un relais en brouillon ou soumis."
+            )
+
+        serializer.save()
+
+    def perform_destroy(self, instance):
+
+        if instance.relais.status not in (
+            FaitStatus.BROUILLON,
+            FaitStatus.SOUMIS,
+        ):
+            raise PermissionDenied(
+                "Les jauges ne peuvent être supprimées "
+                "que pour un relais en brouillon ou soumis."
+            )
+
+        instance.delete()
 
 
 class AdminTenantStationDashboardView(APIView):
@@ -1781,57 +2353,75 @@ class VersementViewSet(ModelViewSet):
 
         user = self.request.user
 
+        # ==================================================
+        # 1. Base : isolation tenant
+        # ==================================================
+
         qs = (
             Versement.objects
             .select_related(
                 "relais_ilot",
                 "relais_ilot__relais",
+                "relais_ilot__relais__station",
                 "relais_ilot__ilot",
                 "relais_ilot__responsable",
             )
-            .filter(tenant=user.tenant)
+            .filter(
+                tenant=user.tenant
+            )
         )
 
-        if user.station:
+        # ==================================================
+        # 2. Cloisonnement station
+        # ==================================================
+
+        if not user.station:
+            # Un utilisateur station sans station affectée
+            # ne doit jamais voir les données opérationnelles.
+            return qs.none()
+
+        qs = qs.filter(
+            relais_ilot__relais__station_id=user.station_id
+        )
+
+        # ==================================================
+        # 3. Filtre relais
+        # ==================================================
+
+        relais_id = self.request.query_params.get("relais")
+
+        if relais_id:
             qs = qs.filter(
-                relais_ilot__relais__station=user.station
+                relais_ilot__relais_id=relais_id
             )
 
-        # superviseur : voit tout
+        # ==================================================
+        # 4. Périmètre métier
+        # ==================================================
+
         if user.role in ["SUPERVISEUR", "GERANT"]:
             return qs.order_by("-date_versement")
 
-        # responsable d'îlot : seulement ses versements
+        # ==================================================
+        # 5. Responsable d'îlot
+        # ==================================================
+
         qs = qs.filter(
-            relais_ilot__responsable=user
+            relais_ilot__responsable_id=user.id
         )
-       
 
         return qs.order_by("-date_versement")
-
-    # création
-    # def perform_create(self, serializer):
-
-    #     user = self.request.user
-    #     relais_ilot = serializer.validated_data["relais_ilot"]
-
-    #     # empêcher de créer un versement pour un autre îlot
-    #     if user.role != "SUPERVISEUR":
-    #         if relais_ilot.responsable != user:
-    #             raise PermissionDenied(
-    #                 "Vous ne pouvez saisir que votre versement."
-    #             )
-
-    #     serializer.save(
-    #         tenant=user.tenant,
-    #         created_by=user
-    #     )
 
     # création
     def perform_create(self, serializer):
 
         user = self.request.user
         relais_ilot = serializer.validated_data["relais_ilot"]
+
+        if not user.station:
+            raise PermissionDenied(
+                "Votre compte n'est rattaché à aucune station."
+            )
 
         # ==================================================
         # 1. Vérifier le relais courant de la station
@@ -1890,10 +2480,22 @@ class VersementViewSet(ModelViewSet):
     def perform_update(self, serializer):
 
         user = self.request.user
+        versement = self.get_object()
 
         if user.role != "SUPERVISEUR":
             raise PermissionDenied(
                 "Seul un superviseur peut modifier un versement."
+            )
+
+        if not user.station:
+            raise PermissionDenied(
+                "Votre compte n'est rattaché à aucune station."
+            )
+
+        if versement.relais_ilot.relais.station_id != user.station_id:
+            raise PermissionDenied(
+                "Vous ne pouvez pas modifier un versement "
+                "d'une autre station."
             )
 
         serializer.save()
@@ -1907,16 +2509,51 @@ class DepenseViewSet(ModelViewSet):
 
         user = self.request.user
 
-        return Depense.objects.filter(
-            tenant=self.request.user.tenant,
-            station=user.station 
-        ).select_related("categorie").order_by("-date_depense")
+        qs = Depense.objects.filter(
+            tenant=user.tenant,
+            station=user.station
+        )
+
+        relais_id = self.request.query_params.get("relais")
+
+        if relais_id:
+            qs = qs.filter(relais_id=relais_id)
+
+        return (
+            qs
+            .select_related("categorie", "relais")
+            .order_by("-date_depense")
+        )
 
     def perform_create(self, serializer):
+
+        user = self.request.user
+
+        relais = (
+            RelaisEquipe.objects
+            .filter(
+                tenant=user.tenant,
+                station=user.station,
+                status__in=[
+                    RelaisEquipe.Statut.BROUILLON,
+                    RelaisEquipe.Statut.SOUMIS,
+                ],
+            )
+            .order_by("-debut_relais")
+            .first()
+        )
+
+        if not relais:
+            raise ValidationError(
+                "Impossible d'enregistrer une dépense : "
+                "aucun relais en cours de traitement pour cette station."
+            )
+
         serializer.save(
-            tenant=self.request.user.tenant,
-            station=self.request.user.station,
-            created_by=self.request.user
+            tenant=user.tenant,
+            station=user.station,
+            relais=relais,
+            created_by=user
         )
 
     @action(detail=True, methods=["post"])
@@ -1974,12 +2611,20 @@ class DetteStationViewSet(viewsets.ModelViewSet):
                 station=user.station
             )
 
+        # Filtrage optionnel par relais
+        relais_id = self.request.query_params.get("relais")
+
+        if relais_id:
+            qs = qs.filter(
+                relais_id=relais_id
+            )
+
         return (
             qs
             .select_related(
                 "client",
                 "station",
-                "produit"
+                "produit",
             )
             .prefetch_related(
                 "reglements__mode_paiement"
@@ -1995,19 +2640,49 @@ class DetteStationViewSet(viewsets.ModelViewSet):
                 "L'administrateur tenant ne peut pas créer de dettes."
             )
 
-        relais = (
-            RelaisEquipe.objects
-            .filter(
-                tenant=user.tenant,
-                station=user.station,
-                status__in=[
-                    RelaisEquipe.Statut.BROUILLON,
-                    RelaisEquipe.Statut.SOUMIS,
-                ],
+        # ==================================================
+        # RELAIS
+        # ==================================================
+
+        relais_id = self.request.data.get("relais")
+
+        if relais_id:
+
+            relais = (
+                RelaisEquipe.objects
+                .filter(
+                    id=relais_id,
+                    tenant=user.tenant,
+                    station=user.station,
+                    status__in=[
+                        RelaisEquipe.Statut.BROUILLON,
+                        RelaisEquipe.Statut.SOUMIS,
+                    ],
+                )
+                .first()
             )
-            .order_by("-debut_relais")
-            .first()
-        )
+
+            if not relais:
+                raise ValidationError(
+                    "Le relais indiqué n'existe pas "
+                    "ou n'appartient pas à cette station."
+                )
+
+        else:
+
+            relais = (
+                RelaisEquipe.objects
+                .filter(
+                    tenant=user.tenant,
+                    station=user.station,
+                    status__in=[
+                        RelaisEquipe.Statut.BROUILLON,
+                        RelaisEquipe.Statut.SOUMIS,
+                    ],
+                )
+                .order_by("-debut_relais")
+                .first()
+            )
 
         if not relais:
             raise ValidationError(
@@ -2015,8 +2690,16 @@ class DetteStationViewSet(viewsets.ModelViewSet):
                 "aucun relais en cours de traitement pour cette station."
             )
 
+        # ==================================================
+        # PRODUIT / VOLUME
+        # ==================================================
+
         produit = serializer.validated_data["produit"]
         volume = serializer.validated_data["volume"]
+
+        # ==================================================
+        # PRIX CARBURANT
+        # ==================================================
 
         try:
 
@@ -2035,18 +2718,29 @@ class DetteStationViewSet(viewsets.ModelViewSet):
 
         prix_unitaire = prix.prix_unitaire
 
-        montant = Decimal(volume) * Decimal(prix_unitaire)
+        montant = (
+            Decimal(volume) *
+            Decimal(prix_unitaire)
+        )
+
+        # ==================================================
+        # TRANSACTION
+        # ==================================================
 
         transaction = TransactionStation.objects.create(
             tenant=user.tenant,
             station=user.station,
             type="RECETTE",
             source_type="DETTE",
-            source_id=0,  # temporaire
+            source_id=0,
             montant=montant,
             volume=volume,
             date=timezone.now()
         )
+
+        # ==================================================
+        # DETTE
+        # ==================================================
 
         dette = serializer.save(
             tenant=user.tenant,
@@ -2058,6 +2752,10 @@ class DetteStationViewSet(viewsets.ModelViewSet):
             montant_initial=montant,
             created_by=user
         )
+
+        # ==================================================
+        # LIEN TRANSACTION → DETTE
+        # ==================================================
 
         transaction.source_id = dette.id
 
@@ -2756,6 +3454,171 @@ class ClotureRelaisPdfView(APIView):
         ] = (
             f'attachment; '
             f'filename="cloture-relais-{relais.id}.pdf"'
+        )
+
+        return response
+
+class ClotureJournalierePdfView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+
+        # ==================================================
+        # STATION
+        # ==================================================
+
+        station_id = request.query_params.get("station_id")
+
+        if not station_id:
+            return Response(
+                {"detail": "station_id requis"},
+                status=400
+            )
+
+        try:
+            station = Station.objects.get(
+                pk=station_id
+            )
+        except Station.DoesNotExist:
+            return Response(
+                {"detail": "Station introuvable."},
+                status=404
+            )
+
+        user = request.user
+
+        # ==================================================
+        # POMPISTE
+        # ==================================================
+
+        if user.role == UserRole.POMPISTE:
+
+            relais = (
+                RelaisEquipe.objects
+                .filter(
+                    station=station,
+                    equipe_entrante=user.get_full_name(),
+                    status=RelaisEquipe.Statut.TRANSFERE,
+                )
+                .order_by("-fin_relais")
+            )
+
+            relais_item = relais.first()
+
+            if not relais_item:
+                return Response(
+                    {
+                        "detail":
+                        "Aucun relais transféré trouvé "
+                        "pour ce pompiste."
+                    },
+                    status=404
+                )
+
+            # Le pompiste ne choisit pas la période.
+            # Elle est déterminée directement par son dernier relais.
+            date_debut = relais_item.debut_relais.date()
+            date_fin = relais_item.fin_relais.date()
+
+        # ==================================================
+        # AUTRES PROFILS
+        # ==================================================
+
+        else:
+
+            date_debut = request.query_params.get(
+                "date_debut"
+            )
+
+            date_fin = request.query_params.get(
+                "date_fin"
+            )
+
+            if not date_debut:
+                return Response(
+                    {
+                        "detail":
+                        "date_debut requis"
+                    },
+                    status=400
+                )
+
+            if not date_fin:
+                return Response(
+                    {
+                        "detail":
+                        "date_fin requis"
+                    },
+                    status=400
+                )
+
+            try:
+                date_debut = datetime.strptime(
+                    date_debut,
+                    "%Y-%m-%d"
+                ).date()
+
+                date_fin = datetime.strptime(
+                    date_fin,
+                    "%Y-%m-%d"
+                ).date()
+
+            except ValueError:
+                return Response(
+                    {
+                        "detail":
+                        "Format de date invalide. "
+                        "Utilisez YYYY-MM-DD."
+                    },
+                    status=400
+                )
+
+        # ==================================================
+        # GENERATION DE LA CLOTURE
+        # ==================================================
+
+        data = generer_cloture_journaliere(
+            station,
+            date_debut,
+            date_fin,
+            user=request.user,
+        )
+
+        # ==================================================
+        # RENDU HTML
+        # ==================================================
+
+        context = {
+            "data": data,
+            **data,
+        }
+
+        html_string = render_to_string(
+            "pdf/cloture_journaliere.html",
+            context,
+            request=request,
+        )
+
+        # ==================================================
+        # GENERATION PDF
+        # ==================================================
+
+        pdf = HTML(
+            string=html_string,
+            base_url=request.build_absolute_uri("/")
+        ).write_pdf()
+
+        # ==================================================
+        # REPONSE
+        # ==================================================
+
+        response = HttpResponse(
+            pdf,
+            content_type="application/pdf",
+        )
+
+        response["Content-Disposition"] = (
+            'attachment; filename="cloture-journaliere.pdf"'
         )
 
         return response

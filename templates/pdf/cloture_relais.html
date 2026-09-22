@@ -227,6 +227,132 @@
 
     </table>
 
+    {% if data.jauges %}
+
+    <div class="section-title">
+        Jauges du relais
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Produit</th>
+                <th>Code</th>
+                <th>Stock départ</th>
+                <th>Stock réel arrivée</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for jauge in data.jauges %}
+
+            <tr>
+                <td>{{ jauge.produit }}</td>
+                <td>{{ jauge.produit_code }}</td>
+                <td>{{ jauge.stock_depart }}</td>
+                <td>{{ jauge.stock_reel_arrivee }}</td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% endif %}
+
+    {% if data.ventes_lubrifiants %}
+
+    <div class="section-title">
+        Ventes de lubrifiants
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Lubrifiant</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Montant</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for vente in data.ventes_lubrifiants %}
+
+            <tr>
+                <td>{{ vente.lubrifiant }}</td>
+
+                <td>
+                    {{ vente.quantite }}
+                </td>
+
+                <td>
+                    {{ vente.prix_unitaire }}
+                </td>
+
+                <td>
+                    {{ vente.montant }}
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% endif %}
+
+    {% if data.operations_baie %}
+
+    <div class="section-title">
+        Opérations de baie
+    </div>
+
+    <table>
+
+        <thead>
+            <tr>
+                <th>Prestation</th>
+                <th>Quantité</th>
+                <th>Prix unitaire</th>
+                <th>Montant</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        {% for operation in data.operations_baie %}
+
+            <tr>
+                <td>{{ operation.prestation }}</td>
+
+                <td>
+                    {{ operation.quantite }}
+                </td>
+
+                <td>
+                    {{ operation.prix_unitaire }}
+                </td>
+
+                <td>
+                    {{ operation.montant }}
+                </td>
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    {% endif %}
+
 
 {% if data.credits.details %}
 

@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+
+    <meta charset="UTF-8">
+
+    <style>
+
+        /* ============================================================
+           FORMAT : A4 PORTRAIT, 1 SEULE PAGE
+           Marges réduites -> zone utile 196 mm x 285 mm
+           ============================================================ */
+        @page {
+            size: A4 portrait;
+            margin: 6mm 7mm 6mm 7mm;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 8.2pt;
+            color: #1f2937;
+            line-height: 1.2;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ===== EN-TÊTE ===== */
+        .header {
+            display: table;
+            width: 100%;
+            background: linear-gradient(135deg, #0b1f3a 0%, #142d54 60%, #1c3a66 100%);
+            color: #ffffff;
+            border-radius: 4px;
+            padding: 6px 12px;
+            margin-bottom: 4px;
+        }
+
+        .header-row { display: table-row; }
+
+        .header-left { display: table-cell; vertical-align: middle; width: 58%; }
+
+        .header-right { display: table-cell; vertical-align: middle; width: 42%; text-align: right; }
+
+        .brand {
+            font-size: 15pt;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .brand .accent { color: #d4af6a; }
+
+        .subtitle {
+            font-size: 7.4pt;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: #b9c6dc;
+            margin-top: 2px;
+        }
+
+        .header-meta {
+            font-size: 7.8pt;
+            line-height: 1.5;
+            color: #e8edf5;
+        }
+
+        .header-meta b { color: #ffffff; }
+
+        .badge {
+            display: inline-block;
+            background: rgba(212,175,106,0.18);
+            border: 1px solid #d4af6a;
+            color: #d4af6a;
+            padding: 1px 6px;
+            border-radius: 8px;
+            font-size: 6.4pt;
+            margin-left: 4px;
+            font-weight: 600;
+        }
+
+        /* ===== BANDEAU KPI (RÉSUMÉ) ===== */
+        .kpi-strip {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 4px;
+            margin-bottom: 4px;
+        }
+
+        .kpi-row { display: table-row; }
+
+        .kpi {
+            display: table-cell;
+            background: #ffffff;
+            border: 1px solid #e2e6ec;
+            border-left: 3px solid #1c3a66;
+            border-radius: 3px;
+            padding: 4px 7px;
+            vertical-align: middle;
+            height: 30px;
+        }
+
+        .kpi.gold { border-left-color: #c79a45; }
+
+        .kpi-label {
+            font-size: 6.2pt;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: #7a8699;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .kpi-value {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #0b1f3a;
+            margin-top: 2px;
+            white-space: nowrap;
+        }
+
+        .kpi-value .unit { font-size: 6.4pt; color: #8a94a6; font-weight: 500; }
+
+        /* ===== TITRES DE SECTION ===== */
+        .section-title {
+            font-size: 7.8pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            color: #0b1f3a;
+            background: #f0f3f8;
+            border-left: 3px solid #c79a45;
+            padding: 3px 8px;
+            margin-bottom: 2px;
+            margin-top: 0;
+        }
+
+        .index-title {
+            font-size: 6.4pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            color: #8a6d1f;
+            margin: 2px 0 2px 0;
+        }
+
+        /* ===== MISE EN PAGE DEUX COLONNES ===== */
+        .columns { display: table; width: 100%; table-layout: fixed; border-spacing: 0; }
+
+        .col { display: table-cell; vertical-align: top; padding-right: 5px; }
+
+        .col:last-child { padding-right: 0; padding-left: 5px; }
+
+        .block { margin-bottom: 4px; }
+
+        /* ===== TABLEAUX ===== */
+        table.data {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            font-size: 7.6pt;
+        }
+
+        table.data th {
+            background: #0b1f3a;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: left;
+            padding: 3px 5px;
+            font-size: 6.4pt;
+            text-transform: uppercase;
+            letter-spacing: 0.1px;
+        }
+
+        table.data td {
+            padding: 2.1px 5px;
+            border-bottom: 1px solid #e9ecf1;
+        }
+
+        table.data tr:nth-child(even) td { background: #f7f9fb; }
+
+        table.data td.num, table.data th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+        table.data.dense { font-size: 7.2pt; }
+        table.data.dense th { font-size: 6.2pt; padding: 2.5px 4px; }
+        table.data.dense td { padding: 1.9px 4px; }
+
+        /* Variante largeur fixe : pour les tableaux à nombreuses colonnes
+           dans une colonne étroite, empêche le débordement horizontal */
+        table.data.fixed { table-layout: fixed; }
+        table.data.fixed th { white-space: normal; }
+
+        table.data tfoot td, table.data tr.total-row td {
+            font-weight: 700;
+            background: #eef1f6 !important;
+            border-top: 1.2px solid #0b1f3a;
+            border-bottom: none;
+        }
+
+        .pos, .excedent { color: #1a7f37; font-weight: 700; }
+        .neg, .manque { color: #b3261e; font-weight: 700; }
+
+        .status-pill {
+            display: inline-block;
+            background: #eef1f6;
+            color: #3a4658;
+            border-radius: 6px;
+            padding: 1px 5px;
+            font-size: 5.6pt;
+            font-weight: 700;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+        .status-pill.pending { background: #fdecea; color: #b3261e; }
+        .status-pill.ok { background: #e7f6ec; color: #1a7f37; }
+        .status-pill.partial { background: #fff4e0; color: #a9660b; }
+
+        /* Sous-table "Index des pompes" imbriquée dans les jauges */
+        table.index-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fbfaf5;
+            font-size: 6.8pt;
+            margin: 1px 0 2px 0;
+            border: 1px solid #ecdfb8;
+        }
+
+        table.index-table th {
+            background: #c79a45;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: left;
+            padding: 2px 5px;
+            font-size: 5.8pt;
+            text-transform: uppercase;
+        }
+
+        table.index-table td {
+            padding: 1.3px 5px;
+            border-bottom: 1px solid #f0e6c9;
+        }
+
+        table.index-table td.num, table.index-table th.num { text-align: right; font-variant-numeric: tabular-nums; }
+
+        /* ===== MODES ADAPTATIFS =====
+           Le gabarit compte les lignes de pompes ; s'il y en a beaucoup,
+           il ajoute la classe "tight" ou "xtight" sur la balise body pour resserrer
+           automatiquement la mise en page et rester sur une seule page. */
+        body.tight table.index-table { font-size: 6.4pt; }
+        body.tight table.index-table td { padding: 0.5px 5px; }
+        body.tight table.index-table th { padding: 1.5px 5px; }
+        body.tight table.data.dense { font-size: 7pt; }
+        body.tight table.data.dense td { padding: 1.3px 4px; }
+        body.tight .block { margin-bottom: 3px; }
+        body.tight .header { padding: 4px 12px; margin-bottom: 3px; }
+        body.tight .kpi { height: 26px; padding: 2px 7px; }
+        body.tight .kpi-value { font-size: 9pt; }
+        body.tight .section-title { padding: 2px 8px; margin-bottom: 2px; }
+        body.tight .signatures { margin-top: 2px; }
+        body.tight .sig-cell { padding-bottom: 8px; }
+
+        body.xtight table.index-table { font-size: 6pt; }
+        body.xtight table.index-table td { padding: 0.2px 5px; }
+        body.xtight table.index-table th { padding: 1px 5px; }
+        body.xtight table.data.dense { font-size: 6.6pt; }
+        body.xtight table.data.dense td { padding: 0.9px 4px; }
+        body.xtight .block { margin-bottom: 2px; }
+        body.xtight .header { padding: 3px 12px; margin-bottom: 2px; }
+        body.xtight .kpi { height: 22px; padding: 1px 7px; }
+        body.xtight .kpi-value { font-size: 8.4pt; margin-top: 1px; }
+        body.xtight .section-title { padding: 1.5px 8px; margin-bottom: 1px; }
+        body.xtight .signatures { margin-top: 1px; }
+        body.xtight .sig-cell { padding-bottom: 6px; }
+        body.xtight .footer { margin-top: 0; }
+
+        table.index-table tr.grp-start td { border-top: 1px solid #c79a45; }
+
+        /* ===== BANDEAU ANALYSE ===== */
+        .analysis-strip {
+            display: table;
+            table-layout: fixed;
+            border-collapse: separate;
+            border-spacing: 3px;
+            margin-top: 2px;
+        }
+
+        .analysis-row { display: table-row; }
+
+        .analysis-cell {
+            display: table-cell;
+            background: #0b1f3a;
+            color: #fff;
+            border-radius: 3px;
+            padding: 5px 5px;
+            vertical-align: middle;
+            height: 32px;
+        }
+
+        .analysis-cell .kpi-label {
+            color: #9fb0c9;
+            font-size: 5.6pt;
+            white-space: normal;
+            line-height: 1.2;
+        }
+
+        .analysis-cell .kpi-value { color: #ffffff; font-size: 8.4pt; }
+
+        .analysis-cell.gold-val .kpi-value { color: #d4af6a; }
+
+        /* ===== SYNTHÈSE FINANCIÈRE (SOLDE THÉORIQUE) ===== */
+        .balance-card {
+            display: table;
+            width: 100%;
+            background: #0b1f3a;
+            border-radius: 3px;
+            margin-top: 2px;
+        }
+
+        .balance-row { display: table-row; }
+
+        .balance-label {
+            display: table-cell;
+            padding: 5px 10px;
+            color: #b9c6dc;
+            font-size: 7pt;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            font-weight: 600;
+            vertical-align: middle;
+        }
+
+        .balance-value {
+            display: table-cell;
+            padding: 5px 10px;
+            color: #d4af6a;
+            font-size: 11pt;
+            font-weight: 700;
+            text-align: right;
+            vertical-align: middle;
+        }
+
+        /* ===== SIGNATURES ===== */
+        .signatures {
+            display: table;
+            width: 100%;
+            table-layout: fixed;
+            margin-top: 6px;
+            border-spacing: 18px 0;
+        }
+
+        .sig-row { display: table-row; }
+
+        .sig-cell {
+            display: table-cell;
+            border-top: 1px solid #a9b3c2;
+            padding-top: 4px;
+            padding-bottom: 12px;
+            text-align: center;
+            font-size: 7pt;
+            color: #55606f;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        /* ===== PIED DE PAGE ===== */
+        .footer {
+            text-align: center;
+            font-size: 6.2pt;
+            color: #9aa4b2;
+            margin-top: 2px;
+            font-style: italic;
+        }
+
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+
+        .index-detail-row td {
+            padding: 0 !important;
+            border-top: none !important;
+        }
+
+        .index-detail {
+            margin: 0 8px 10px 8px;
+            padding: 8px 10px;
+            background: #f8fafc;
+            border-left: 3px solid #cbd5e1;
+        }
+
+        .index-title {
+            font-size: 9px;
+            font-weight: 700;
+            color: #475569;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .index-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 8px;
+        }
+
+        .index-table th {
+            padding: 4px 5px;
+            background: #e2e8f0;
+            color: #475569;
+            font-weight: 700;
+            text-align: left;
+            white-space: nowrap;
+        }
+
+        .index-table td {
+            padding: 4px 5px;
+            border-bottom: 1px solid #e2e8f0;
+            color: #334155;
+        }
+
+        .index-table .num {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+    </style>
+
+</head>
+
+<body
+    class="{% if nombre_indexes > 17 %}xtight{% elif nombre_indexes > 12 %}tight{% endif %}"
+>
+
+
+<!-- ========================================================= -->
+<!-- EN-TÊTE -->
+<!-- ========================================================= -->
+
+<div class="header">
+    <div class="header-row">
+        <div class="header-left">
+            <div class="brand">{{ data.meta.tenant }}</div>
+            <div class="subtitle">Fiche de Clôture Journalière &mdash; Station {{ data.meta.station }}</div>
+        </div>
+        <div class="header-right">
+            <div class="header-meta">
+                <b>Période&nbsp;:</b> {{ data.meta.date_debut }} &rarr; {{ data.meta.date_fin }}{{ data.meta.tenant }}</span><br>
+                <b>Relais&nbsp;:</b> {{ data.meta.nombre_relais }}&nbsp;&nbsp;&nbsp;<b>Îlots&nbsp;:</b> {{ data.meta.nombre_ilots }}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ========================================================= -->
+<!-- RÉSUMÉ -->
+<!-- ========================================================= -->
+
+<div class="section-title">
+    Résumé de la journée
+</div>
+
+<div class="kpi-strip">
+
+    <div class="kpi-row">
+
+        <div class="kpi gold">
+            <div class="kpi-label">Volume carburant vendu</div>
+            <div class="kpi-value">{{ data.resume.volume_vendu }}</div>
+        </div>
+
+        <div class="kpi">
+            <div class="kpi-label">Vente carburant</div>
+            <div class="kpi-value">{{ data.resume.vente_theorique }}</div>
+        </div>
+
+        <div class="kpi">
+            <div class="kpi-label">Encaissements</div>
+            <div class="kpi-value">{{ data.resume.encaissements }}</div>
+        </div>
+
+        <div class="kpi">
+            <div class="kpi-label">Versements</div>
+            <div class="kpi-value">{{ data.resume.versements }}</div>
+        </div>
+
+    </div>
+
+    <div class="kpi-row">
+
+        <div class="kpi">
+            <div class="kpi-label">Ventes lubrifiants</div>
+            <div class="kpi-value">{{ data.resume.ventes_lubrifiants }}</div>
+        </div>
+
+        <div class="kpi">
+            <div class="kpi-label">Opérations baie</div>
+            <div class="kpi-value">{{ data.resume.operations_baie }}</div>
+        </div>
+
+        <div class="kpi">
+            <div class="kpi-label">Dépenses</div>
+            <div class="kpi-value">{{ data.resume.depenses }}</div>
+        </div>
+
+        <div class="kpi">
+            <div class="kpi-label">Crédits</div>
+            <div class="kpi-value">{{ data.resume.credits }}</div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- JAUGES (pleine largeur : jusqu'à 9 colonnes) -->
+<!-- ========================================================= -->
+
+{% if data.jauges %}
+
+<div class="block">
+
+    <div class="section-title">
+        Jauges et index de clôture
+    </div>
+
+    <table class="data dense">
+
+        <thead>
+
+            <tr>
+
+                <th>Produit</th>
+                <th>Code</th>
+
+                <th class="num">
+                    Stock départ
+                </th>
+
+                <th class="num">
+                    Dépotage
+                </th>
+
+                <th class="num">
+                    Volume distribué
+                </th>
+
+                <th class="num">
+                    Retour cuve
+                </th>
+
+                <th class="num">
+                    Stock théorique
+                </th>
+
+                <th class="num">
+                    Stock réel
+                </th>
+
+                <th class="num">
+                    Écart
+                </th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for jauge in data.jauges %}
+
+            <!-- ================================================= -->
+            <!-- LIGNE PRINCIPALE DE LA JAUGE -->
+            <!-- ================================================= -->
+
+            <tr>
+
+                <td>
+                    <strong>
+                        {{ jauge.produit }}
+                    </strong>
+                </td>
+
+                <td>
+                    {{ jauge.produit_code }}
+                </td>
+
+                <td class="num">
+                    {{ jauge.stock_depart }}
+                </td>
+
+                <td class="num">
+                    {{ jauge.entrees }}
+                </td>
+
+                <td class="num">
+                    {{ jauge.volume_distribue }}
+                </td>
+
+                <td class="num">
+                    {{ jauge.retour_cuve }}
+                </td>
+
+                <td class="num">
+                    {{ jauge.stock_theorique }}
+                </td>
+
+                <td class="num">
+                    {{ jauge.stock_reel_arrivee }}
+                </td>
+
+                <td class="num
+                    {% if jauge.ecart < 0 %}
+                        neg
+                    {% elif jauge.ecart > 0 %}
+                        pos
+                    {% endif %}
+                ">
+
+                    {{ jauge.ecart }}
+
+                </td>
+
+            </tr>
+
+
+            <!-- ================================================= -->
+            <!-- DÉTAIL DES INDEX DU PRODUIT -->
+            <!-- ================================================= -->
+
+            {% if jauge.indexes %}
+
+            <tr class="index-detail-row">
+
+                <td colspan="9">
+
+                    <div class="index-detail">
+
+                        <div class="index-title">
+                            Détail des index — {{ jauge.produit }}
+                        </div>
+
+                        <table class="index-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>
+                                        Îlot
+                                    </th>
+
+                                    <th>
+                                        Pompe
+                                    </th>
+
+                                    <th>
+                                        Index début
+                                    </th>
+
+                                    <th>
+                                        Index fin
+                                    </th>
+
+                                    <th>
+                                        Volume distribué
+                                    </th>
+
+                                    <th>
+                                        Retour cuve
+                                    </th>
+
+                                    <th>
+                                        Volume réel
+                                    </th>
+
+                                    <th>
+                                        Prix unitaire
+                                    </th>
+
+                                    <th>
+                                        Montant
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                {% for index in jauge.indexes %}
+
+                                <tr>
+
+                                    <td>
+                                        {{ index.ilot }}
+                                    </td>
+
+                                    <td>
+                                        {{ index.pompe }}
+                                    </td>
+
+                                    <td class="num">
+                                        {{ index.index_debut }}
+                                    </td>
+
+                                    <td class="num">
+                                        {{ index.index_fin }}
+                                    </td>
+
+                                    <td class="num">
+                                        {{ index.volume }}
+                                    </td>
+
+                                    <td class="num">
+                                        {{ index.retour_en_cuve }}
+                                    </td>
+
+                                    <td class="num">
+                                        {{ index.volume_reel }}
+                                    </td>
+
+                                    <td class="num">
+                                        {{ index.prix_unitaire }}
+                                    </td>
+
+                                    <td class="num">
+                                        {{ index.montant }}
+                                    </td>
+
+                                </tr>
+
+                                {% endfor %}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+            {% endif %}
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endif %}
+
+
+<!-- ========================================================= -->
+<!-- COLONNE GAUCHE / COLONNE DROITE -->
+<!-- ========================================================= -->
+
+    <!-- ÎLOTS -->
+    <div class="block">
+
+        <div class="section-title">
+            Synthèse par îlot
+        </div>
+
+        <table class="data dense fixed">
+
+            <thead>
+                <tr>
+                    <th style="width:12%;">Îlot</th>
+                    <th style="width:24%;">Responsable</th>
+                    <th class="num" style="width:16%;">Vol. vendu</th>
+                    <th class="num" style="width:16%;">Vente théo.</th>
+                    <th class="num" style="width:16%;">Encaiss.</th>
+                    <th class="num" style="width:16%;">Versements</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for ilot in data.ilots %}
+
+                <tr>
+
+                    <td>{{ ilot.ilot }}</td>
+
+                    <td>{{ ilot.responsable }}</td>
+
+                    <td class="num">{{ ilot.volume_vendu }}</td>
+
+                    <td class="num">{{ ilot.vente_theorique }}</td>
+
+                    <td class="num">{{ ilot.encaissements }}</td>
+
+                    <td class="num">{{ ilot.versements }}</td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+
+<div class="columns">
+
+    <!-- ===================== COLONNE GAUCHE ===================== -->
+    <div class="col" style="width:55%;">
+
+        <!-- ENCAISSEMENTS PAR MODE -->
+        {% if data.encaissements.par_mode %}
+
+        <div class="block">
+
+            <div class="section-title">
+                Encaissements par mode de paiement
+            </div>
+
+            <table class="data dense">
+
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th class="num">Montant</th>
+                        <th class="num">Pourcentage</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for item in data.encaissements.par_mode %}
+
+                    <tr>
+
+                        <td>{{ item.mode }}</td>
+
+                        <td class="num">{{ item.montant }}</td>
+
+                        <td class="num">{{ item.pourcentage }} %</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    <tr class="total-row">
+                        <td>TOTAL</td>
+                        <td class="num">{{ data.encaissements.total }}</td>
+                        <td class="num">100 %</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- CRÉDITS -->
+        {% if data.credits.details %}
+
+        <div class="block">
+
+            <div class="section-title">
+                Crédits en cours
+            </div>
+
+            <table class="data dense fixed">
+
+                <thead>
+                    <tr>
+                        <th style="width:24%;">Client</th>
+                        <th style="width:12%;">Produit</th>
+                        <th class="num" style="width:10%;">Volume</th>
+                        <th class="num" style="width:13%;">Mont. init.</th>
+                        <th class="num" style="width:11%;">Réglé</th>
+                        <th class="num" style="width:12%;">Reste</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for credit in data.credits.details %}
+
+                    <tr>
+
+                        <td>{{ credit.client }}</td>
+
+                        <td>{{ credit.produit }}</td>
+
+                        <td class="num">{{ credit.volume }}</td>
+
+                        <td class="num">{{ credit.montant_initial }}</td>
+
+                        <td class="num">{{ credit.montant_regle }}</td>
+
+                        <td class="num">{{ credit.reste }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    <tr class="total-row">
+                        <td colspan="3">TOTAL &mdash; {{ data.credits.nombre }} crédit(s)</td>
+                        <td colspan="3" class="num">{{ data.credits.total }}</td>
+                        <td></td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- DÉPENSES -->
+        {% if data.depenses.details %}
+
+        <div class="block">
+
+            <div class="section-title">
+                Dépenses
+            </div>
+
+            <table class="data dense">
+
+                <thead>
+                    <tr>
+                        <th>Libellé</th>
+                        <th class="num">Montant</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for depense in data.depenses.details %}
+
+                    <tr>
+
+                        <td>{{ depense.description }}</td>
+
+                        <td class="num">{{ depense.montant }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    <tr class="total-row">
+                        <td>TOTAL</td>
+                        <td class="num">{{ data.depenses.total }}</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+
+    <!-- ===================== COLONNE DROITE ===================== -->
+    <div class="col" style="width:45%;">
+
+        <!-- VENTES LUBRIFIANTS -->
+        {% if data.ventes_lubrifiants %}
+
+        <div class="block">
+
+            <div class="section-title">
+                Ventes de lubrifiants
+            </div>
+
+            <table class="data dense">
+
+                <thead>
+                    <tr>
+                        <th>Lubrifiant</th>
+                        <th class="num">Quantité</th>
+                        <th class="num">Prix unitaire</th>
+                        <th class="num">Montant</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for vente in data.ventes_lubrifiants %}
+
+                    <tr>
+
+                        <td>{{ vente.lubrifiant }}</td>
+
+                        <td class="num">{{ vente.quantite }}</td>
+
+                        <td class="num">{{ vente.prix_unitaire }}</td>
+
+                        <td class="num">{{ vente.montant }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- OPÉRATIONS BAIE -->
+        {% if data.operations_baie %}
+
+        <div class="block">
+
+            <div class="section-title">
+                Opérations de baie
+            </div>
+
+            <table class="data dense">
+
+                <thead>
+                    <tr>
+                        <th>Prestation</th>
+                        <th class="num">Quantité</th>
+                        <th class="num">Prix unitaire</th>
+                        <th class="num">Montant</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for operation in data.operations_baie %}
+
+                    <tr>
+
+                        <td>{{ operation.prestation }}</td>
+
+                        <td class="num">{{ operation.quantite }}</td>
+
+                        <td class="num">{{ operation.prix_unitaire }}</td>
+
+                        <td class="num">{{ operation.montant }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- ÉCARTS -->
+        {% if data.ecarts.details %}
+
+        <div class="block">
+
+            <div class="section-title">
+                Écarts constatés
+            </div>
+
+            <table class="data dense">
+
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th class="num">Montant</th>
+                        <th>Détail</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for ecart in data.ecarts.details %}
+
+                    <tr>
+
+                        <td>{{ ecart.type }}</td>
+
+                        <td class="num">{{ ecart.montant }}</td>
+
+                        <td>{{ ecart.detail }}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    <tr class="total-row">
+                        <td>TOTAL</td>
+                        <td class="num">{{ data.ecarts.total }}</td>
+                        <td>
+                            <span class="manque">Manques&nbsp;: {{ data.ecarts.manques }}</span>
+                            &nbsp;|&nbsp;
+                            <span class="excedent">Excédents&nbsp;: {{ data.ecarts.excedents }}</span>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% endif %}
+
+        <!-- ANALYSE DE LA JOURNÉE -->
+        <div class="block">
+
+            <div class="section-title">
+                Analyse de la journée
+            </div>
+
+            <div class="analysis-strip">
+                <div class="analysis-row">
+
+                    <div class="analysis-cell">
+                        <div class="kpi-label">Écart vente / encaissement</div>
+                        <div class="kpi-value">{{ data.analyse.ecart_vente_encaissement }}</div>
+                    </div>
+
+                    <div class="analysis-cell">
+                        <div class="kpi-label">Taux d'encaissement</div>
+                        <div class="kpi-value">{{ data.analyse.taux_encaissement }}&nbsp;%</div>
+                    </div>
+
+                    <div class="analysis-cell">
+                        <div class="kpi-label">Taux de versement</div>
+                        <div class="kpi-value">{{ data.analyse.taux_versement }}&nbsp;%</div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- SYNTHÈSE FINANCIÈRE -->
+        <div class="block">
+
+            <div class="section-title">
+                Synthèse financière
+            </div>
+
+            <div class="balance-card">
+                <div class="balance-row">
+                    <div class="balance-label">Solde théorique</div>
+                    <div class="balance-value">{{ data.synthese.solde_theorique }}</div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================================= -->
+<!-- SIGNATURES -->
+<!-- ========================================================= -->
+
+<div class="section-title">
+    Validation et signatures
+</div>
+
+<div class="signatures">
+    <div class="sig-row">
+        <div class="sig-cell">Responsable station</div>
+        <div class="sig-cell">Superviseur</div>
+        <div class="sig-cell">Gérant</div>
+    </div>
+</div>
+
+
+<!-- ========================================================= -->
+<!-- PIED DE PAGE -->
+<!-- ========================================================= -->
+
+<div class="footer">
+    Document généré automatiquement par FuelControl, plateforme de pilotage intelligent
+des réseaux de carburant.
+</div>
+
+
+</body>
+</html>
